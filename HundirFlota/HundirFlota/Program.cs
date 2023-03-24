@@ -11,7 +11,7 @@ namespace HundirFlota
         static void Main(string[] args)
         {
             Console.WriteLine("hola");
-            Console.WriteLine();
+            Console.WriteLine("adios");
         }
     }
 }
