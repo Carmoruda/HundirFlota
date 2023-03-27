@@ -10,8 +10,8 @@ namespace HundirFlota
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("hola");
-            Console.WriteLine("adios");
+            Juego miJuego = new Juego();
+            miJuego.Menu();
         }
     }
 }
