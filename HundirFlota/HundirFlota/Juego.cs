@@ -57,5 +57,93 @@ namespace HundirFlota
             consola = new Pantalla();
             listaPartidas = _listaPartidas;
         }
+
+        // Métodos
+
+        /// <summary>
+        /// Información del nombre del juego, fecha 
+        /// y hora actuales.
+        /// </summary>
+        public void NuevaSesion()
+        {
+            string bienvenidaJuego = "------------------------------ HUNDIR LA FLOTA ------------------------------\n\n";
+            bienvenidaJuego += "\t *   Hora: " + DateTime.Now.ToString("HH:mm tt") + "\n";
+            bienvenidaJuego += "\t *   Día: " + DateTime.Now.ToString("dd/MM/yyyy") + "\n";
+            consola.ImprimirConsola(bienvenidaJuego, 0);
+        }
+
+        /// <summary>
+        /// Menú principal del juego. Permite crear nuevas partidas (1 y 2 jugadores),
+        /// cargar partidas anteriores y ver el ranking.
+        /// </summary>
+        public void Menu()
+        {
+            int accionMenu = 0;
+
+            string[] opciones = { "\nSeleccione una de las siguientes opciones:\n",
+                                  "\t1   Cargar una partida anterior.",
+                                  "\t2   Jugar una partida de 2 jugadores.",
+                                  "\t3   Jugar una partida de 1 jugador.",
+                                  "\t4   Ranking."};
+
+            do
+            {
+                NuevaSesion();
+
+                accionMenu = consola.PintarMenu(opciones, 0);
+
+                switch (accionMenu)
+                {
+                    case 1:
+                        CargarPartidas();
+                        break;
+                    case 2:
+                        CrearPartida(2);
+                        break;
+                    case 3:
+                        CrearPartida(1);
+                        break;
+                    case 4:
+                        RankingPartidas();
+                    case 5: // Salir.
+                        Environment.Exit(0);
+                        break;
+                    default: // Mensaje Error.
+                        consola.ImprimirConsola("  Error! El valor introducido debe estar entre 1 y 5.\n\n", 0);
+                        break;
+
+                }
+            } while (true);
+
+        }
+
+        /// <summary>
+        /// Muestra un listado de todas las partidas que no han finalizado,
+        /// permitiendo elegir una para continuarla.
+        /// </summary>
+        public void CargarPartidas()
+        {
+
+        }
+
+        /// <summary>
+        /// Recoge la información básica necesaria para la creación de 
+        /// una nueva partida.
+        /// </summary>
+        /// <param name="numJugadores"></param>
+        public void CrearPartida(int numJugadores)
+        {
+
+        }
+
+        /// <summary>
+        /// Muestra todas las partidas que han finalizado en victoria
+        /// y muestra su información (Nombre jugadores, número movimientos
+        /// y ganador).
+        /// </summary>
+        public void RankingPartidas()
+        {
+
+        }
     }
 }
