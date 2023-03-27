@@ -18,5 +18,19 @@ namespace HundirFlota
 {
     internal class Juego
     {
+
+        // Atributos
+
+        /// <summary>
+        /// Lista de instancias de Partida que almacena todas las
+        /// partidas de un jugador VS otro jugador humano o automático.
+        /// </summary>
+        public List<Partida> listaPartidas { get; set; }
+
+        /// <summary>
+        /// Intacia de la clase Pantalla para controlar la entrada
+        /// y salida de datos del usuario.
+        /// </summary>
+        public Pantalla consola { get; set; }
     }
 }
