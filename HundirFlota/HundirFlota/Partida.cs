@@ -17,5 +17,29 @@ namespace HundirFlota
 {
     internal abstract class Partida
     {
+        //ATRIBUTOS
+        public bool finalizada { get; set; }
+        public Tablero tablero {get; set; }
+        public int numMovimientos { get; set; }
+
+        //CONSTRUCTORES
+
+        public Partida()
+        {
+            tablero = new Tablero();
+            numMovimientos = 0;
+            finalizada= false;
+        }
+
+        public Partida (bool _finalizada, int _numMovimientos)
+        {
+            finalizada = _finalizada;
+            numMovimientos= _numMovimientos;
+            tablero = new Tablero();
+
+        }
+
+        //MÉTODOS
+       
     }
 }
