@@ -105,6 +105,7 @@ namespace HundirFlota
                         break;
                     case 4:
                         RankingPartidas();
+                        break;
                     case 5: // Salir.
                         Environment.Exit(0);
                         break;
