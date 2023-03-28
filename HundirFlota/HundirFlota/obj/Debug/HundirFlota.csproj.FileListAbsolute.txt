@@ -6,3 +6,11 @@ C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\HundirFlota
 C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\HundirFlota.pdb
 C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.exe
 C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.pdb
+C:\Users\Usuario\Desktop\HUNDIR_FLOTA\HundirFlota\HundirFlota\HundirFlota\bin\Debug\HundirFlota.exe.config
+C:\Users\Usuario\Desktop\HUNDIR_FLOTA\HundirFlota\HundirFlota\HundirFlota\bin\Debug\HundirFlota.exe
+C:\Users\Usuario\Desktop\HUNDIR_FLOTA\HundirFlota\HundirFlota\HundirFlota\bin\Debug\HundirFlota.pdb
+C:\Users\Usuario\Desktop\HUNDIR_FLOTA\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.csproj.AssemblyReference.cache
+C:\Users\Usuario\Desktop\HUNDIR_FLOTA\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.csproj.SuggestedBindingRedirects.cache
+C:\Users\Usuario\Desktop\HUNDIR_FLOTA\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Desktop\HUNDIR_FLOTA\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.exe
+C:\Users\Usuario\Desktop\HUNDIR_FLOTA\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.pdb

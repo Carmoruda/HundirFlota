@@ -18,5 +18,6 @@ namespace HundirFlota
 {
     internal class JuegoIndividual : Partida
     {
+
     }
 }

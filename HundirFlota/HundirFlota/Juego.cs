@@ -28,7 +28,7 @@ namespace HundirFlota
         public List<Partida> listaPartidas { get; set; }
 
         /// <summary>
-        /// Intacia de la clase Pantalla para controlar la entrada
+        /// Instancia de la clase Pantalla para controlar la entrada
         /// y salida de datos del usuario.
         /// </summary>
         public Pantalla consola { get; set; }
