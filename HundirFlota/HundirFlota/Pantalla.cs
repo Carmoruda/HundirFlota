@@ -162,5 +162,20 @@ namespace HundirFlota
                 return 0;
             }
         }
+
+        public void PintarTablero(int[,] mapa, int i, int j)
+        {
+            for (i = 0; i < 11; i++)
+            {
+                for (j = 0; j < 11; j++)
+                {
+                    Console.BackgroundColor = ConsoleColor.Blue;
+                    Console.Write(" ");
+                }
+            }
+
+            Console.ResetColor();
+
+        }
     }
 }
