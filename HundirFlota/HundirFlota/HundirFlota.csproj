@@ -52,7 +52,10 @@
     <Compile Include="Partida.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< Updated upstream
     <Compile Include="prueba.cs" />
+=======
+>>>>>>> Stashed changes
     <Compile Include="Tablero.cs" />
   </ItemGroup>
   <ItemGroup>
