@@ -109,8 +109,7 @@ namespace HundirFlota
                     case 5: // Salir.
                         Environment.Exit(0);
                         break;
-                    default: // Mensaje Error.
-                        consola.ImprimirConsola("  Error! El valor introducido debe estar entre 1 y 5.\n\n", 0);
+                    default: // Mensaje error desde PintarMenu en Pantalla.
                         break;
 
                 }
