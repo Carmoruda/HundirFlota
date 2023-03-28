@@ -1,0 +1,8 @@
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.csproj.AssemblyReference.cache
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.csproj.SuggestedBindingRedirects.cache
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.csproj.CoreCompileInputs.cache
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\HundirFlota.exe.config
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\HundirFlota.exe
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\HundirFlota.pdb
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.exe
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.pdb

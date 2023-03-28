@@ -121,8 +121,7 @@ namespace HundirFlota
 
             Console.Write("\n\n  Introduzca su elección:\n  ===> ");
 
-
-            return int.Parse(Console.ReadLine()); // Opción seleccionada.
+            return LeerEntero(int.Parse(Console.ReadLine()), 0, opciones.Length); // Opción seleccionada.
         }
 
 
@@ -151,7 +150,7 @@ namespace HundirFlota
         /// <returns></returns>
         public int LeerEntero(int variable, int limiteInf, int limiteSup)
         {
-            string mensajeError = "Error! El valor introducido debe estar entre " + limiteInf + " y " + limiteSup;
+            string mensajeError = "  Error! El valor introducido debe estar entre " + limiteInf + " y " + limiteSup + "\n\n";
 
             if (limiteInf <= variable && limiteSup >= variable)
             {

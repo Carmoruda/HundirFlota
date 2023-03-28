@@ -80,7 +80,7 @@ namespace HundirFlota
         {
             int accionMenu = 0;
 
-            string[] opciones = { "\nSeleccione una de las siguientes opciones:\n",
+            string[] opciones = { "\n  Seleccione una de las siguientes opciones:\n",
                                   "\t1   Cargar una partida anterior.",
                                   "\t2   Jugar una partida de 2 jugadores.",
                                   "\t3   Jugar una partida de 1 jugador.",
@@ -109,8 +109,7 @@ namespace HundirFlota
                     case 5: // Salir.
                         Environment.Exit(0);
                         break;
-                    default: // Mensaje Error.
-                        consola.ImprimirConsola("  Error! El valor introducido debe estar entre 1 y 5.\n\n", 0);
+                    default: // Mensaje error desde PintarMenu en Pantalla.
                         break;
 
                 }
@@ -124,14 +123,17 @@ namespace HundirFlota
         /// </summary>
         public void CargarPartidas()
         {
-
+            
         }
 
         /// <summary>
         /// Recoge la información básica necesaria para la creación de 
         /// una nueva partida.
         /// </summary>
-        /// <param name="numJugadores"></param>
+        /// <param name="numJugadores">
+        /// Entero que representa el número de jugadores humanos de la
+        /// partida.
+        /// </param>
         public void CrearPartida(int numJugadores)
         {
 
