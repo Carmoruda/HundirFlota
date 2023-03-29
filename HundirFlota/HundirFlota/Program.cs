@@ -11,6 +11,8 @@ namespace HundirFlota
         static void Main(string[] args)
         {
             Juego miJuego = new Juego();
+            //Tablero tablero = new Tablero(); nome lo borreis :)
+           // tablero.pintar();
             miJuego.Menu();
         }
     }

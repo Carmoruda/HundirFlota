@@ -14,3 +14,11 @@ C:\Users\Usuario\Desktop\HUNDIR_FLOTA\HundirFlota\HundirFlota\HundirFlota\obj\De
 C:\Users\Usuario\Desktop\HUNDIR_FLOTA\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.csproj.CoreCompileInputs.cache
 C:\Users\Usuario\Desktop\HUNDIR_FLOTA\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.exe
 C:\Users\Usuario\Desktop\HUNDIR_FLOTA\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.pdb
+C:\Users\prueb\Documents\PRIMERO\2do cuatri\POO\HundirFlota\HundirFlota\HundirFlota\HundirFlota\bin\Debug\HundirFlota.exe.config
+C:\Users\prueb\Documents\PRIMERO\2do cuatri\POO\HundirFlota\HundirFlota\HundirFlota\HundirFlota\bin\Debug\HundirFlota.exe
+C:\Users\prueb\Documents\PRIMERO\2do cuatri\POO\HundirFlota\HundirFlota\HundirFlota\HundirFlota\bin\Debug\HundirFlota.pdb
+C:\Users\prueb\Documents\PRIMERO\2do cuatri\POO\HundirFlota\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.csproj.AssemblyReference.cache
+C:\Users\prueb\Documents\PRIMERO\2do cuatri\POO\HundirFlota\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.csproj.SuggestedBindingRedirects.cache
+C:\Users\prueb\Documents\PRIMERO\2do cuatri\POO\HundirFlota\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.csproj.CoreCompileInputs.cache
+C:\Users\prueb\Documents\PRIMERO\2do cuatri\POO\HundirFlota\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.exe
+C:\Users\prueb\Documents\PRIMERO\2do cuatri\POO\HundirFlota\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.pdb

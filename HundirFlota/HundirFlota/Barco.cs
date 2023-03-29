@@ -20,6 +20,12 @@ namespace HundirFlota
     {
         public int longitud { get; set; }
         public int[,] coordenada { get; set; }
+        public int[,] patrullera = new int[2,2]; // es bidimensional puesto que almaceno 2 numero (coordenadas)
+        public int[,] submarino = new int[3,2]; //el primero es la longitud del barco
+        public int[,] destructuctor = new int[4,2];
+        public int[,] portaaviones = new int[5,2];
+
+
 
         public Barco() 
         {
@@ -33,6 +39,11 @@ namespace HundirFlota
         {
             this.longitud = longitud;
             this.coordenada = coordenada;
+        }
+
+        public void ColocarBarcos()
+        {
+
         }
     }
 }

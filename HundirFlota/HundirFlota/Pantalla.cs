@@ -163,18 +163,30 @@ namespace HundirFlota
             }
         }
 
-        public void PintarTablero(int[,] mapa, int i, int j)
+        public void PintarTablero(String[,] mapa, int i, int j)
         {
-            for (i = 0; i < 11; i++)
+            for (i=1; i<=12; i++)
             {
-                for (j = 0; j < 11; j++)
+                Console.Write("  " + i);
+            }
+            Console.WriteLine();
+
+            for (i=1; i <= 12; i++)
+            {
+                Console.Write(i + ".");
+                for (j = 1; j <= 12; j++)
                 {
                     Console.BackgroundColor = ConsoleColor.Blue;
-                    Console.Write(" ");
+                    mapa[i, j] = "| _ ";
+                    Console.Write(mapa[i,j]);
+                   
                 }
+                Console.WriteLine();
+                Console.ResetColor();
             }
 
-            Console.ResetColor();
+
+            Console.ReadLine();
 
         }
     }

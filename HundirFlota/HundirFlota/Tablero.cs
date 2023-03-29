@@ -18,7 +18,7 @@ namespace HundirFlota
 {
     internal class Tablero
     {
-        public int[,] mapa = new int[12, 12];
+        public String[,] mapa = new String[12, 12];
         public List<int> zonasTierra = new List<int>();
         public Pantalla consola { get; set; }
 
