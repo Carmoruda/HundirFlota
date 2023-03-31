@@ -47,7 +47,7 @@ namespace HundirFlota
 
         /// <summary>
         /// Constructor parametrizado de la clase Juego. Inicializa
-        /// el atributo consola y la lista de barcos.
+        /// el atributo consola y asigna el valor la lista de barcos.
         /// </summary>
         /// <param name="_listaPartidas">
         /// Lista que representa las partidas del Juego.
