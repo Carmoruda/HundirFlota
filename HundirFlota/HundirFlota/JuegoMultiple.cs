@@ -18,34 +18,48 @@ namespace HundirFlota
 {
     internal class JuegoMultiple : Partida
     {
-        //Atributos
+        // Atributos
 
         /// <summary>
-        /// Primer Jugador humano iniciado por composición de 
-        /// la clase Jugador.
+        /// Instancia de la clase Jugador que permite a un
+        /// jugador humano participar en la partida (Jugador 1).
         /// </summary>
         public Jugador jugadorHumano1 { get; set; }
+
         /// <summary>
-        /// Segundo jugador humano iniciado por comopsición de 
-        /// la clase Jugador.
+        /// Instancia de la clase Jugador que permite a otro 
+        /// jugador humano participar en la partida (Jugador 2).
         /// </summary>
         public Jugador jugadorHumano2 { get; set; }
 
-        //Constructores 
+        // Constructores 
+
         /// <summary>
-        /// Constructor vacío de la clase JuegoMúltiple 
+        /// Constructor vacío de la clase JuegoMultiple. Inicializa
+        /// las instancias de la clase Jugador.
         /// </summary>
-        public JuegoMultiple() { }
+        public JuegoMultiple() 
+        {
+            jugadorHumano1 = new Jugador();
+            jugadorHumano2 = new Jugador();
+        }
 
         /// <summary>
         /// Constructor parametrizado de la clase JuegoMúltiple.
+        /// Inicializa las instancias de la clase Jugador.
         /// </summary>
-        /// <param name="jugadorHumano1"></param>
-        /// <param name="jugadorHumano2"></param>
-        public JuegoMultiple(Jugador jugadorHumano1, Jugador jugadorHumano2)
+        /// <param name="_jugadorHumano1">
+        /// Instancia de Jugador que representa al jugador humano 1.
+        /// </param>
+        /// <param name="_jugadorHumano2">
+        /// Instancia de un Jugador que representa al jugador humano 2.
+        /// </param>
+        public JuegoMultiple(Jugador _jugadorHumano1, Jugador _jugadorHumano2)
         {
-            this.jugadorHumano1 = jugadorHumano1;
-            this.jugadorHumano2 = jugadorHumano2;
+            jugadorHumano1 = _jugadorHumano1;
+            jugadorHumano2 = _jugadorHumano2;
         }
+
+        // Métodos
     }
 }
