@@ -41,7 +41,6 @@ namespace HundirFlota
         public Partida()
         {
             finalizada = false;
-            tablero = new Tablero();
             numMovimientos = 0;
         }
 
@@ -60,7 +59,6 @@ namespace HundirFlota
         {
             finalizada = _finalizada;
             numMovimientos= _numMovimientos;
-            tablero = new Tablero();
         }
 
         // Métodos

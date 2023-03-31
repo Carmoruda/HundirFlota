@@ -21,13 +21,16 @@ namespace HundirFlota
         // Atributos
 
         /// <summary>
-        /// String que recoge el nombre del jugador.
+        /// String que representa el nombre del jugador.
         /// </summary>
         public string nombre { get; set; }
+
         /// <summary>
-        /// Tablero iniciado por composición.
+        /// Instancia de la clase Tablero que permite el control
+        /// del tablero de la partida.
         /// </summary>
         public Tablero tablero { get; set; }
+
         /// <summary>
         /// Barco tipo patrullero iniciado  por composición
         /// de la clase barco.
