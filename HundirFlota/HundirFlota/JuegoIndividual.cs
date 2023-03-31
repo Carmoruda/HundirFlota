@@ -47,10 +47,10 @@ namespace HundirFlota
         /// Constructor parametrizado de la clase JuegoIndividual.
         /// Inicializa las instancias de la clase Jugador.
         /// </summary>
-        /// <param name="jugadorHumano">
-        /// Instancia de Jugador que representa al jugador Humano.
+        /// <param name="_jugadorHumano">
+        /// Instancia de Jugador que representa al jugador humano.
         /// </param>
-        /// <param name="jugadorAuto">
+        /// <param name="_jugadorAuto">
         /// Instancia de Jguador que repsenta al jugador automático
         /// </param>
         public JuegoIndividual(Jugador _jugadorHumano, Jugador _jugadorAuto)

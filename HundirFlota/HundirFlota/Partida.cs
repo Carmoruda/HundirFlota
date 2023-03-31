@@ -17,12 +17,12 @@ namespace HundirFlota
 {
     internal abstract class Partida
     {
-        //ATRIBUTOS
+        // Atributos
         public bool finalizada { get; set; }
         public Tablero tablero {get; set; }
         public int numMovimientos { get; set; }
 
-        //CONSTRUCTORES
+        // Constructores
 
         public Partida()
         {
@@ -39,7 +39,7 @@ namespace HundirFlota
 
         }
 
-        //MÉTODOS
+        // Métodos
        
     }
 }

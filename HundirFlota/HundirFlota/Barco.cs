@@ -18,6 +18,8 @@ namespace HundirFlota
 {
     internal class Barco
     {
+        // Atributos
+
         public int longitud { get; set; }
         public int[,] coordenada { get; set; }
         public int[,] patrullera = new int[2,2]; // es bidimensional puesto que almaceno 2 numero (coordenadas)
