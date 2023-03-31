@@ -26,12 +26,6 @@ namespace HundirFlota
         public bool finalizada { get; set; }
 
         /// <summary>
-        /// Instancia de la clase Tablero que permite el control
-        /// del tablero de la partida.
-        /// </summary>
-        public Tablero tablero {get; set; }
-
-        /// <summary>
         /// Entero que representa el número de movimientos que 
         /// han sido realizados en la partida.
         /// </summary>
