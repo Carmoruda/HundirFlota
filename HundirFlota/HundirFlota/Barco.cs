@@ -21,23 +21,30 @@ namespace HundirFlota
     {
         // Atributos
 
-        public int[,] patrullera = new int[2,2]; // es bidimensional puesto que almaceno 2 numero (coordenadas)
+        public int[,] patrullera = new int[2, 2]; // es bidimensional puesto que almaceno 2 numero (coordenadas)
         public int[,] submarino = new int[3,2]; //el primero coincide con la longitud del barco
         public int[,] destructor = new int[4,2];
         public int[,] portaaviones = new int[5,2];
         public Pantalla consola { get; set; }
+        public Tablero tablero { get; set; }    
 
 
 
         public Barco() 
         {
             consola= new Pantalla();
+            tablero =new Tablero();
             
         }
 
-        public Barco(int longitud, int[,] coordenada)
+        public Barco(int[,] patrullera, int[,] submarino, int[,] destructor, int[,] portaaviones, Pantalla consola, Tablero tablero)
         {
-
+            this.patrullera = patrullera;
+            this.submarino = submarino;
+            this.destructor = destructor;
+            this.portaaviones = portaaviones;
+            this.consola = consola;
+            this.tablero = tablero;
         }
 
         public void ColocarBarcos()
@@ -45,24 +52,24 @@ namespace HundirFlota
 
             string patrullero = "Colocacion barco PATRULLERO";
             consola.ImprimirConsola(patrullero, 0);
-            AumentarPosicion(ref patrullera, 2);
+            AumentarPosicion(ref patrullera, 2, "| P");
 
             string subma = "Colocacion barco SUBMARINO";
             consola.ImprimirConsola(subma, 0);
-            AumentarPosicion(ref submarino, 3);
+            AumentarPosicion(ref submarino, 3, "| S");
 
             string destr = "Colocacion barco DESTRUCTOR";
             consola.ImprimirConsola(destr, 0);
-            AumentarPosicion(ref destructor, 4);
+            AumentarPosicion(ref destructor, 4, "| D");
 
             string porta = "Colocacion barco PORTAAVIONES";
             consola.ImprimirConsola(porta, 0);
-            AumentarPosicion(ref portaaviones, 5);
+            AumentarPosicion(ref portaaviones, 5, "| V");
 
         }
 
 
-        public void AumentarPosicion(ref int[,] barco, int longitud) //creo una funcion a la que le paso el barco, su longitud 
+        public void AumentarPosicion(ref int[,] barco, int longitud, string letra) //creo una funcion a la que le paso el barco, su longitud 
         {
             string coordenadaX = "Coordenada X del barco";
             consola.ImprimirConsola(coordenadaX, 0);
@@ -86,6 +93,7 @@ namespace HundirFlota
                     {
                         barco[i, 0] = posicionX;
                         barco[i, 1]= posicionY + i;
+                        tablero.mapa[posicionX,posicionY+i] = letra;
                        
                     }
                     break;
@@ -96,6 +104,7 @@ namespace HundirFlota
                     {
                         barco[i, 0] = posicionX + i;
                         barco[i, 1] = posicionY;
+                        tablero.mapa[posicionX +i, posicionY] = letra;
 
                     }
                     break;

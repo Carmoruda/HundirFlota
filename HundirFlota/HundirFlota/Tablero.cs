@@ -24,7 +24,7 @@ namespace HundirFlota
         /// Array bidimesional de strings que representa el mapa
         /// del juego.
         /// </summary>
-        public String[,] mapa = new String[12, 12];
+        public String[,] mapa { get; set; }
 
         /// <summary>
         /// Lista de enteros que representan las coordenadas de las 
