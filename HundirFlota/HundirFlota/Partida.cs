@@ -72,6 +72,39 @@ namespace HundirFlota
         }
 
         // Métodos
-       
+
+        /// <summary>
+        /// Muestra la información correspondiente a cada jugador
+        /// de la partida.
+        /// </summary>
+        /// <returns>
+        /// String que muestra el nombre del jugador 1 y del jugador 2.
+        /// </returns>
+        public virtual string InformacionJugadores()
+        {
+            return "No hay jugadores";
+        }
+
+        /// <summary>
+        /// Muestra la información correspondiente al status
+        /// de la partida
+        /// </summary>
+        /// <returns>
+        /// String que muestra el nombre del jugador 1 y del jugador 2.
+        /// </returns>
+        public virtual string InformacionStatus()
+        {
+            switch(finalizada)
+            {
+                case true:
+                    return "Partida finalizada.";
+                case false:
+                    return "Partida no finalizada.";
+
+            }
+
+            return "\n\t * Jugadores: No hay información del estatus.";
+        }
+
     }
 }

@@ -63,6 +63,18 @@ namespace HundirFlota
         }
 
         // Métodos
+
+        /// <summary>
+        /// Muestra la información correspondiente a cada jugador
+        /// de la partida.
+        /// </summary>
+        /// <returns>
+        /// String que muestra el nombre del jugador 1 y del jugador 2.
+        /// </returns>
+        public override string InformacionJugadores()
+        {
+            return "\n\t * Jugador 1: " + jugadorHumano.nombre + "\n\t * Jugador 2: " + jugadorAuto.nombre;
+        }
     }
 
 }

@@ -98,10 +98,10 @@ namespace HundirFlota
                         CargarPartidas();
                         break;
                     case 2:
-                        CrearPartida(2);
+                        CrearPartida(2); // Partida Múltiple.
                         break;
                     case 3:
-                        CrearPartida(1);
+                        CrearPartida(1); // Partida Individual.
                         break;
                     case 4:
                         RankingPartidas();
@@ -123,7 +123,16 @@ namespace HundirFlota
         /// </summary>
         public void CargarPartidas()
         {
-            
+            consola.ImprimirConsola("------------------------------ LISTADO PARTIDAS ------------------------------\n\n", 1);
+
+            foreach (Partida partida in listaPartidas)
+            {
+                string informacion = "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n";
+                consola.ImprimirConsola(informacion, 0);
+                consola.ImprimirConsola("\n", 0);
+            }
+
+            consola.Continuar(); // Pulsa enter para continuar.
         }
 
         /// <summary>
@@ -140,7 +149,7 @@ namespace HundirFlota
                                   "\t * Nombre de la Partida: ",
                                   "\t * Nombre Jugador 1: ",
                                   "\t * Nombre Jugador 2: ",
-                                  "\n  Partida creada correctamente.\n",
+                                  "\n  Partida creada correctamente.\n\n",
                                   "\n  Ya existe una partida con ese nombre.\n"};
 
             Jugador nuevoJugador1; // Instancia jugador1.
