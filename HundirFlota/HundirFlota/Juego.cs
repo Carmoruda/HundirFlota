@@ -82,8 +82,8 @@ namespace HundirFlota
 
             string[] opciones = { "\n  Seleccione una de las siguientes opciones:\n",
                                   "\t1   Cargar una partida anterior.",
-                                  "\t2   Jugar una partida de 2 jugadores.",
-                                  "\t3   Jugar una partida de 1 jugador.",
+                                  "\t2   Crear una partida de 2 jugadores.",
+                                  "\t3   Crear una partida de 1 jugador.",
                                   "\t4   Ranking."};
 
             do
@@ -136,7 +136,47 @@ namespace HundirFlota
         /// </param>
         public void CrearPartida(int numJugadores)
         {
+            string[] opciones = {"------------------------------ NUEVA PARTIDA ------------------------------\n\n\nInformación partida:\n\n",
+                                  "\t * Nombre de la Partida: ",
+                                  "\t * Nombre Jugador 1: ",
+                                  "\t * Nombre Jugador 2: ",
+                                  "\n  Partida creada correctamente.\n",
+                                  "\n  Ya existe una partida con ese nombre.\n"};
 
+            consola.ImprimirConsola(opciones[0], 1); // Opciones[0]: -- NUEVA PARTIDA --...
+            string nuevoNombrePartida = consola.LeerString(opciones[1]); // Opciones[1]: * Nombre de la Partida.
+        
+            Partida partidaInsertar = BuscarPartida(nuevoNombrePartida);
+            if (partidaInsertar != null)
+            {
+                consola.ImprimirConsola(opciones[5], 0); // Opciones[4]: Ya existe una partida con ese nombre.
+                consola.Continuar(); // PUlsar enter para continuar.
+                return;
+            }
+
+            Jugador nuevoJugador1 = new Jugador(consola.LeerString(opciones[2])); // Opciones[2]: * Nombre Jugador 1.
+            Jugador nuevoJugador2;
+
+            switch (numJugadores)
+            {
+                case 1:
+                    opciones[3] = "\t * Nombre Jugador 2: " + "Autómata"; // Opciones[3]: * Nombre Jugador 2 = Autómata.
+
+                    consola.ImprimirConsola(opciones[3], 0);
+
+                    nuevoJugador2 = new Jugador("Autómata");
+                    partidaInsertar = new PartidaIndividual(nuevoJugador1, nuevoJugador2, nuevoNombrePartida);
+                    break;
+                case 2:
+                    nuevoJugador2 = new Jugador(consola.LeerString(opciones[3])); // Opciones[3]: * Nombre Jugador 2.
+                    partidaInsertar = new PartidaMultiple(nuevoJugador1, nuevoJugador2, nuevoNombrePartida);
+                    break;
+            }
+
+            listaPartidas.Add(partidaInsertar);
+
+            consola.ImprimirConsola(opciones[4], 0);// Opciones[4]: Partida creada correctamente.
+            consola.Continuar();
         }
 
         /// <summary>
@@ -147,6 +187,22 @@ namespace HundirFlota
         public void RankingPartidas()
         {
 
+        }
+
+        /// <summary>
+        /// Busca si existe una partida con el nombre introducido.
+        /// </summary>
+        /// <param name="nombre">
+        /// String que representa el nombre de la partida que se 
+        /// busca.
+        /// </param>
+        /// <returns>
+        /// Si existe, devuleve ese objeto de tipo Barco.
+        /// En el caso contrario, devuelve una referencia nula.
+        /// </returns>
+        public Partida BuscarPartida(string nombre)
+        {
+            return listaPartidas.SingleOrDefault(r => r.nombrePartida == nombre);
         }
     }
 }
