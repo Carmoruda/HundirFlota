@@ -1,6 +1,6 @@
 ﻿/// <summary>
 /// 
-/// La clase JuegoIndividual define los atributos que permiten
+/// La clase PartidaIndividual define los atributos que permiten
 /// controlar las partidas del juego con el perfil
 /// de un jugador humano contra un jugador automático.
 /// 
@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace HundirFlota
 {
-    internal class JuegoIndividual : Partida
+    internal class PartidaIndividual : Partida
     {
         //Atributos
 
@@ -34,17 +34,17 @@ namespace HundirFlota
         //Constructores
 
         /// <summary>
-        /// Constructor vacío de la clase JuegoIndividual. Inicializa
+        /// Constructor vacío de la clase PartidaIndividual. Inicializa
         /// las instancias de la clase Jugador.
         /// </summary>
-        public JuegoIndividual() 
+        public PartidaIndividual() 
         {
             jugadorHumano = new Jugador();
             jugadorAuto = new Jugador();
         }
 
         /// <summary>
-        /// Constructor parametrizado de la clase JuegoIndividual.
+        /// Constructor parametrizado de la clase PartidaIndividual.
         /// Inicializa las instancias de la clase Jugador.
         /// </summary>
         /// <param name="_jugadorHumano">
@@ -53,7 +53,7 @@ namespace HundirFlota
         /// <param name="_jugadorAuto">
         /// Instancia de Jguador que repsenta al jugador automático
         /// </param>
-        public JuegoIndividual(Jugador _jugadorHumano, Jugador _jugadorAuto)
+        public PartidaIndividual(Jugador _jugadorHumano, Jugador _jugadorAuto) : base()
         {
             jugadorHumano = _jugadorHumano;
             jugadorAuto = _jugadorAuto;

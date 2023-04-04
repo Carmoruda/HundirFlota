@@ -1,6 +1,6 @@
 ﻿/// <summary>
 /// 
-/// La clase JuegoMultiple define los atributos que permiten
+/// La clase PartidaMultiple define los atributos que permiten
 /// controlar las partidas del juego con el perfil
 /// de un jugador humano contra un jugador humano.
 /// 
@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace HundirFlota
 {
-    internal class JuegoMultiple : Partida
+    internal class PartidaMultiple : Partida
     {
         // Atributos
 
@@ -35,17 +35,17 @@ namespace HundirFlota
         // Constructores 
 
         /// <summary>
-        /// Constructor vacío de la clase JuegoMultiple. Inicializa
+        /// Constructor vacío de la clase PartidaMultiple. Inicializa
         /// las instancias de la clase Jugador.
         /// </summary>
-        public JuegoMultiple() 
+        public PartidaMultiple() 
         {
             jugadorHumano1 = new Jugador();
             jugadorHumano2 = new Jugador();
         }
 
         /// <summary>
-        /// Constructor parametrizado de la clase JuegoMúltiple.
+        /// Constructor parametrizado de la clase PartidaMultiple.
         /// Inicializa las instancias de la clase Jugador.
         /// </summary>
         /// <param name="_jugadorHumano1">
@@ -54,7 +54,7 @@ namespace HundirFlota
         /// <param name="_jugadorHumano2">
         /// Instancia de un Jugador que representa al jugador humano 2.
         /// </param>
-        public JuegoMultiple(Jugador _jugadorHumano1, Jugador _jugadorHumano2)
+        public PartidaMultiple(Jugador _jugadorHumano1, Jugador _jugadorHumano2)
         {
             jugadorHumano1 = _jugadorHumano1;
             jugadorHumano2 = _jugadorHumano2;

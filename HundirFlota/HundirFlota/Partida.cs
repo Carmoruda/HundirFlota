@@ -31,6 +31,11 @@ namespace HundirFlota
         /// </summary>
         public int numMovimientos { get; set; }
 
+        /// <summary>
+        /// String que representa el nombre de la partida.
+        /// </summary>
+        public string nombre { get; set; }
+
         // Constructores
 
         /// <summary>
