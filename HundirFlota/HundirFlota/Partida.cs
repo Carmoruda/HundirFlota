@@ -34,19 +34,20 @@ namespace HundirFlota
         /// <summary>
         /// String que representa el nombre de la partida.
         /// </summary>
-        public string nombre { get; set; }
+        public string nombrePartida { get; set; }
 
         // Constructores
 
         /// <summary>
         /// Constructor vacío de la clase Partida. Inicializa el
-        /// atributo de tablero y asigna valores a finalizada y a
-        /// numMovimientos.
+        /// atributo de tablero y asigna valores a finalizada, a
+        /// numMovimientos y a nombrePartida.
         /// </summary>
         public Partida()
         {
             finalizada = false;
             numMovimientos = 0;
+            nombrePartida = "Partida" + DateTime.Now.ToString("dd/MM/yyyy HH:mm tt");
         }
 
         /// <summary>
@@ -60,10 +61,14 @@ namespace HundirFlota
         /// Entero que representa el número de movimientos que han sido
         /// realizados en la partida.
         /// </param>
-        public Partida (bool _finalizada, int _numMovimientos)
+        /// <param name="_nombrePartida">
+        /// String que representa el nombre de la partida.
+        /// </param>
+        public Partida (bool _finalizada, int _numMovimientos, string _nombrePartida)
         {
             finalizada = _finalizada;
             numMovimientos= _numMovimientos;
+            nombrePartida = _nombrePartida;
         }
 
         // Métodos

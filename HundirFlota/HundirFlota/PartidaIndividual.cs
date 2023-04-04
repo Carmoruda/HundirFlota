@@ -51,9 +51,12 @@ namespace HundirFlota
         /// Instancia de Jugador que representa al jugador humano.
         /// </param>
         /// <param name="_jugadorAuto">
-        /// Instancia de Jguador que repsenta al jugador automático
+        /// Instancia de Jugador que repsenta al jugador automático
         /// </param>
-        public PartidaIndividual(Jugador _jugadorHumano, Jugador _jugadorAuto) : base()
+        /// <param name="_nombrePartida">
+        /// String que representa el nombre de la partida.
+        /// </param>
+        public PartidaIndividual(Jugador _jugadorHumano, Jugador _jugadorAuto, string _nombrePartida) : base(false, 0, _nombrePartida)
         {
             jugadorHumano = _jugadorHumano;
             jugadorAuto = _jugadorAuto;

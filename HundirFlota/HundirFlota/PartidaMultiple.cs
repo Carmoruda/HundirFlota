@@ -54,7 +54,10 @@ namespace HundirFlota
         /// <param name="_jugadorHumano2">
         /// Instancia de un Jugador que representa al jugador humano 2.
         /// </param>
-        public PartidaMultiple(Jugador _jugadorHumano1, Jugador _jugadorHumano2)
+        /// <param name="_nombrePartida">
+        /// String que representa el nombre de la partida.
+        /// </param>
+        public PartidaMultiple(Jugador _jugadorHumano1, Jugador _jugadorHumano2, string _nombrePartida) : base(false, 0, _nombrePartida)
         {
             jugadorHumano1 = _jugadorHumano1;
             jugadorHumano2 = _jugadorHumano2;
