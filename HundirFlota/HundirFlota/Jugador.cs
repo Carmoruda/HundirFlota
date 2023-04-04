@@ -57,10 +57,17 @@ namespace HundirFlota
         /// <summary>
         /// Constructor vacío de la clase Jugador.
         /// </summary>
-        public Jugador() { }
+        public Jugador() 
+        {
+            tablero = new Tablero();
+            patrullero = new Barco();
+            submarino = new Barco();
+            destructor = new Barco();
+            portaaviones = new Barco();
+        }
 
         /// <summary>
-        /// Constructor parametrizado de la clase jugador
+        /// Constructor parametrizado 1 de la clase jugador
         /// </summary>
         /// <param name="nombre"></param>
         /// <param name="tablero"></param>
@@ -76,6 +83,11 @@ namespace HundirFlota
             this.submarino = submarino;
             this.destructor = destructor;
             this.portaaviones = portaaviones;
+        }
+
+        public Jugador(string _nombre) : base()
+        {
+            nombre = _nombre;
         }
 
     }
