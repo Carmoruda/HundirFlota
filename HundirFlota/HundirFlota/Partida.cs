@@ -36,6 +36,11 @@ namespace HundirFlota
         /// </summary>
         public string nombrePartida { get; set; }
 
+        /// <summary>
+        /// String que representa el nombre del jugador ganador.
+        /// </summary>
+        public string nombreGanador { get; set; }
+
         // Constructores
 
         /// <summary>

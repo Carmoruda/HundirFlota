@@ -127,8 +127,7 @@ namespace HundirFlota
 
             foreach (Partida partida in listaPartidas)
             {
-                string informacion = "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n";
-                consola.ImprimirConsola(informacion, 0);
+                consola.ImprimirConsola(InformacionPartida(partida, 0), 0);
                 consola.ImprimirConsola("\n", 0);
             }
 
@@ -173,7 +172,7 @@ namespace HundirFlota
             switch (numJugadores) // Partida de 1 o 2 jugadores.
             {
                 case 1: // Individual (Humano VS Auto)
-                    opciones[3] = "\t * Nombre Jugador 2: " + "Autómata"; // Opciones[3]: * Nombre Jugador 2 = Autómata.
+                    opciones[3] = "\t * Nombre Jugador 2: " + "Autómata\n"; // Opciones[3]: * Nombre Jugador 2 = Autómata.
 
                     consola.ImprimirConsola(opciones[3], 0);
 
@@ -200,7 +199,18 @@ namespace HundirFlota
         /// </summary>
         public void RankingPartidas()
         {
+            consola.ImprimirConsola("------------------------------ LISTADO PARTIDAS ------------------------------\n\n", 1);
 
+            foreach (Partida partida in listaPartidas)
+            {
+                if (partida.finalizada == true)
+                {
+                    consola.ImprimirConsola(InformacionPartida(partida, 1), 0);
+                    consola.ImprimirConsola("\n", 0);
+                }
+            }
+
+            consola.Continuar(); // Pulsa enter para continuar.
         }
 
         /// <summary>
@@ -217,6 +227,31 @@ namespace HundirFlota
         public Partida BuscarPartida(string nombre)
         {
             return listaPartidas.SingleOrDefault(r => r.nombrePartida == nombre);
+        }
+
+        /// <summary>
+        /// Muestra la información de la cada partida (Nombre, nombre jugadores,
+        /// nº movimientos y estatus).
+        /// </summary>
+        /// <param name="partida">
+        /// Instancia de la clase Partida que representa aquella partida de la que se
+        /// quiere saber la información.
+        /// </param>
+        /// <param name="mostrarGanador">
+        /// Entero que representa si se desea mostrar el nombre del ganador.
+        /// </param>
+        /// <returns>
+        /// String que contiene toda la información de la partida.
+        /// </returns>
+        public string InformacionPartida(Partida partida, int mostrarGanador)
+        {
+            if (mostrarGanador == 1) // Mostrar nombre ganador.
+            {
+                return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n\t * Ganador: " + partida.nombreGanador + "\n";
+
+            }
+
+            return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n";
         }
     }
 }
