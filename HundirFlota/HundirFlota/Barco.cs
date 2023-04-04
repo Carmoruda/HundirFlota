@@ -8,6 +8,7 @@
 /// <version>0.1</version>
 /// </summary>
 
+using HundirFlota;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace HundirFlota
 
         public int[,] patrullera = new int[2,2]; // es bidimensional puesto que almaceno 2 numero (coordenadas)
         public int[,] submarino = new int[3,2]; //el primero coincide con la longitud del barco
-        public int[,] destructuctor = new int[4,2];
+        public int[,] destructor = new int[4,2];
         public int[,] portaaviones = new int[5,2];
         public Pantalla consola { get; set; }
 
@@ -41,35 +42,62 @@ namespace HundirFlota
 
         public void ColocarBarcos()
         {
-            string coordenadaX = "Coordenada X del barco";
-            consola.ImprimirConsola(coordenadaX, 0);
-            int posicionX = Convert.ToInt32(Console.ReadLine());
-            patrullera[0, 0] = posicionX;
-            string coordenadaY = "Coordenada Y del barco";
-            consola.ImprimirConsola(coordenadaY, 0);
-            int posicionY = Convert.ToInt32(Console.ReadLine());
-            patrullera[0, 1] = posicionY;
-            AumentarPosicion(patrullera, 2, 2, posicionX, posicionY);
 
+            string patrullero = "Colocacion barco PATRULLERO";
+            consola.ImprimirConsola(patrullero, 0);
+            AumentarPosicion(ref patrullera, 2);
 
+            string subma = "Colocacion barco SUBMARINO";
+            consola.ImprimirConsola(subma, 0);
+            AumentarPosicion(ref submarino, 3);
 
+            string destr = "Colocacion barco DESTRUCTOR";
+            consola.ImprimirConsola(destr, 0);
+            AumentarPosicion(ref destructor, 4);
 
-
-            //creo una funcion a la que le paso el barco, su longitud y si quiero que incremente izqda o dcha
+            string porta = "Colocacion barco PORTAAVIONES";
+            consola.ImprimirConsola(porta, 0);
+            AumentarPosicion(ref portaaviones, 5);
 
         }
 
 
-        public void AumentarPosicion(Array barco, int longitud, int coordenada, int posicionX, int posicionY) 
-        
+        public void AumentarPosicion(ref int[,] barco, int longitud) //creo una funcion a la que le paso el barco, su longitud 
         {
+            string coordenadaX = "Coordenada X del barco";
+            consola.ImprimirConsola(coordenadaX, 0);
+            int posicionX = Convert.ToInt32(Console.ReadLine());
+            barco[0, 0] = posicionX;
+            string coordenadaY = "Coordenada Y del barco";
+            consola.ImprimirConsola(coordenadaY, 0);
+            int posicionY = Convert.ToInt32(Console.ReadLine());
+            barco[0, 1] = posicionY;
+
             string direccion = "Quieres colocarlo en vertical u horizontal?";
             consola.ImprimirConsola(direccion, 0);
             string decision = Console.ReadLine().ToUpper();
 
             switch (decision)
             {
-                case "Vertical":
+
+                case "VERTICAL":
+
+                    for (int i = 1; i <= longitud; i++) //empiezo en 1 pq la posicion 0 ya la he elegido arriba
+                    {
+                        barco[i, 0] = posicionX;
+                        barco[i, 1]= posicionY + i;
+                       
+                    }
+                    break;
+
+                case "HORIZONTAL":
+
+                    for (int i = 1; i <= longitud; i++)
+                    {
+                        barco[i, 0] = posicionX + i;
+                        barco[i, 1] = posicionY;
+
+                    }
                     break;
 
             }
@@ -77,3 +105,7 @@ namespace HundirFlota
         }
     }
 }
+
+
+
+
