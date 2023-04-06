@@ -197,7 +197,6 @@ namespace HundirFlota
                 for (j = 0; j < 12; j++)
                 {
                     Console.BackgroundColor = ConsoleColor.Blue;
-                    mapa[i, j] = "| _ ";
                     Console.Write(mapa[i,j]);
                    
                 }

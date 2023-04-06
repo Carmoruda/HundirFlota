@@ -49,6 +49,8 @@ namespace HundirFlota
             consola = new Pantalla();
             zonasTierra = new List<int>();
             mapa = new string[12, 12];
+            RellenarTableroInicial(ref mapa); // esto no es muy buena practica?? pq quiero llamarlo cada vez que accedo al contstructor
+
         }
 
         /// <summary>
@@ -68,10 +70,24 @@ namespace HundirFlota
             consola = new Pantalla();
             zonasTierra = _zonasTierra;
             mapa = _mapa;
+            RellenarTableroInicial(ref _mapa); // esto no es muy buena practica?? pq quiero llamarlo cada vez que accedo al contstructor
+            
         }
+
 
         // Métodos 
 
+
+        public void RellenarTableroInicial(ref String[,] mapa) // creo esta funcion pq modifico el contenido cuando pongo barcos
+        {
+            for (int i = 0; i<12; i++)
+            {
+                for (int j = 0; j<12; j++)
+                {
+                    mapa[i, j] = "| _ ";
+                }
+            }
+        }
         public void Pintar()
         {
             consola.PintarTablero(mapa, 0, 0);
