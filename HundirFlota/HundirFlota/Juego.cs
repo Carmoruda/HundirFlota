@@ -257,6 +257,17 @@ namespace HundirFlota
             return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n";
         }
 
+        /// <summary>
+        /// Guarda un objeto de forma síncrona en su respectivo fichero.
+        /// </summary>
+        /// <param name="_partida">
+        /// Objeto que representa la partida que se quiere guardar
+        /// en el fichero.
+        /// </param>
+        /// <param name="nombreFichero">
+        /// String que representa la ruta relativa al fichero en el que
+        /// se quiere guardar la información.
+        /// </param>
         public virtual void GuardarFichero(object _partida, string nombreFichero)
         {
             var opciones = new JsonSerializerOptions { WriteIndented = true };
