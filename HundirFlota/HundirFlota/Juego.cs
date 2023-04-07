@@ -257,7 +257,7 @@ namespace HundirFlota
             return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n";
         }
 
-        public virtual void GuardarFichero(Partida _partida, string nombreFichero)
+        public virtual void GuardarFichero(object _partida, string nombreFichero)
         {
             var opciones = new JsonSerializerOptions { WriteIndented = true };
             string jsonString = JsonSerializer.Serialize(_partida, opciones);
