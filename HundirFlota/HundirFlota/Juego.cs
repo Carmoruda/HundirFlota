@@ -10,8 +10,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace HundirFlota
@@ -187,6 +189,7 @@ namespace HundirFlota
             }
 
             listaPartidas.Add(partidaInsertar);
+            GuardarFichero(partidaInsertar, Program.ficheroPartidas);
 
             consola.ImprimirConsola(opciones[4], 0);// Opciones[4]: Partida creada correctamente.
             consola.Continuar(); // Pulsar enter para continuar.
@@ -252,6 +255,13 @@ namespace HundirFlota
             }
 
             return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n";
+        }
+
+        public virtual void GuardarFichero(Partida _partida, string nombreFichero)
+        {
+            var opciones = new JsonSerializerOptions { WriteIndented = true };
+            string jsonString = JsonSerializer.Serialize(_partida, opciones);
+            File.AppendAllText(nombreFichero, jsonString);
         }
     }
 }

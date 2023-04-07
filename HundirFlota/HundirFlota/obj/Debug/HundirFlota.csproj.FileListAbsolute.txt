@@ -22,3 +22,22 @@ C:\Users\prueb\Documents\PRIMERO\2do cuatri\POO\HundirFlota\HundirFlota\HundirFl
 C:\Users\prueb\Documents\PRIMERO\2do cuatri\POO\HundirFlota\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.csproj.CoreCompileInputs.cache
 C:\Users\prueb\Documents\PRIMERO\2do cuatri\POO\HundirFlota\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.exe
 C:\Users\prueb\Documents\PRIMERO\2do cuatri\POO\HundirFlota\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.pdb
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\System.Buffers.dll
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\System.Memory.dll
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\System.Numerics.Vectors.dll
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\System.Text.Encodings.Web.dll
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\System.Text.Json.dll
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\System.ValueTuple.dll
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\System.Buffers.xml
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\System.Memory.xml
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\System.Numerics.Vectors.xml
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\System.Text.Encodings.Web.xml
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\System.Text.Json.xml
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\bin\Debug\System.ValueTuple.xml
+C:\Programación\Repos\HundirFlota\HundirFlota\HundirFlota\obj\Debug\HundirFlota.csproj.CopyComplete
