@@ -27,10 +27,10 @@ namespace HundirFlota
         public String[,] mapa { get; set; }
 
         /// <summary>
-        /// Lista de enteros que representan las coordenadas de las 
+        /// Lista de la clase Coordenadas que representan las coordenadas de las 
         /// zonas de tierra en el mapa.
         /// </summary>
-        public List<int[]> zonasTierra = new List<int[]>();
+        public List<Coordenadas> zonasTierra = new List<Coordenadas>();
 
         /// <summary>
         /// Instancia de la clase Pantalla para controlar la entrada
@@ -47,7 +47,7 @@ namespace HundirFlota
         public Tablero()
         {
             consola = new Pantalla();
-            zonasTierra = new List<int[]>();
+            zonasTierra = new List<Coordenadas>();
             mapa = new string[12, 12];
             RellenarTableroInicial(mapa); // esto no es muy buena practica?? pq quiero llamarlo cada vez que accedo al contstructor
             RellenarTierra();
@@ -65,7 +65,7 @@ namespace HundirFlota
         /// Array bidimesional de string que representa el mapa
         /// del juego.
         /// </param>
-        public Tablero(List<int[]> _zonasTierra, String[,] _mapa) : this()
+        public Tablero(List<Coordenadas> _zonasTierra, String[,] _mapa) : this()
         {
             zonasTierra = _zonasTierra;
             mapa = _mapa;
@@ -86,6 +86,15 @@ namespace HundirFlota
 
             for (int i = 0; i < coordenadasX.Length; i++)
             {
+                Coordenadas nuevasCoordenas = new Coordenadas();
+
+                nuevasCoordenas.x[0] = coordenadasX[i];
+                nuevasCoordenas.x[1] = coordenadasX[i] + longitudTierra[i];
+
+                nuevasCoordenas.y[0] = nuevasCoordenas.y[1] = coordenadasY[i];
+                
+                zonasTierra.Add(nuevasCoordenas); // A;adir coordenadas a la lista de zonasTierra.
+
                 for (int j = 0; j  < longitudTierra[i]; j++)
                 {
                     mapa[coordenadasY[i], coordenadasX[i] + j] = "| X ";
