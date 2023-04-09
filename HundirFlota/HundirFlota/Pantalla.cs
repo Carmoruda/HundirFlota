@@ -225,8 +225,28 @@ namespace HundirFlota
                 for (j = 0; j < 12; j++)
                 {
                     Console.BackgroundColor = ConsoleColor.Blue;
-                    Console.Write(mapa[i,j]);
-                   
+                    
+                    switch(mapa[i, j])
+                    {
+                        case "| X ":
+                            Console.BackgroundColor = ConsoleColor.DarkGreen; // Color Tierra.
+                            break;
+                        case "| P ":
+                            Console.BackgroundColor = ConsoleColor.DarkRed; // Color Patrullero.
+                            break;
+                        case "| S ":
+                            Console.BackgroundColor = ConsoleColor.DarkYellow; // Color Submarino.
+                            break;
+                        case "| D ":
+                            Console.BackgroundColor = ConsoleColor.DarkMagenta; // Color Destructor.
+                            break;
+                        case "| A ":
+                            Console.BackgroundColor = ConsoleColor.DarkGray; // Color PortaAviones.
+                            break;
+                    }
+
+                    Console.Write(mapa[i, j]);
+
                 }
                 Console.ResetColor();
                 Console.WriteLine();

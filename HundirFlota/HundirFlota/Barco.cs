@@ -115,7 +115,7 @@ namespace HundirFlota
         public void SeleccionarOrientacion()
         {
             int accionOrientacion = 0;
-            string texto = "------------------------------JUGADOR " + nombreJugador.ToUpper() + "------------------------------\n\n" +
+            string texto = "------------------------------ JUGADOR " + nombreJugador.ToUpper() + " ------------------------------\n\n" +
                            "------------------------------ NUEVO BARCO ------------------------------\n\n\n  Información barco:" +
                            "\n\n\t * Tipo de barco: " + tipo + "\n\t * Longitud: " + longitud + "\n\t * Letra mapa: " 
                            + tipo.Substring(0, 1).ToUpper() + "\n";
@@ -164,16 +164,16 @@ namespace HundirFlota
             switch (horizontal) // Asignación de las coordenadas.
             {
                 case 0: // Orientación vertical
-                    coordenadas.x[0] = coordenadas.x[1] = coordenadaY - 1;
+                    coordenadas.y[0] = coordenadas.y[1] = coordenadaY - 1;
                     
-                    coordenadas.y[0] = coordenadaX - 1;
-                    coordenadas.y[1] = coordenadaX + longitud - 2;
+                    coordenadas.x[0] = coordenadaX - 1;
+                    coordenadas.x[1] = coordenadaX + longitud - 2;
                     break;
                 case 1: // Orientación horizontal
-                    coordenadas.x[0] = coordenadaY - 1;
-                    coordenadas.x[1] = coordenadaY + longitud - 2;
+                    coordenadas.y[0] = coordenadaY - 1;
+                    coordenadas.y[1] = coordenadaY + longitud - 2;
                     
-                    coordenadas.y[0] = coordenadas.y[1] = coordenadaX - 1;
+                    coordenadas.x[0] = coordenadas.x[1] = coordenadaX - 1;
                     break;
             }
 
@@ -192,24 +192,20 @@ namespace HundirFlota
                 case 0: // Orientación vertical. 
                     for (int i = 0; i < longitud; i++)
                     {
-                        tablero.mapa[coordenadas.x[0] + i, coordenadas.y[0]] = letraBarco;
+                        tablero.mapa[coordenadas.y[0] + i, coordenadas.x[0]] = letraBarco;
                     }
                     break;
                 case 1: // Orientación horizontal.
                     for (int i = 0; i < longitud; i++)
                     {
-                        tablero.mapa[coordenadas.x[0], coordenadas.y[0] + i] = letraBarco;
+                        tablero.mapa[coordenadas.y[0], coordenadas.x[0] + i] = letraBarco;
                     }
                     break;
             }
 
 
-            tablero.Pintar();
-            consola.Continuar();
+            tablero.Pintar(); // Mostrar el tablero
+            consola.Continuar(); // Pulsar enter para continuar.
         }
     }
 }
-
-
-
-

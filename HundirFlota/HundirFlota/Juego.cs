@@ -152,7 +152,6 @@ namespace HundirFlota
                                   "\t * Nombre de la Partida: ",
                                   "\t * Nombre Jugador 1: ",
                                   "\t * Nombre Jugador 2: ",
-                                  "\n  Partida creada correctamente.\n\n",
                                   "\n  Ya existe una partida con ese nombre.\n"};
 
             Jugador nuevoJugador1; // Instancia jugador1.
@@ -166,7 +165,7 @@ namespace HundirFlota
             Partida partidaInsertar = BuscarPartida(nuevoNombrePartida);
             if (partidaInsertar != null) // Ya existe.
             {
-                consola.ImprimirConsola(opciones[5], 0); // Opciones[4]: Ya existe una partida con ese nombre.
+                consola.ImprimirConsola(opciones[4], 0); // Opciones[4]: Ya existe una partida con ese nombre.
                 consola.Continuar(); // Pulsar enter para continuar.
                 return; // Volver al menú.
             }
@@ -192,10 +191,6 @@ namespace HundirFlota
 
             partidaInsertar.NuevaPartida();
             listaPartidas.Add(partidaInsertar);
-
-            consola.ImprimirConsola(opciones[4], 0);// Opciones[4]: Partida creada correctamente.
-
-            consola.Continuar(); // Pulsar enter para continuar.
         }
 
         /// <summary>
