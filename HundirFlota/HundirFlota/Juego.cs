@@ -93,7 +93,7 @@ namespace HundirFlota
             {
                 NuevaSesion();
 
-                accionMenu = consola.PintarMenu(opciones, 0);
+                accionMenu = consola.PintarMenu(opciones, 0, 1);
 
                 switch (accionMenu)
                 {
@@ -135,7 +135,7 @@ namespace HundirFlota
                 consola.ImprimirConsola("\n", 0);
             }
 
-            consola.Continuar(); // Pulsa enter para continuar.
+            consola.Continuar(1); // Pulsa enter para continuar.
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace HundirFlota
             if (partidaInsertar != null) // Ya existe.
             {
                 consola.ImprimirConsola(opciones[4], 0); // Opciones[4]: Ya existe una partida con ese nombre.
-                consola.Continuar(); // Pulsar enter para continuar.
+                consola.Continuar(1); // Pulsar enter para continuar.
                 return; // Volver al menú.
             }
 
@@ -211,7 +211,7 @@ namespace HundirFlota
                 }
             }
 
-            consola.Continuar(); // Pulsa enter para continuar.
+            consola.Continuar(1); // Pulsa enter para continuar.
         }
 
         /// <summary>

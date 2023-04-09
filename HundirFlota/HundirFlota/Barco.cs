@@ -98,6 +98,14 @@ namespace HundirFlota
 
         // Métodos
 
+        /// <summary>
+        /// LLama a los métodos necesarios para crear un nuevo 
+        /// barco (seleccionar la orientación, introducir las
+        /// coordenadas y color el barco en el mapa).
+        /// </summary>
+        /// <param name="nombre">
+        /// String que representa el nombre del jugador.
+        /// </param>
         public void NuevoBarco(string nombre)
         {
             nombreJugador = nombre;
@@ -115,25 +123,28 @@ namespace HundirFlota
         public void SeleccionarOrientacion()
         {
             int accionOrientacion = 0;
-            string texto = "------------------------------ JUGADOR " + nombreJugador.ToUpper() + " ------------------------------\n\n" +
+
+            do
+            {
+                string texto = "------------------------------ JUGADOR " + nombreJugador.ToUpper() + " ------------------------------\n\n" +
                            "------------------------------ NUEVO BARCO ------------------------------\n\n\n  Información barco:" +
-                           "\n\n\t * Tipo de barco: " + tipo + "\n\t * Longitud: " + longitud + "\n\t * Letra mapa: " 
+                           "\n\n\t * Tipo de barco: " + tipo + "\n\t * Longitud: " + longitud + "\n\t * Letra mapa: "
                            + tipo.Substring(0, 1).ToUpper() + "\n";
 
-            consola.ImprimirConsola(texto, 1);
+                consola.ImprimirConsola(texto, 1); // texto: -- JUGADOR...
 
-            string[] opciones = { "\n  Seleccione una de las siguientes opciones:\n",
-                                  "\t1   Orientación vertical.",
-                                  "\t2   Orientación horizontal."};
+                string[] opciones = { "\n  Seleccione una de las siguientes opciones:\n",
+                                      "\t1   Orientación vertical.\n\t2   Orientación horizontal."};
 
-            accionOrientacion = consola.PintarMenu(opciones, 0) - 1;
+                accionOrientacion = consola.PintarMenu(opciones, 0, 0);
+                
+                consola.Continuar(0); // Pulsar enter para continuar.
+            } while (accionOrientacion < 1 || accionOrientacion > 2);
+            
 
-            if(accionOrientacion == 3) // Salir
-            {
-                return;
-            }
+            horizontal = accionOrientacion - 1; // Orientación del barco.
+            consola.ImprimirConsola("\n", 0); // Imprimir salto de línea.
 
-            horizontal = accionOrientacion;
         }
 
         /// <summary>
@@ -148,31 +159,42 @@ namespace HundirFlota
             tablero.Pintar(); // Mostrar el tablero.
 
             string[] opciones = { "\n\t* Coordenada X: ",
-                                  "\t* Coordenada Y: "};
+                                  "\t* Coordenada Y: ",
+                                  "\t  Error, la longitud de su barco es " + longitud + " y posicionándolo en la casilla "};
 
-            do
+            do // Coordenadas eje X. 
             {
                 coordenadaX = consola.LeerEntero(opciones[0], 1, 12); // Opciones[0]: * Coordenada X.
-            } while (coordenadaX < 1 || coordenadaX > 12);
 
-            do
+                if(coordenadaX + longitud > 12 && horizontal == 1) // Mensaje de error cuando se sale del tablero.
+                {
+                    consola.ImprimirConsola(opciones[2] + coordenadaX + " se sale del tablero.\n", 0); // Error, la longitud de su barco es...
+                }
+
+            } while (coordenadaX < 1 || coordenadaX > 12 || (coordenadaX + longitud > 12 && horizontal == 1));
+
+            do // Coordenadas eje Y.
             {
                 coordenadaY = consola.LeerEntero(opciones[1], 1, 12); // Opciones[1]: * Coordenada Y.
-            } while (coordenadaY < 1 || coordenadaY > 12);
 
+                if (coordenadaY + longitud > 12 && horizontal == 0) // Mensaje de error cuando se sale del tablero.
+                {
+                    consola.ImprimirConsola(opciones[2] + coordenadaY + " se sale del tablero.\n", 0); // Error, la longitud de su barco es...
+                }
+            } while (coordenadaY < 1 || coordenadaY > 12 || (coordenadaY + longitud > 12 && horizontal == 0));
 
             switch (horizontal) // Asignación de las coordenadas.
             {
                 case 0: // Orientación vertical
                     coordenadas.y[0] = coordenadas.y[1] = coordenadaY - 1;
-                    
+
                     coordenadas.x[0] = coordenadaX - 1;
                     coordenadas.x[1] = coordenadaX + longitud - 2;
                     break;
                 case 1: // Orientación horizontal
                     coordenadas.y[0] = coordenadaY - 1;
                     coordenadas.y[1] = coordenadaY + longitud - 2;
-                    
+
                     coordenadas.x[0] = coordenadas.x[1] = coordenadaX - 1;
                     break;
             }
@@ -186,7 +208,7 @@ namespace HundirFlota
         /// </summary>
         public void ColocarBarco()
         {
-            string letraBarco = "| " + tipo.Substring(0, 1).ToUpper() + " ";
+            string letraBarco = "| " + tipo.Substring(0, 1).ToUpper() + " "; // Letra del barco en el mapa.
             switch (horizontal)
             {
                 case 0: // Orientación vertical. 
@@ -205,7 +227,7 @@ namespace HundirFlota
 
 
             tablero.Pintar(); // Mostrar el tablero
-            consola.Continuar(); // Pulsar enter para continuar.
+            consola.Continuar(1); // Pulsar enter para continuar.
         }
     }
 }

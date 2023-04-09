@@ -48,6 +48,20 @@ namespace HundirFlota
         // Métodos
 
         /// <summary>
+        /// Permite limpiar la consola.
+        /// </summary>
+        /// <param name="limpiar">
+        /// Entero que representa si se desea limpiar (1) la consola.
+        /// </param>
+        public void Limpiar(int limpiar)
+        {
+            if (limpiar == 1) // Limpiar consola.
+            {
+                Console.Clear();
+            }
+        }
+
+        /// <summary>
         /// Imprime la opción de salida en los menús.
         /// </summary>
         /// <param name="opciones">
@@ -62,11 +76,15 @@ namespace HundirFlota
         /// <summary>
         /// Pide al usuario que pulse la tecla enter para continuar.
         /// </summary>
-        public void Continuar()
+        /// <param name="limpiar">
+        /// Entero que representa si se desea limpiar (1) la consola
+        /// antes de mostrar el texto.
+        /// </param>
+        public void Continuar(int limpiar)
         {
             Console.WriteLine("\n  Pulse Enter para continuar:");
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
-            Console.Clear();
+            Limpiar(limpiar);
         }
 
         /// <summary>
@@ -81,10 +99,7 @@ namespace HundirFlota
         /// </param>
         public void ImprimirConsola(string texto, int limpiar)
         {
-            if (limpiar == 1) // Limpiar consola.
-            {
-                Console.Clear();
-            }
+            Limpiar(limpiar);
 
             Console.Write(texto);
 
@@ -100,16 +115,17 @@ namespace HundirFlota
         /// Entero que representa si se desea limpiar (1) la consola
         /// antes de mostrar el texto.
         /// </param>
+        /// <param name="Salir">
+        /// Entero que representa si se desea permitir la opción de 
+        /// salir en el menú.
+        /// </param>
         /// <returns>
         /// Devuelve un entero que representa la opción seleccionada
         /// por el usuario.
         /// </returns>
-        public int PintarMenu(string[] opciones, int limpiar)
+        public int PintarMenu(string[] opciones, int limpiar, int salir)
         {
-            if (limpiar == 1) // Limpiar consola.
-            {
-                Console.Clear();
-            }
+            Limpiar(limpiar);
 
 
             foreach (string opcion in opciones)
@@ -117,11 +133,14 @@ namespace HundirFlota
                 Console.WriteLine(opcion);
             }
 
-            Salir(opciones); // Mostar opción de salida.
+            if (salir  == 1)
+            {
+                Salir(opciones); // Mostar opción de salida.
+            }
 
             Console.Write("\n\n  Introduzca su elección:\n  ===> ");
 
-            return ComprobarEntero(int.Parse(Console.ReadLine()), 0, opciones.Length); // Opción seleccionada.
+            return ComprobarEntero(int.Parse(Console.ReadLine()), 1, opciones.Length); // Opción seleccionada.
         }
 
 
