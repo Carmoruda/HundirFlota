@@ -195,6 +195,7 @@ namespace HundirFlota
 
                         coordenadas.y[0] = coordenadaY - 1;
                         coordenadas.y[1] = coordenadaY + longitud - 2;
+
                         break;
                     case 1: // Orientación horizontal
                         coordenadas.y[0] = coordenadas.y[1] = coordenadaY - 1;

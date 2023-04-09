@@ -154,19 +154,11 @@ namespace HundirFlota
         {
             for (int i = 0; i < zonasBarcos.Count; i++)
             {
-                if (coordenadas.x[0] <= zonasBarcos[i].x[0] && zonasBarcos[i].x[0] <= coordenadas.x[1])
+                if ((coordenadas.x[0] <= zonasBarcos[i].x[0] && zonasBarcos[i].x[0] <= coordenadas.x[1]) || zonasBarcos[i].x[0] <= coordenadas.x[0] && coordenadas.x[0] <= zonasBarcos[i].x[1])
                 {
-                    if (zonasBarcos[i].y[0] <= coordenadas.y[0] && coordenadas.y[0] <= zonasBarcos[i].y[1])
+                    if ((zonasBarcos[i].y[0] <= coordenadas.y[0] && coordenadas.y[0] <= zonasBarcos[i].y[1]) || coordenadas.y[0] <= zonasBarcos[i].y[0] && zonasBarcos[i].y[0] <= coordenadas.y[1])
                     { return true; }
                 }
-                /*if ((zonasBarcos[i].x[0] <= coordenadas.x[0] && coordenadas.x[0] <= zonasBarcos[i].x[1]) && (zonasBarcos[i].y[0] == coordenadas.y[0]))
-                {
-                    return true;
-                }
-                else if ((zonasBarcos[i].x[0] == coordenadas.x[0]) && (zonasBarcos[i].y[0] <= coordenadas.y[0] && coordenadas.y[0] <= zonasBarcos[i].y[1]))
-                {
-                    return true;
-                }*/
 
             }
 
