@@ -20,16 +20,16 @@ namespace HundirFlota
         // Atributos
 
         /// <summary>
-        /// Entero que representa la coordenada en 
+        /// Array de enteros que representa la coordenada en 
         /// el eje X del barco.
         /// </summary>
-        public int x {  get; set; }
+        public int[] x {  get; set; }
 
         /// <summary>
-        /// Entero que representa la coordenada en 
+        /// Array de enteros que representa la coordenada en 
         /// el eje Y del barco.
         /// </summary>
-        public int y { get; set; }
+        public int[] y { get; set; }
 
         // Constructores
 
@@ -38,8 +38,8 @@ namespace HundirFlota
         /// </summary>
         public Coordenadas() 
         {
-            x = 0;
-            y = 0;
+            x = new int[2];
+            y = new int[2];
         }
 
         /// <summary>
@@ -47,12 +47,12 @@ namespace HundirFlota
         /// los valor de las coordenas x e y del barco.
         /// </summary>
         /// <param name="_x">
-        /// Entero que representa la coordenada X del barco.
+        /// Array de enteros que representa la coordenada X del barco.
         /// </param>
         /// <param name="_y">
-        /// Entero que representa la coordenada Y del barco.
+        /// Array de enteros que representa la coordenada Y del barco.
         /// </param>
-        public Coordenadas(int _x, int _y)
+        public Coordenadas(int[] _x, int[] _y)
         {
             x = _x;
             y = _y;

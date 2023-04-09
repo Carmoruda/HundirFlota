@@ -121,7 +121,7 @@ namespace HundirFlota
 
             Console.Write("\n\n  Introduzca su elección:\n  ===> ");
 
-            return LeerEntero(int.Parse(Console.ReadLine()), 0, opciones.Length); // Opción seleccionada.
+            return ComprobarEntero(int.Parse(Console.ReadLine()), 0, opciones.Length); // Opción seleccionada.
         }
 
 
@@ -141,14 +141,41 @@ namespace HundirFlota
         }
 
         /// <summary>
+        /// Muestra por consola un texto y lee el input del usuario.
+        /// </summary>
+        /// <param name="texto">
+        /// String que representa el texto que se quiere mostrar.
+        /// </param>
+        /// <param name="limiteInf">
+        /// Entero que representa el límite inferior.
+        /// </param>
+        /// <param name="limiteSup">
+        /// Entero que representa el límite superior.
+        /// </param>
+        /// <returns>
+        /// Devuelve un entero que representa el input del usuario.
+        /// </returns>
+        public int LeerEntero(string texto, int limiteInf, int limiteSup)
+        {
+            Console.Write(texto);
+            return ComprobarEntero(Convert.ToInt32(Console.ReadLine()), limiteInf, limiteSup);
+        }
+
+        /// <summary>
         /// Comprueba si el entero introducido por el usuario se encuentra
         /// entre los límites asignados.
         /// </summary>
-        /// <param name="variable">Entero que se desea comprobar.</param>
-        /// <param name="limiteInf">Entero que representa el límite inferior.</param>
-        /// <param name="limiteSup">Entero que representa el límite superior.</param>
+        /// <param name="variable">
+        /// Entero que se desea comprobar.
+        /// </param>
+        /// <param name="limiteInf">
+        /// Entero que representa el límite inferior.
+        /// </param>
+        /// <param name="limiteSup">
+        /// Entero que representa el límite superior.
+        /// </param>
         /// <returns></returns>
-        public int LeerEntero(int variable, int limiteInf, int limiteSup)
+        public int ComprobarEntero(int variable, int limiteInf, int limiteSup)
         {
             string mensajeError = "  Error! El valor introducido debe estar entre " + limiteInf + " y " + limiteSup + "\n\n";
 
@@ -181,6 +208,7 @@ namespace HundirFlota
                 }
                 
             }
+            Console.ResetColor();
             Console.WriteLine();
 
             for (i = 0; i < 12; i++)
@@ -200,12 +228,11 @@ namespace HundirFlota
                     Console.Write(mapa[i,j]);
                    
                 }
-                Console.WriteLine();
                 Console.ResetColor();
+                Console.WriteLine();
             }
 
-
-            Console.ReadLine();
+            
 
         }
     }

@@ -98,13 +98,20 @@ namespace HundirFlota
         }
 
         /// <summary>
+        /// Controla el inicio de una nueva partida.
+        /// </summary>
+        public virtual void NuevaPartida()
+        {
+        }
+
+        /// <summary>
         /// Muestra la información correspondiente al status
         /// de la partida
         /// </summary>
         /// <returns>
         /// String que muestra el nombre del jugador 1 y del jugador 2.
         /// </returns>
-        public virtual string InformacionStatus()
+        public string InformacionStatus()
         {
             switch(finalizada)
             {

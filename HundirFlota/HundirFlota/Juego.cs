@@ -190,9 +190,11 @@ namespace HundirFlota
                     break;
             }
 
+            partidaInsertar.NuevaPartida();
             listaPartidas.Add(partidaInsertar);
 
             consola.ImprimirConsola(opciones[4], 0);// Opciones[4]: Partida creada correctamente.
+
             consola.Continuar(); // Pulsar enter para continuar.
         }
 

@@ -78,6 +78,15 @@ namespace HundirFlota
         {
             return "\n\t * Jugador 1: " + jugadorHumano.nombre + "\n\t * Jugador 2: " + jugadorAuto.nombre;
         }
+
+        /// <summary>
+        /// Controla el inicio de una nueva partida, permitiendo
+        /// al jugador 1 (Humano) colocar sus barcos.
+        /// </summary>
+        public override void NuevaPartida()
+        {
+            jugadorHumano.NuevaPartida();
+        }
     }
 
 }

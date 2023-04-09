@@ -32,23 +32,26 @@ namespace HundirFlota
         public Tablero tablero { get; set; }
 
         /// <summary>
-        /// Barco tipo patrullero iniciado  por composición
-        /// de la clase barco.
+        /// Instancia de la clase Barco que representa
+        /// un navío de tipo patrullero.
         /// </summary>
         public Barco patrullero { get; set; }
+
         /// <summary>
-        /// Barco tipo submarino iniciado por composición
-        /// de la clase barco.
+        /// Instancia de la clase Barco que representa
+        /// un navío de tipo submarino.
         /// </summary>
         public Barco submarino { get; set; }
+        
         /// <summary>
-        /// Barco tipo destructor iniciadopor composición
-        /// de la clase barco.
+        /// Instancia de la clase Barco que representa
+        /// un navío de tipo destructor.
         /// </summary>
         public Barco destructor { get; set; }
+
         /// <summary>
-        /// Barco tipo portaaviones iniciadopor composición
-        /// de la clase barco.
+        /// Instancia de la clase Barco que representa
+        /// un navío de tipo portaaviones.
         /// </summary>
         public Barco portaaviones { get; set; }
 
@@ -60,35 +63,34 @@ namespace HundirFlota
         public Jugador() 
         {
             tablero = new Tablero();
-            patrullero = new Barco();
-            submarino = new Barco();
-            destructor = new Barco();
-            portaaviones = new Barco();
+            patrullero = new Barco(2, "Patrullero", tablero);
+            submarino = new Barco(3, "Submarino", tablero);
+            destructor = new Barco(4, "Destructor", tablero);
+            portaaviones = new Barco(5, "Aviones", tablero);
         }
 
         /// <summary>
-        /// Constructor parametrizado 1 de la clase jugador
+        /// Constructor parametrizado de la clase Jugador. Asigna
+        /// el valor del nombre del jugador.
         /// </summary>
-        /// <param name="nombre"></param>
-        /// <param name="tablero"></param>
-        /// <param name="patrullero"></param>
-        /// <param name="submarino"></param>
-        /// <param name="destructor"></param>
-        /// <param name="portaaviones"></param>
-        public Jugador(string nombre, Tablero tablero, Barco patrullero, Barco submarino, Barco destructor, Barco portaaviones)
-        {
-            this.nombre = nombre;
-            this.tablero = tablero;
-            this.patrullero = patrullero;
-            this.submarino = submarino;
-            this.destructor = destructor;
-            this.portaaviones = portaaviones;
-        }
-
-        public Jugador(string _nombre) : base()
+        /// <param name="_nombre"></param>
+        public Jugador(string _nombre) : this()
         {
             nombre = _nombre;
         }
 
+        // Métodos
+
+        /// <summary>
+        /// Permite asignar la orientación y la posición
+        /// de los barcos dentro del tablero.
+        /// </summary>
+        public void NuevaPartida()
+        {
+            patrullero.NuevoBarco(nombre);
+            submarino.NuevoBarco(nombre);
+            destructor.NuevoBarco(nombre);
+            portaaviones.NuevoBarco(nombre);
+        }
     }
 }
