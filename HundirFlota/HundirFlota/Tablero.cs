@@ -149,7 +149,18 @@ namespace HundirFlota
 
         }
 
-        // No consigo que funcione bien - Carmen :)
+        /// <summary>
+        /// Busca si existen barcos donde al menos 1 de las 
+        /// coordenadas coincida.
+        /// </summary>
+        /// <param name="coordenadas">
+        /// Instancias de la clase Coordenadas que representa
+        /// las coordenadas del barco que se quiere colocar.
+        /// </param>
+        /// <returns>
+        /// Devuelve un booleano que es verdadero si existe al menos 1 barco
+        /// donde coincida mínimo 1 de las coordenadas.
+        /// </returns>
         public bool BuscarBarco(Coordenadas coordenadas)
         {
             for (int i = 0; i < zonasBarcos.Count; i++)
@@ -157,6 +168,33 @@ namespace HundirFlota
                 if ((coordenadas.x[0] <= zonasBarcos[i].x[0] && zonasBarcos[i].x[0] <= coordenadas.x[1]) || zonasBarcos[i].x[0] <= coordenadas.x[0] && coordenadas.x[0] <= zonasBarcos[i].x[1])
                 {
                     if ((zonasBarcos[i].y[0] <= coordenadas.y[0] && coordenadas.y[0] <= zonasBarcos[i].y[1]) || coordenadas.y[0] <= zonasBarcos[i].y[0] && zonasBarcos[i].y[0] <= coordenadas.y[1])
+                    { return true; }
+                }
+
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Busca si existen zonas de tierra donde al menos 1 de las 
+        /// coordenadas coincida.
+        /// </summary>
+        /// <param name="coordenadas">
+        /// Instancias de la clase Coordenadas que representa
+        /// las coordenadas del barco que se quiere colocar.
+        /// </param>
+        /// <returns>
+        /// Devuelve un booleano que es verdadero si existe al menos 1 zona
+        /// de tierra donde coincida mínimo 1 de las coordenadas.
+        /// </returns>
+        public bool BuscarTierra(Coordenadas coordenadas)
+        {
+            for (int i = 0; i < zonasTierra.Count; i++)
+            {
+                if ((coordenadas.x[0] <= zonasTierra[i].x[0] && zonasTierra[i].x[0] <= coordenadas.x[1]) || zonasTierra[i].x[0] <= coordenadas.x[0] && coordenadas.x[0] <= zonasTierra[i].x[1])
+                {
+                    if ((zonasTierra[i].y[0] <= coordenadas.y[0] && coordenadas.y[0] <= zonasTierra[i].y[1]) || coordenadas.y[0] <= zonasTierra[i].y[0] && zonasTierra[i].y[0] <= coordenadas.y[1])
                     { return true; }
                 }
 

@@ -157,13 +157,15 @@ namespace HundirFlota
             int coordenadaX = 0;
             int coordenadaY = 0;
             bool existeBarco = true;
+            bool existeTierra = true;
 
             tablero.Pintar(); // Mostrar el tablero.
 
             string[] opciones = { "\n\t* Coordenada X: ",
                                   "\t* Coordenada Y: ",
                                   "\t  Error! La longitud de su barco es " + longitud + " y posicionándolo en la casilla ",
-                                  "\t  Error! Ya hay otro barco colocado en esa posición.\n"};
+                                  "\t  Error! Ya hay otro barco colocado en esa posición.\n",
+                                  "\t  Error! Hay una zona de tierra en esa posición.\n"};
 
             do
             {
@@ -184,7 +186,7 @@ namespace HundirFlota
 
                     if (coordenadaY + longitud > 12 && horizontal == 0) // Mensaje de error cuando se sale del tablero.
                     {
-                        consola.ImprimirConsola(opciones[2] + coordenadaY + " se sale del tablero.\n", 0); // Error, la longitud de su barco es...
+                        consola.ImprimirConsola(opciones[2] + coordenadaY + " se sale del tablero.\n", 0); // Error! La longitud de su barco es...
                     }
                 } while (coordenadaY < 1 || coordenadaY > 12 || (coordenadaY + longitud > 12 && horizontal == 0));
 
@@ -206,14 +208,18 @@ namespace HundirFlota
                 }
 
                 existeBarco = tablero.BuscarBarco(coordenadas);
+                //existeTierra = tablero.BuscarTierra(coordenadas);
 
                 if (existeBarco)
                 {
                     consola.ImprimirConsola(opciones[3], 0); // Error! Ya hay otro barco...
+                } else if (existeTierra)
+                {
+                    consola.ImprimirConsola(opciones[4], 0); // Error! Hay una zona de...
                 }
 
-            } while (existeBarco);
-            
+            } while (existeBarco); //|| existeTierra
+
             consola.ImprimirConsola("\n", 0); // Imprimir salto de línea.
         }
 
