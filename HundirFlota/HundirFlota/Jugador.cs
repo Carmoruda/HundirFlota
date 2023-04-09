@@ -83,10 +83,14 @@ namespace HundirFlota
 
         /// <summary>
         /// Permite asignar la orientación y la posición
-        /// de los barcos dentro del tablero.
+        /// de los barcos dentro del tablero, además de 
+        /// rellenar el tablero con las casillas iniciales.
         /// </summary>
         public void NuevaPartida()
         {
+            tablero.RellenarTableroInicial(tablero.mapa);
+            tablero.RellenarTierra();
+
             patrullero.NuevoBarco(nombre);
             submarino.NuevoBarco(nombre);
             destructor.NuevoBarco(nombre);

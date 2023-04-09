@@ -33,6 +33,12 @@ namespace HundirFlota
         public List<Coordenadas> zonasTierra = new List<Coordenadas>();
 
         /// <summary>
+        /// Lista de la clase Coordenadas que representan las coordenadas de los 
+        /// barcos en el mapa.
+        /// </summary>
+        public List<Coordenadas> zonasBarcos = new List<Coordenadas>();
+
+        /// <summary>
         /// Instancia de la clase Pantalla para controlar la entrada
         /// y salida de datos del tablero.
         /// </summary>
@@ -49,8 +55,6 @@ namespace HundirFlota
             consola = new Pantalla();
             zonasTierra = new List<Coordenadas>();
             mapa = new string[12, 12];
-            RellenarTableroInicial(mapa); // esto no es muy buena practica?? pq quiero llamarlo cada vez que accedo al contstructor
-            RellenarTierra();
         }
 
         /// <summary>
@@ -75,7 +79,8 @@ namespace HundirFlota
         // Métodos 
 
         /// <summary>
-        /// Permite colocar los trozos de tierra en el mapa.
+        /// Permite colocar los trozos de tierra en el mapa y
+        /// añadir las coordenadas a la lista de zonasTierra.
         /// </summary>
         public void RellenarTierra()
         {
@@ -93,12 +98,37 @@ namespace HundirFlota
 
                 nuevasCoordenas.y[0] = nuevasCoordenas.y[1] = coordenadasY[i];
                 
-                zonasTierra.Add(nuevasCoordenas); // A;adir coordenadas a la lista de zonasTierra.
+                zonasTierra.Add(nuevasCoordenas); // Añadir coordenadas a la lista de zonasTierra.
 
                 for (int j = 0; j  < longitudTierra[i]; j++)
                 {
                     mapa[coordenadasY[i], coordenadasX[i] + j] = "| X ";
                 }
+            }
+        }
+
+        /// <summary>
+        /// Permite colocar los barcos en el mapa y
+        /// añadir las coordenadas a la lista de zonasBarcos.
+        /// </summary>
+        public void RellenarBarcos(int orientación, string letraBarco, int longitud, Coordenadas coordenadas)
+        {
+            zonasBarcos.Add(coordenadas); // Añadir coordenadas a la lista de zonasBarcos.
+
+            switch (orientación)
+            {
+                case 0: // Orientación vertical. 
+                    for (int i = 0; i < longitud; i++)
+                    {
+                        mapa[coordenadas.y[0] + i, coordenadas.x[0]] = letraBarco;
+                    }
+                    break;
+                case 1: // Orientación horizontal.
+                    for (int i = 0; i < longitud; i++)
+                    {
+                        mapa[coordenadas.y[0], coordenadas.x[0] + i] = letraBarco;
+                    }
+                    break;
             }
         }
 
@@ -112,10 +142,25 @@ namespace HundirFlota
                 }
             }
         }
+
         public void Pintar()
         {
             consola.PintarTablero(mapa, 0, 0);
 
+        }
+
+
+        public bool BuscarBarco(Coordenadas coordenadas)
+        {
+            for (int i = 0; i < zonasBarcos.Count; i++)
+            {
+                if ((zonasBarcos[i].x[0] <= coordenadas.x[0] && coordenadas.x[0] <= zonasBarcos[i].x[1]) && (zonasBarcos[i].y[0] <= coordenadas.y[0] && coordenadas.y[0] <= zonasBarcos[i].y[1]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
