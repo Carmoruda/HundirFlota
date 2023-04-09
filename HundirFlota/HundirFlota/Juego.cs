@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace HundirFlota
@@ -97,7 +98,7 @@ namespace HundirFlota
                 switch (accionMenu)
                 {
                     case 1:
-                        CargarPartidas();
+                        ListarPartidas();
                         break;
                     case 2:
                         CrearPartida(2); // Partida Múltiple.
@@ -109,6 +110,7 @@ namespace HundirFlota
                         RankingPartidas();
                         break;
                     case 5: // Salir.
+                        GuardarFichero(listaPartidas, Program.ficheroPartidas);
                         Environment.Exit(0);
                         break;
                     default: // Mensaje error desde PintarMenu en Pantalla.
@@ -123,7 +125,7 @@ namespace HundirFlota
         /// Muestra un listado de todas las partidas que no han finalizado,
         /// permitiendo elegir una para continuarla.
         /// </summary>
-        public void CargarPartidas()
+        public void ListarPartidas()
         {
             consola.ImprimirConsola("------------------------------ LISTADO PARTIDAS ------------------------------\n\n", 1);
 
@@ -189,7 +191,6 @@ namespace HundirFlota
             }
 
             listaPartidas.Add(partidaInsertar);
-            GuardarFichero(partidaInsertar, Program.ficheroPartidas);
 
             consola.ImprimirConsola(opciones[4], 0);// Opciones[4]: Partida creada correctamente.
             consola.Continuar(); // Pulsar enter para continuar.
@@ -232,6 +233,11 @@ namespace HundirFlota
             return listaPartidas.SingleOrDefault(r => r.nombrePartida == nombre);
         }
 
+        public void CargarPartida(string nombre)
+        {
+
+        }
+
         /// <summary>
         /// Muestra la información de la cada partida (Nombre, nombre jugadores,
         /// nº movimientos y estatus).
@@ -260,7 +266,7 @@ namespace HundirFlota
         /// <summary>
         /// Guarda un objeto de forma síncrona en su respectivo fichero.
         /// </summary>
-        /// <param name="_partida">
+        /// <param name="partida">
         /// Objeto que representa la partida que se quiere guardar
         /// en el fichero.
         /// </param>
@@ -268,11 +274,28 @@ namespace HundirFlota
         /// String que representa la ruta relativa al fichero en el que
         /// se quiere guardar la información.
         /// </param>
-        public virtual void GuardarFichero(object _partida, string nombreFichero)
+        public void GuardarFichero(List<Partida> partida, string nombreFichero)
         {
-            var opciones = new JsonSerializerOptions { WriteIndented = true };
-            string jsonString = JsonSerializer.Serialize(_partida, opciones);
+            var opciones = new JsonSerializerOptions { WriteIndented = true, IncludeFields = true };
+            string jsonString = JsonSerializer.Serialize(partida, opciones);
             File.AppendAllText(nombreFichero, jsonString);
+        }
+
+        /// <summary>
+        /// Carga la lista de partidas de un fichero.
+        /// </summary>
+        /// <param name="nombreFichero">
+        /// String que represeta la ruta relativa al fichero del que
+        /// se quiere leer la información.
+        /// </param>
+        public void CargarFichero(string nombreFichero)
+        {
+            if (!File.Exists(nombreFichero))
+            {
+                File.Create(nombreFichero).Close();
+            }
+
+            listaPartidas = JsonSerializer.Deserialize<List<Partida>>(File.ReadAllText(nombreFichero));
         }
     }
 }

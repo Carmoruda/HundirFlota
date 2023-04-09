@@ -18,7 +18,11 @@ using System.Threading.Tasks;
 
 namespace HundirFlota
 {
-    internal abstract class Partida
+    [JsonDerivedType(typeof(Partida), typeDiscriminator: "base")]
+    [JsonDerivedType(typeof(PartidaMultiple), typeDiscriminator: "conHumanos")]
+    [JsonDerivedType(typeof(PartidaIndividual), typeDiscriminator: "conAutómata")]
+
+    internal class Partida
     {
         // Atributos
 

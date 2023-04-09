@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace HundirFlota
@@ -24,11 +25,13 @@ namespace HundirFlota
         /// Instancia de la clase Jugador que permite
         /// a un jugador humano participar en la partida.
         /// </summary>
+        [JsonInclude]
         public Jugador jugadorHumano { get; set; }
         /// <summary>
         /// Instancia de la clase Jugador que permite
         /// a un jugador automático participar en la partida.
         /// </summary>
+        [JsonInclude]
         public Jugador jugadorAuto { get; set; }
 
         //Constructores

@@ -12,10 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace HundirFlota
 {
+
     internal class PartidaMultiple : Partida
     {
         // Atributos
@@ -24,12 +26,14 @@ namespace HundirFlota
         /// Instancia de la clase Jugador que permite a un
         /// jugador humano participar en la partida (Jugador 1).
         /// </summary>
+        [JsonInclude]
         public Jugador jugadorHumano1 { get; set; }
 
         /// <summary>
         /// Instancia de la clase Jugador que permite a otro 
         /// jugador humano participar en la partida (Jugador 2).
         /// </summary>
+        [JsonInclude]
         public Jugador jugadorHumano2 { get; set; }
 
         // Constructores 
