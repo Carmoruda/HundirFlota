@@ -26,7 +26,9 @@ namespace HundirFlota
         public int[,] destructor = new int[4,2];
         public int[,] portaaviones = new int[5,2];
         public Pantalla consola { get; set; }
-        public Tablero tablero { get; set; }    
+        public Tablero tablero { get; set; } 
+        
+        public Coordenadas coordenadas { get; set; }
 
 
 

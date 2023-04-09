@@ -290,11 +290,13 @@ namespace HundirFlota
         /// </param>
         public void CargarFichero(string nombreFichero)
         {
+            // Si el fichero no existe se crea.
             if (!File.Exists(nombreFichero))
             {
                 File.Create(nombreFichero).Close();
             }
 
+            // Cargar a listaPartidas las partidas guardadas en el fichero.
             listaPartidas = JsonSerializer.Deserialize<List<Partida>>(File.ReadAllText(nombreFichero));
         }
     }
