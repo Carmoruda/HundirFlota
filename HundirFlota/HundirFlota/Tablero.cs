@@ -94,7 +94,7 @@ namespace HundirFlota
                 Coordenadas nuevasCoordenas = new Coordenadas();
 
                 nuevasCoordenas.x[0] = coordenadasX[i];
-                nuevasCoordenas.x[1] = coordenadasX[i] + longitudTierra[i];
+                nuevasCoordenas.x[1] = coordenadasX[i] + longitudTierra[i] - 1;
 
                 nuevasCoordenas.y[0] = nuevasCoordenas.y[1] = coordenadasY[i];
                 

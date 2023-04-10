@@ -173,22 +173,22 @@ namespace HundirFlota
                 {
                     coordenadaX = consola.LeerEntero(opciones[0], 1, 12); // Opciones[0]: * Coordenada X.
 
-                    if (coordenadaX + longitud > 12 && horizontal == 1) // Mensaje de error cuando se sale del tablero.
+                    if (coordenadaX + longitud - 1 > 12 && horizontal == 1) // Mensaje de error cuando se sale del tablero.
                     {
                         consola.ImprimirConsola(opciones[2] + coordenadaX + " se sale del tablero.\n", 0); // Error, la longitud de su barco es...
                     }
 
-                } while (coordenadaX < 1 || coordenadaX > 12 || (coordenadaX + longitud > 12 && horizontal == 1));
+                } while (coordenadaX < 1 || coordenadaX > 12 || (coordenadaX + longitud - 1 > 12 && horizontal == 1));
 
                 do // Coordenadas eje Y.
                 {
                     coordenadaY = consola.LeerEntero(opciones[1], 1, 12); // Opciones[1]: * Coordenada Y.
 
-                    if (coordenadaY + longitud > 12 && horizontal == 0) // Mensaje de error cuando se sale del tablero.
+                    if (coordenadaY + longitud - 1 > 12 && horizontal == 0) // Mensaje de error cuando se sale del tablero.
                     {
                         consola.ImprimirConsola(opciones[2] + coordenadaY + " se sale del tablero.\n", 0); // Error! La longitud de su barco es...
                     }
-                } while (coordenadaY < 1 || coordenadaY > 12 || (coordenadaY + longitud > 12 && horizontal == 0));
+                } while (coordenadaY < 1 || coordenadaY > 12 || (coordenadaY + longitud - 1 > 12 && horizontal == 0));
 
                 switch (horizontal) // Asignación de las coordenadas.
                 {
@@ -208,7 +208,7 @@ namespace HundirFlota
                 }
 
                 existeBarco = tablero.BuscarBarco(coordenadas);
-                //existeTierra = tablero.BuscarTierra(coordenadas);
+                existeTierra = tablero.BuscarTierra(coordenadas);
 
                 if (existeBarco)
                 {
@@ -218,7 +218,7 @@ namespace HundirFlota
                     consola.ImprimirConsola(opciones[4], 0); // Error! Hay una zona de...
                 }
 
-            } while (existeBarco); //|| existeTierra
+            } while (existeBarco || existeTierra); //|| existeTierra
 
             consola.ImprimirConsola("\n", 0); // Imprimir salto de línea.
         }
