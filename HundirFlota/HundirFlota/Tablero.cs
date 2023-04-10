@@ -145,8 +145,13 @@ namespace HundirFlota
 
         public void Pintar()
         {
-            consola.PintarTablero(mapa, 0, 0);
+            consola.PintarTablero(mapa);
 
+        }
+
+        public void PintarOponente()
+        {
+            consola.PintarTableroOponente(mapa);
         }
 
         /// <summary>
