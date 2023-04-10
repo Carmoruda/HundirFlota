@@ -26,13 +26,13 @@ namespace HundirFlota
         /// a un jugador humano participar en la partida.
         /// </summary>
         [JsonInclude]
-        public Jugador jugadorHumano { get; set; }
+        public JugadorHumano jugadorHumano { get; set; }
         /// <summary>
         /// Instancia de la clase Jugador que permite
         /// a un jugador automático participar en la partida.
         /// </summary>
         [JsonInclude]
-        public Jugador jugadorAuto { get; set; }
+        public JugadorHumano jugadorAuto { get; set; }
 
         //Constructores
 
@@ -42,8 +42,8 @@ namespace HundirFlota
         /// </summary>
         public PartidaIndividual() 
         {
-            jugadorHumano = new Jugador();
-            jugadorAuto = new Jugador();
+            jugadorHumano = new JugadorHumano();
+            jugadorAuto = new JugadorHumano();
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace HundirFlota
         /// <param name="_nombrePartida">
         /// String que representa el nombre de la partida.
         /// </param>
-        public PartidaIndividual(Jugador _jugadorHumano, Jugador _jugadorAuto, string _nombrePartida) : base(false, 0, _nombrePartida)
+        public PartidaIndividual(JugadorHumano _jugadorHumano, JugadorHumano _jugadorAuto, string _nombrePartida) : base(false, 0, _nombrePartida)
         {
             jugadorHumano = _jugadorHumano;
             jugadorAuto = _jugadorAuto;

@@ -75,6 +75,7 @@
     <Compile Include="Coordenadas.cs" />
     <Compile Include="Juego.cs" />
     <Compile Include="Jugador.cs" />
+    <Compile Include="JugadorHumano.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="Pantalla.cs" />
     <Compile Include="Partida.cs" />
