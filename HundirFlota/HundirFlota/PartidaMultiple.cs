@@ -67,6 +67,24 @@ namespace HundirFlota
             jugador2 = _jugador2;
         }
 
+        /// <summary>
+        /// Constructor parametrizado de la clase PartidaMultiple.
+        /// </summary>
+        /// <param name="_jugadorHumano"></param>
+        /// <param name="_jugadorAuto"></param>
+        /// <param name="_finalizada"></param>
+        /// <param name="_numMovimientos"></param>
+        /// <param name="_nombrePartida"></param>
+        public PartidaMultiple(Jugador _jugadorHumano1, Jugador _jugadorHumano2, bool _finalizada, int _numMovimientos, string _nombrePartida, string _nombreGanador)
+        {
+            jugadorHumano1 = _jugadorHumano1;
+            jugadorHumano2 = _jugadorHumano2;
+            finalizada = _finalizada;
+            numMovimientos = _numMovimientos;
+            nombrePartida = _nombrePartida;
+            nombreGanador = _nombreGanador;
+        }
+
         // Métodos
 
         /// <summary>

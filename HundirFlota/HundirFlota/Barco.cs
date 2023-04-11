@@ -97,6 +97,27 @@ namespace HundirFlota
             tablero = _tablero;
         }
 
+        /// <summary>
+        /// Constructor parametrizado de la clase Barco.
+        /// </summary>
+        /// <param name="_tipo"></param>
+        /// <param name="_longitud"></param>
+        /// <param name="_horizontal"></param>
+        /// <param name="_nombreJugador"></param>
+        /// <param name="_consola"></param>
+        /// <param name="_tablero"></param>
+        /// <param name="_coordenadas"></param>
+        public Barco(string _tipo, int _longitud, int _horizontal, string _nombreJugador, Pantalla _consola, Tablero _tablero, Coordenadas _coordenadas)
+        {
+            tipo = _tipo;
+            longitud = _longitud;
+            horizontal = _horizontal;
+            nombreJugador = _nombreJugador;
+            consola = _consola;
+            tablero = _tablero;
+            coordenadas = _coordenadas;
+        }
+
         // Métodos
 
         /// <summary>

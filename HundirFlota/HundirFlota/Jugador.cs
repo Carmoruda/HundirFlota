@@ -1,4 +1,4 @@
-﻿/// <summary>
+/// <summary>
 /// 
 /// La clase Jugador define los atributos necesarios
 /// para la identificación de los jugadores y el
@@ -83,6 +83,24 @@ namespace HundirFlota
             nombre = _nombre;
         }
 
+        /// <summary>
+        /// Constructor parametrizado de la clase Jugador.
+        /// </summary>
+        /// <param name="_nombre"></param>
+        /// <param name="_tablero"></param>
+        /// <param name="_patrullero"></param>
+        /// <param name="_submarino"></param>
+        /// <param name="_destructor"></param>
+        /// <param name="_portaaviones"></param>
+        public Jugador(string _nombre, Tablero _tablero, Barco _patrullero, Barco _submarino, Barco _destructor, Barco _portaaviones)
+        {
+            nombre = _nombre;
+            tablero = _tablero;
+            patrullero = _patrullero;
+            submarino = _submarino;
+            destructor = _destructor;
+            portaaviones = _portaaviones;
+        }
 
         // Métodos
 

@@ -83,6 +83,21 @@ namespace HundirFlota
             nombrePartida = _nombrePartida;
         }
 
+        /// <summary>
+        /// Constructor parametrizado de la clase Partida.
+        /// </summary>
+        /// <param name="_finalizada"></param>
+        /// <param name="_numMovimientos"></param>
+        /// <param name="_nombrePartida"></param>
+        /// <param name="_nombreGanador"></param>
+        protected Partida(bool _finalizada, int _numMovimientos, string _nombrePartida, string _nombreGanador)
+        {
+            finalizada = _finalizada;
+            numMovimientos = _numMovimientos;
+            nombrePartida = _nombrePartida;
+            nombreGanador = _nombreGanador;
+        }
+
         // Métodos
 
         /// <summary>

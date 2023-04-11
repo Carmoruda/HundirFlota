@@ -77,6 +77,20 @@ namespace HundirFlota
             mapa = _mapa;
         }
 
+        /// <summary>
+        /// Constructor parametrizado clase Tablero.
+        /// </summary>
+        /// <param name="_mapa"></param>
+        /// <param name="_zonasTierra"></param>
+        /// <param name="_zonasBarcos"></param>
+        /// <param name="_consola"></param>
+        public Tablero(string[,] _mapa, List<Coordenadas> _zonasTierra, List<Coordenadas> _zonasBarcos, Pantalla _consola)
+        {
+            mapa = _mapa;
+            zonasTierra = _zonasTierra;
+            zonasBarcos = _zonasBarcos;
+            consola = _consola;
+        }
 
         // Métodos 
 

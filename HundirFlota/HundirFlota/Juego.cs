@@ -1,4 +1,4 @@
-﻿/// <summary>
+/// <summary>
 /// 
 /// La clase Juego define los atributos y métodos necesarios
 /// para el correcto funcionamiento de la gestión de partidas
@@ -13,8 +13,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 
 namespace HundirFlota
@@ -58,6 +58,17 @@ namespace HundirFlota
         public Juego(List<Partida> _listaPartidas)
         {
             consola = new Pantalla();
+            listaPartidas = _listaPartidas;
+        }
+
+        /// <summary>
+        /// Constructor parametrizado de Juego.
+        /// </summary>
+        /// <param name="_listaPartidas"></param>
+        /// <param name="_consola"></param>
+        public Juego(List<Partida> _listaPartidas, Pantalla _consola)
+        {
+            consola = _consola;
             listaPartidas = _listaPartidas;
         }
 
@@ -263,19 +274,20 @@ namespace HundirFlota
         /// <summary>
         /// Guarda un objeto de forma síncrona en su respectivo fichero.
         /// </summary>
-        /// <param name="partida">
-        /// Objeto que representa la partida que se quiere guardar
+        /// <param name="listadoPartidas">
+        /// Listado de partidas que se quiere guardar
         /// en el fichero.
         /// </param>
         /// <param name="nombreFichero">
         /// String que representa la ruta relativa al fichero en el que
         /// se quiere guardar la información.
         /// </param>
-        public void GuardarFichero(List<Partida> partida, string nombreFichero)
+        public void GuardarFichero(List<Partida> listadoPartidas, string nombreFichero)
         {
-            var opciones = new JsonSerializerOptions { WriteIndented = true, IncludeFields = true };
-            var jsonString = JsonSerializer.Serialize(partida, opciones);
-            File.AppendAllText(nombreFichero, jsonString);
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            FileStream Archivo = File.OpenWrite(nombreFichero);
+            binaryFormatter.Serialize(Archivo, listadoPartidas);
+            Archivo.Close();
         }
 
         /// <summary>
@@ -294,9 +306,10 @@ namespace HundirFlota
             }
 
             // Cargar a listaPartidas las partidas guardadas en el fichero.
-            listaPartidas = JsonSerializer.Deserialize<List<Partida>>(File.ReadAllText(nombreFichero));
-
-
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            FileStream Archivo = File.Open(nombreFichero, FileMode.Open);
+            listaPartidas = (List<Partida>)binaryFormatter.Deserialize(Archivo);
+            Archivo.Close();
         }
 
         public void Jugar()
