@@ -299,7 +299,7 @@ namespace HundirFlota
 
         }
 
-        public void jugar()
+        public void Jugar()
         {
 
         }

@@ -25,6 +25,7 @@ namespace HundirFlota
         /// del juego.
         /// </summary>
         public String[,] mapa { get; set; }
+        public String[,] mapaOponente { get; set; }
 
         /// <summary>
         /// Lista de la clase Coordenadas que representan las coordenadas de las 
@@ -55,6 +56,7 @@ namespace HundirFlota
             consola = new Pantalla();
             zonasTierra = new List<Coordenadas>();
             mapa = new string[12, 12];
+            mapaOponente = new string[12, 12];
         }
 
         /// <summary>
@@ -132,13 +134,14 @@ namespace HundirFlota
             }
         }
 
-        public void RellenarTableroInicial(String[,] mapa) // creo esta funcion pq modifico el contenido cuando pongo barcos
+        public void RellenarTableroInicial(String[,] mapa, String[,] mapaOponente) // creo esta funcion pq modifico el contenido cuando pongo barcos
         {
             for (int i = 0; i<12; i++)
             {
                 for (int j = 0; j<12; j++)
                 {
                     mapa[i, j] = "| _ ";
+                    mapaOponente[i, j] = "| _ ";
                 }
             }
         }
@@ -146,6 +149,7 @@ namespace HundirFlota
         public void Pintar()
         {
             consola.PintarTablero(mapa);
+            consola.PintarTablero(mapaOponente);
 
         }
 

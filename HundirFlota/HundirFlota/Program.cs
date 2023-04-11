@@ -24,12 +24,12 @@ namespace HundirFlota
         static void Main(string[] args)
         {
 
-            Juego miJuego = new Juego();
-            //Tablero tablero = new Tablero();
-            //tablero.Pintar();
-            //Console.ReadKey();
+            //Juego miJuego = new Juego();
+            Tablero tablero = new Tablero();
+            tablero.Pintar();
+            Console.ReadKey();
             //miJuego.CargarFichero(ficheroPartidas);
-            miJuego.Menu();
+            //miJuego.Menu();
         }
     }
 }

@@ -93,7 +93,7 @@ namespace HundirFlota
         /// </summary>
         public void NuevaPartida()
         {
-            tablero.RellenarTableroInicial(tablero.mapa);
+            tablero.RellenarTableroInicial(tablero.mapa, tablero.mapaOponente);
             tablero.RellenarTierra();
 
             patrullero.NuevoBarco(nombre);

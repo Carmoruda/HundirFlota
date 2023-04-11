@@ -213,10 +213,10 @@ namespace HundirFlota
         /// Muestra el tablero del jugador con las tierras y barcos
         /// y asignando sus respectivos colores.
         /// </summary>
-        /// <param name="mapa">
-        /// Array bidimensional de strings que representa el mapa.
+        /// <param name="mapaGeneral">
+        /// Array bidimensional de strings que representa el mapaGeneral.
         /// </param>
-        public void PintarTablero(String[,] mapa)
+        public void PintarTablero(String[,] mapaGeneral )
         {
             for (int i = 0; i < 12; i++)
             {
@@ -252,7 +252,7 @@ namespace HundirFlota
                 {
                     Console.BackgroundColor = ConsoleColor.Blue;
                     
-                    switch(mapa[i, j])
+                    switch(mapaGeneral[i, j])
                     {
                         case "| X ":
                             Console.BackgroundColor = ConsoleColor.DarkGreen; // Color Tierra.
@@ -271,7 +271,7 @@ namespace HundirFlota
                             break;
                     }
 
-                    Console.Write(mapa[i, j]);
+                    Console.Write(mapaGeneral[i, j]);
 
                 }
                 Console.ResetColor();
@@ -285,7 +285,7 @@ namespace HundirFlota
         /// ocultando los barcos.
         /// </summary>
         /// <param name="mapa">
-        /// Array bidimensional de strings que representa el mapa.
+        /// Array bidimensional de strings que representa el mapaGeneral.
         /// </param>
         public void PintarTableroOponente(String[,] mapa)
         {
