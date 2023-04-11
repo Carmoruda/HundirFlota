@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace HundirFlota
 {
+    [Serializable]
     internal class Tablero
     {
         // Atributos
@@ -148,7 +149,7 @@ namespace HundirFlota
             }
         }
 
-        public void RellenarTableroInicial(String[,] mapa, String[,] mapaOponente) // creo esta funcion pq modifico el contenido cuando pongo barcos
+        public void RellenarTableroInicial(String[,] mapa, String[,] mapaOponente)
         {
             for (int i = 0; i<12; i++)
             {

@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 
 namespace HundirFlota
 {
+    [Serializable]
     internal class Juego
     {
 
@@ -139,6 +140,13 @@ namespace HundirFlota
         public void ListarPartidas()
         {
             consola.ImprimirConsola("------------------------------ LISTADO PARTIDAS ------------------------------\n\n", 1);
+
+            if (listaPartidas.Count < 1) // Comprobar que al menos hay 1 partida.
+            {
+                consola.ImprimirConsola("  No hay partidas guardadas.\n", 0);
+                consola.Continuar(1); // Pulsa enter para continuar.
+                return;
+            }
 
             foreach (Partida partida in listaPartidas)
             {
@@ -303,6 +311,7 @@ namespace HundirFlota
             if (!File.Exists(nombreFichero))
             {
                 File.Create(nombreFichero).Close();
+                return;
             }
 
             // Cargar a listaPartidas las partidas guardadas en el fichero.

@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace HundirFlota
 {
+    [Serializable]
     internal class Jugador
     {
         // Atributos

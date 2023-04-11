@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 
 namespace HundirFlota
 {
+    [Serializable]
     internal class Barco
     {
         // Atributos 

@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace HundirFlota
 {
-
+    [Serializable]
     internal class PartidaMultiple : Partida
     {
         // Atributos
@@ -75,10 +75,10 @@ namespace HundirFlota
         /// <param name="_finalizada"></param>
         /// <param name="_numMovimientos"></param>
         /// <param name="_nombrePartida"></param>
-        public PartidaMultiple(Jugador _jugadorHumano1, Jugador _jugadorHumano2, bool _finalizada, int _numMovimientos, string _nombrePartida, string _nombreGanador)
+        public PartidaMultiple(Jugador _jugador1, Jugador _jugador2, bool _finalizada, int _numMovimientos, string _nombrePartida, string _nombreGanador)
         {
-            jugadorHumano1 = _jugadorHumano1;
-            jugadorHumano2 = _jugadorHumano2;
+            jugador1 = _jugador1;
+            jugador2 = _jugador2;
             finalizada = _finalizada;
             numMovimientos = _numMovimientos;
             nombrePartida = _nombrePartida;
