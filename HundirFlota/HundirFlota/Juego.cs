@@ -295,6 +295,13 @@ namespace HundirFlota
 
             // Cargar a listaPartidas las partidas guardadas en el fichero.
             listaPartidas = JsonSerializer.Deserialize<List<Partida>>(File.ReadAllText(nombreFichero));
+
+
+        }
+
+        public void jugar()
+        {
+
         }
     }
 }

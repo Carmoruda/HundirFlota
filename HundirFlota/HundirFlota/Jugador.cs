@@ -55,6 +55,10 @@ namespace HundirFlota
         /// </summary>
         public Barco portaaviones { get; set; }
 
+        public List<int> lanzamientoX = new List<int>();
+        public List<int> lanzamientoY = new List<int>();
+        public Random r = new Random();
+
         // Constructores
 
         /// <summary>
@@ -79,6 +83,7 @@ namespace HundirFlota
             nombre = _nombre;
         }
 
+
         // Métodos
 
         /// <summary>
@@ -95,6 +100,42 @@ namespace HundirFlota
             submarino.NuevoBarco(nombre);
             destructor.NuevoBarco(nombre);
             portaaviones.NuevoBarco(nombre);
+        }
+
+        public void Automático()
+        {
+            bool libre = false;
+            int posX = 0;
+            int posY = 0;
+            do
+            {
+                posX = r.Next(1, 12);
+                posY = r.Next(1, 12);
+
+                Coordenadas coordenada = new Coordenadas();
+
+                coordenada.x[0] = coordenada.x[1] = posX;
+                coordenada.y[0] = coordenada.y[1] = posY;
+
+                libre = tablero.BuscarTierra(coordenada);
+
+                for (int i = 0; i< lanzamientoX.Count; i++)
+                {
+                    if (posX == lanzamientoX[i] && posY == lanzamientoY[i])
+                    {
+                        libre = true;
+                    }
+                }
+            } while (libre);
+
+            lanzamientoX.Add(posX);
+            lanzamientoY.Add(posY);
+
+        }
+
+        public void Atacar(Coordenadas coordenada)
+        {
+
         }
     }
 }

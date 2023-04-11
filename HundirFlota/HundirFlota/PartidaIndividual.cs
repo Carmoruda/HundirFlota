@@ -26,13 +26,13 @@ namespace HundirFlota
         /// a un jugador humano participar en la partida.
         /// </summary>
         [JsonInclude]
-        public JugadorHumano jugadorHumano { get; set; }
+        public JugadorHumano jugador1 { get; set; }
         /// <summary>
         /// Instancia de la clase Jugador que permite
         /// a un jugador automático participar en la partida.
         /// </summary>
         [JsonInclude]
-        public JugadorHumano jugadorAuto { get; set; }
+        public JugadorHumano jugador2 { get; set; }
 
         //Constructores
 
@@ -42,27 +42,27 @@ namespace HundirFlota
         /// </summary>
         public PartidaIndividual() 
         {
-            jugadorHumano = new JugadorHumano();
-            jugadorAuto = new JugadorHumano();
+            jugador1 = new JugadorHumano();
+            jugador2 = new JugadorHumano();
         }
 
         /// <summary>
         /// Constructor parametrizado de la clase PartidaIndividual.
         /// Inicializa las instancias de la clase Jugador.
         /// </summary>
-        /// <param name="_jugadorHumano">
+        /// <param name="_jugador1">
         /// Instancia de Jugador que representa al jugador humano.
         /// </param>
-        /// <param name="_jugadorAuto">
+        /// <param name="_jugador2">
         /// Instancia de Jugador que repsenta al jugador automático
         /// </param>
         /// <param name="_nombrePartida">
         /// String que representa el nombre de la partida.
         /// </param>
-        public PartidaIndividual(JugadorHumano _jugadorHumano, JugadorHumano _jugadorAuto, string _nombrePartida) : base(false, 0, _nombrePartida)
+        public PartidaIndividual(JugadorHumano _jugador1, JugadorHumano _jugador2, string _nombrePartida) : base(false, 0, _nombrePartida)
         {
-            jugadorHumano = _jugadorHumano;
-            jugadorAuto = _jugadorAuto;
+            jugador1 = _jugador1;
+            jugador2 = _jugador2;
         }
 
         // Métodos
@@ -76,7 +76,7 @@ namespace HundirFlota
         /// </returns>
         public override string InformacionJugadores()
         {
-            return "\n\t * Jugador 1: " + jugadorHumano.nombre + "\n\t * Jugador 2: " + jugadorAuto.nombre;
+            return "\n\t * Jugador 1: " + jugador1.nombre + "\n\t * Jugador 2: " + jugador2.nombre;
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace HundirFlota
         /// </summary>
         public override void NuevaPartida()
         {
-            jugadorHumano.NuevaPartida();
+            jugador1.NuevaPartida();
         }
     }
 
