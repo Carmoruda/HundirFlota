@@ -56,6 +56,12 @@ namespace HundirFlota
         /// </summary>
         public Barco portaaviones { get; set; }
 
+        /// <summary>
+        /// Instancia de la clase Pantalla para controlar la entrada
+        /// y salida de datos del usuario.
+        /// </summary>
+        public Pantalla consola { get; set; }
+
         public List<int> lanzamientoX = new List<int>();
         public List<int> lanzamientoY = new List<int>();
         public Random r = new Random();
@@ -68,6 +74,7 @@ namespace HundirFlota
         public Jugador() 
         {
             tablero = new Tablero();
+            consola = new Pantalla();
             patrullero = new Barco(2, "Patrullero", tablero);
             submarino = new Barco(3, "Submarino", tablero);
             destructor = new Barco(4, "Destructor", tablero);
@@ -85,14 +92,32 @@ namespace HundirFlota
         }
 
         /// <summary>
-        /// Constructor parametrizado de la clase Jugador.
+        /// Constructor parametrizado de la clase Jugador. Asigna
+        /// el valor de todos los atributos.
         /// </summary>
-        /// <param name="_nombre"></param>
-        /// <param name="_tablero"></param>
-        /// <param name="_patrullero"></param>
-        /// <param name="_submarino"></param>
-        /// <param name="_destructor"></param>
-        /// <param name="_portaaviones"></param>
+        /// <param name="_nombre">
+        /// String que representa el nombre del jugador.
+        /// </param>
+        /// <param name="_tablero">
+        /// Instancia de la clase Tablero que permite el control
+        /// del tablero de la partida.
+        /// </param>
+        /// <param name="_patrullero">
+        /// Instancia de la clase Barco que representa
+        /// un navío de tipo patrullero.
+        /// </param>
+        /// <param name="_submarino">
+        /// Instancia de la clase Barco que representa
+        /// un navío de tipo submarino.
+        /// </param>
+        /// <param name="_destructor">
+        /// Instancia de la clase Barco que representa
+        /// un navío de tipo destructor.
+        /// </param>
+        /// <param name="_portaaviones">
+        /// Instancia de la clase Barco que representa
+        /// un navío de tipo portaaviones.
+        /// </param>
         public Jugador(string _nombre, Tablero _tablero, Barco _patrullero, Barco _submarino, Barco _destructor, Barco _portaaviones)
         {
             nombre = _nombre;
@@ -136,7 +161,7 @@ namespace HundirFlota
                 coordenada.x[0] = coordenada.x[1] = posX;
                 coordenada.y[0] = coordenada.y[1] = posY;
 
-                libre = tablero.BuscarTierra(coordenada);
+                libre = coordenada.BuscarEntidad(tablero.zonasTierra);
 
                 for (int i = 0; i< lanzamientoX.Count; i++)
                 {
@@ -152,9 +177,11 @@ namespace HundirFlota
 
         }
 
-        public void Atacar(Coordenadas coordenada)
+        public void Atacar()
         {
-
+            string[] opciones = { "\n\t* Coordenada X: ", "\t* Coordenada Y: "};
+            Coordenadas coordenadasAtacar = new Coordenadas();
+            coordenadasAtacar.ControlIntroducirCoordenadas(1, 1, consola, tablero, opciones, "ATACAR", true);
         }
     }
 }

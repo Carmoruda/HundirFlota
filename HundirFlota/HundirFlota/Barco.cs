@@ -40,7 +40,7 @@ namespace HundirFlota
         /// Entero que representa la orientación 
         /// del barco (0 - Vertical, 1 - Horizontal).
         /// </summary>
-        public int horizontal { get; set; }
+        public int orientacion { get; set; }
 
         /// <summary>
         /// String que representa el nombre del 
@@ -89,7 +89,7 @@ namespace HundirFlota
         /// String que representa el tipo de barco.
         /// </param>
         /// <param name="_nombreJugador">
-        /// String que representa el nombre del jugador/
+        /// String que representa el nombre del jugador.
         /// </param>
         public Barco(int _longitud, string _tipo, Tablero _tablero) : this()
         {
@@ -99,20 +99,39 @@ namespace HundirFlota
         }
 
         /// <summary>
-        /// Constructor parametrizado de la clase Barco.
+        /// Constructor parametrizado de la clase Barco. Asigna
+        /// los valores de todos los atributos.
         /// </summary>
-        /// <param name="_tipo"></param>
-        /// <param name="_longitud"></param>
-        /// <param name="_horizontal"></param>
-        /// <param name="_nombreJugador"></param>
-        /// <param name="_consola"></param>
-        /// <param name="_tablero"></param>
-        /// <param name="_coordenadas"></param>
-        public Barco(string _tipo, int _longitud, int _horizontal, string _nombreJugador, Pantalla _consola, Tablero _tablero, Coordenadas _coordenadas)
+        /// <param name="_tipo">
+        /// String que representa el tipo de barco.
+        /// </param>
+        /// <param name="_longitud">
+        /// Entero que representa la longitud del barco.
+        /// </param>
+        /// <param name="_orientacion">
+        /// Entero que representa la orientación 
+        /// del barco (0 - Vertical, 1 - Horizontal).
+        /// </param>
+        /// <param name="_nombreJugador">
+        /// String que representa el nombre del jugador/
+        /// </param>
+        /// <param name="_consola">
+        /// Instancia de la clase Pantalla para controlar la entrada
+        /// y salida de datos del usuario.
+        /// </param>
+        /// <param name="_tablero">
+        /// Instancia de la clase Tablero para controlar los
+        /// elementos del tablero.
+        /// </param>
+        /// <param name="_coordenadas">
+        /// Instancia de la clase Coordenadas para controlar
+        /// las coordenadas de los barcos.
+        /// </param>
+        public Barco(string _tipo, int _longitud, int _orientacion, string _nombreJugador, Pantalla _consola, Tablero _tablero, Coordenadas _coordenadas)
         {
             tipo = _tipo;
             longitud = _longitud;
-            horizontal = _horizontal;
+            orientacion = _orientacion;
             nombreJugador = _nombreJugador;
             consola = _consola;
             tablero = _tablero;
@@ -165,7 +184,7 @@ namespace HundirFlota
             } while (accionOrientacion < 1 || accionOrientacion > 2);
             
 
-            horizontal = accionOrientacion - 1; // Orientación del barco.
+            orientacion = accionOrientacion - 1; // Orientación del barco.
             consola.ImprimirConsola("\n", 0); // Imprimir salto de línea.
 
         }
@@ -176,73 +195,13 @@ namespace HundirFlota
         /// </summary>
         public void IntroducirCoordenadas() 
         {
-            int coordenadaX = 0;
-            int coordenadaY = 0;
-            bool existeBarco = true;
-            bool existeTierra = true;
-
-            tablero.Pintar(); // Mostrar el tablero.
-
             string[] opciones = { "\n\t* Coordenada X: ",
                                   "\t* Coordenada Y: ",
                                   "\t  Error! La longitud de su barco es " + longitud + " y posicionándolo en la casilla ",
                                   "\t  Error! Ya hay otro barco colocado en esa posición.\n",
                                   "\t  Error! Hay una zona de tierra en esa posición.\n"};
 
-            do
-            {
-                do // Coordenadas eje X. 
-                {
-                    coordenadaX = consola.LeerEntero(opciones[0], 1, 12); // Opciones[0]: * Coordenada X.
-
-                    if (coordenadaX + longitud - 1 > 12 && horizontal == 1) // Mensaje de error cuando se sale del tablero.
-                    {
-                        consola.ImprimirConsola(opciones[2] + coordenadaX + " se sale del tablero.\n", 0); // Error, la longitud de su barco es...
-                    }
-
-                } while (coordenadaX < 1 || coordenadaX > 12 || (coordenadaX + longitud - 1 > 12 && horizontal == 1));
-
-                do // Coordenadas eje Y.
-                {
-                    coordenadaY = consola.LeerEntero(opciones[1], 1, 12); // Opciones[1]: * Coordenada Y.
-
-                    if (coordenadaY + longitud - 1 > 12 && horizontal == 0) // Mensaje de error cuando se sale del tablero.
-                    {
-                        consola.ImprimirConsola(opciones[2] + coordenadaY + " se sale del tablero.\n", 0); // Error! La longitud de su barco es...
-                    }
-                } while (coordenadaY < 1 || coordenadaY > 12 || (coordenadaY + longitud - 1 > 12 && horizontal == 0));
-
-                switch (horizontal) // Asignación de las coordenadas.
-                {
-                    case 0: // Orientación vertical
-                        coordenadas.x[0] = coordenadas.x[1] = coordenadaX - 1;
-
-                        coordenadas.y[0] = coordenadaY - 1;
-                        coordenadas.y[1] = coordenadaY + longitud - 2;
-
-                        break;
-                    case 1: // Orientación horizontal
-                        coordenadas.y[0] = coordenadas.y[1] = coordenadaY - 1;
-
-                        coordenadas.x[0] = coordenadaX - 1;
-                        coordenadas.x[1] = coordenadaX + longitud - 2;
-                        break;
-                }
-
-                existeBarco = tablero.BuscarBarco(coordenadas);
-                existeTierra = tablero.BuscarTierra(coordenadas);
-
-                if (existeBarco)
-                {
-                    consola.ImprimirConsola(opciones[3], 0); // Error! Ya hay otro barco...
-                } else if (existeTierra)
-                {
-                    consola.ImprimirConsola(opciones[4], 0); // Error! Hay una zona de...
-                }
-
-            } while (existeBarco || existeTierra); //|| existeTierra
-
-            consola.ImprimirConsola("\n", 0); // Imprimir salto de línea.
+            coordenadas.ControlIntroducirCoordenadas(orientacion, longitud, consola, tablero, opciones, "BARCO", false);
         }
 
         /// <summary>
@@ -252,8 +211,8 @@ namespace HundirFlota
         public void ColocarBarco()
         {
             string letraBarco = "| " + tipo.Substring(0, 1).ToUpper() + " "; // Letra del barco en el mapa.
-            tablero.RellenarBarcos(horizontal, letraBarco, longitud, coordenadas); // Añadir barcos al mapa.
-            tablero.Pintar(); // Mostrar el tablero
+            tablero.RellenarBarcos(orientacion, letraBarco, longitud, coordenadas); // Añadir barcos al mapa.
+            tablero.Pintar(false); // Mostrar el tablero
             consola.Continuar(1); // Pulsar enter para continuar.
         }
     }

@@ -217,7 +217,7 @@ namespace HundirFlota
         /// <param name="mapaGeneral">
         /// Array bidimensional de strings que representa el mapaGeneral.
         /// </param>
-        public void PintarTablero(String[,] mapaGeneral )
+        public void PintarTablero(String[,] mapaGeneral)
         {
 
             Console.WriteLine(String.Concat(Enumerable.Repeat(" ", 27)) + "EJE  X");
@@ -310,6 +310,7 @@ namespace HundirFlota
 
         }
 
+        /*
         /// <summary>
         /// Muestra el tablero del oponente con las tierras,
         /// ocultando los barcos.
@@ -374,6 +375,6 @@ namespace HundirFlota
                 Console.WriteLine();
             }
 
-        }
+        }*/
     }
 }

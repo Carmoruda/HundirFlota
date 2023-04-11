@@ -23,9 +23,14 @@ namespace HundirFlota
 
         /// <summary>
         /// Array bidimesional de strings que representa el mapa
-        /// del juego.
+        /// del jugador.
         /// </summary>
         public String[,] mapa { get; set; }
+
+        /// <summary>
+        /// Array bidimesional de strings que representa el mapa
+        /// del oponente.
+        /// </summary>
         public String[,] mapaOponente { get; set; }
 
         /// <summary>
@@ -61,7 +66,7 @@ namespace HundirFlota
         }
 
         /// <summary>
-        /// Constructor parametrizado de la clase Juego. Inicializa el 
+        /// Constructor parametrizado de la clase Tablero. Inicializa el 
         /// atributo consola y asigna el valor de zonasTierra y mapa.
         /// </summary>
         /// <param name="_zonasTierra">
@@ -79,12 +84,25 @@ namespace HundirFlota
         }
 
         /// <summary>
-        /// Constructor parametrizado clase Tablero.
+        /// Constructor parametrizado de la clase Tablero. Inicializa el 
+        /// atributo consola y asigna el valor de zonasTierra y mapa.
         /// </summary>
-        /// <param name="_mapa"></param>
-        /// <param name="_zonasTierra"></param>
-        /// <param name="_zonasBarcos"></param>
-        /// <param name="_consola"></param>
+        /// <param name="_mapa">
+        /// Array bidimesional de string que representa el mapa
+        /// del juego.
+        /// </param>
+        /// <param name="_zonasTierra">
+        /// Lista de enteros que representan las coordenadas de las zonas
+        /// de tierra en el mapa.
+        /// </param>
+        /// <param name="_zonasBarcos">
+        /// Lista de enteros que representan las coordenadas de las zonas
+        /// de barcos en el mapa.
+        /// </param>
+        /// <param name="_consola">
+        /// Instancia de la clase Pantalla para controlar la entrada
+        /// y salida de datos del usuario.
+        /// </param>
         public Tablero(string[,] _mapa, List<Coordenadas> _zonasTierra, List<Coordenadas> _zonasBarcos, Pantalla _consola)
         {
             mapa = _mapa;
@@ -120,6 +138,7 @@ namespace HundirFlota
                 for (int j = 0; j  < longitudTierra[i]; j++)
                 {
                     mapa[coordenadasY[i], coordenadasX[i] + j] = "| X ";
+                    mapaOponente[coordenadasY[i], coordenadasX[i] + j] = "| X ";
                 }
             }
         }
@@ -128,11 +147,25 @@ namespace HundirFlota
         /// Permite colocar los barcos en el mapa y
         /// añadir las coordenadas a la lista de zonasBarcos.
         /// </summary>
-        public void RellenarBarcos(int orientación, string letraBarco, int longitud, Coordenadas coordenadas)
+        /// <param name="orientacion">
+        /// Entero que representa la orientación 
+        /// del barco (0 - Vertical, 1 - Horizontal).
+        /// </param>
+        /// <param name="letraBarco">
+        /// String que representa la letra del barco en el mapa.
+        /// </param>
+        /// <param name="longitud">
+        /// Entero que determina la longitud del barco.
+        /// </param>
+        /// <param name="coordenadas">
+        /// Instancia de la clase Coordenadas para controlar
+        /// las posiciones de las letras dentro del mapa.
+        /// </param>
+        public void RellenarBarcos(int orientacion, string letraBarco, int longitud, Coordenadas coordenadas)
         {
             zonasBarcos.Add(coordenadas); // Añadir coordenadas a la lista de zonasBarcos.
 
-            switch (orientación)
+            switch (orientacion)
             {
                 case 0: // Orientación vertical. 
                     for (int i = 0; i < longitud; i++)
@@ -149,6 +182,17 @@ namespace HundirFlota
             }
         }
 
+        /// <summary>
+        /// Permite rellenar el tablero con su estado inicial (todo agua).
+        /// </summary>
+        /// <param name="mapa">
+        /// Array bidimesional de strings que representa el mapa
+        /// del jugador.
+        /// </param>
+        /// <param name="mapaOponente">
+        /// Array bidimesional de strings que representa el mapa
+        /// del oponente.
+        /// </param>
         public void RellenarTableroInicial(String[,] mapa, String[,] mapaOponente)
         {
             for (int i = 0; i<12; i++)
@@ -161,70 +205,29 @@ namespace HundirFlota
             }
         }
 
-        public void Pintar()
+        /// <summary>
+        /// Permite pintar el mapa de los jugadores.
+        /// </summary>
+        /// <param name="oponente">
+        /// Booleano que indica si se desea imprimir el tablero del
+        /// adversario.
+        /// </param>
+        public void Pintar(bool mostrarOponente)
         {
             consola.PintarTablero(mapa);
-            consola.PintarTablero(mapaOponente);
+
+            if (mostrarOponente)
+            {
+                consola.PintarTablero(mapaOponente);
+            }
+            
 
         }
 
-        public void PintarOponente()
+        /*public void PintarOponente()
         {
             consola.PintarTableroOponente(mapa);
-        }
+        }*/
 
-        /// <summary>
-        /// Busca si existen barcos donde al menos 1 de las 
-        /// coordenadas coincida.
-        /// </summary>
-        /// <param name="coordenadas">
-        /// Instancias de la clase Coordenadas que representa
-        /// las coordenadas del barco que se quiere colocar.
-        /// </param>
-        /// <returns>
-        /// Devuelve un booleano que es verdadero si existe al menos 1 barco
-        /// donde coincida mínimo 1 de las coordenadas.
-        /// </returns>
-        public bool BuscarBarco(Coordenadas coordenadas)
-        {
-            for (int i = 0; i < zonasBarcos.Count; i++)
-            {
-                if ((coordenadas.x[0] <= zonasBarcos[i].x[0] && zonasBarcos[i].x[0] <= coordenadas.x[1]) || zonasBarcos[i].x[0] <= coordenadas.x[0] && coordenadas.x[0] <= zonasBarcos[i].x[1])
-                {
-                    if ((zonasBarcos[i].y[0] <= coordenadas.y[0] && coordenadas.y[0] <= zonasBarcos[i].y[1]) || coordenadas.y[0] <= zonasBarcos[i].y[0] && zonasBarcos[i].y[0] <= coordenadas.y[1])
-                    { return true; }
-                }
-
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Busca si existen zonas de tierra donde al menos 1 de las 
-        /// coordenadas coincida.
-        /// </summary>
-        /// <param name="coordenadas">
-        /// Instancias de la clase Coordenadas que representa
-        /// las coordenadas del barco que se quiere colocar.
-        /// </param>
-        /// <returns>
-        /// Devuelve un booleano que es verdadero si existe al menos 1 zona
-        /// de tierra donde coincida mínimo 1 de las coordenadas.
-        /// </returns>
-        public bool BuscarTierra(Coordenadas coordenadas)
-        {
-            for (int i = 0; i < zonasTierra.Count; i++)
-            {
-                if ((coordenadas.x[0] <= zonasTierra[i].x[0] && zonasTierra[i].x[0] <= coordenadas.x[1]) || zonasTierra[i].x[0] <= coordenadas.x[0] && coordenadas.x[0] <= zonasTierra[i].x[1])
-                {
-                    if ((zonasTierra[i].y[0] <= coordenadas.y[0] && coordenadas.y[0] <= zonasTierra[i].y[1]) || coordenadas.y[0] <= zonasTierra[i].y[0] && zonasTierra[i].y[0] <= coordenadas.y[1])
-                    { return true; }
-                }
-
-            }
-
-            return false;
-        }
     }
 }

@@ -26,7 +26,7 @@ namespace HundirFlota
 
         /// <summary>
         /// Booleano que reprsenta el estado de la partida
-        /// (1 ≡ Finalizada).
+        /// (True ≡ Finalizada).
         /// </summary>
         public bool finalizada { get; set; }
 
@@ -56,7 +56,7 @@ namespace HundirFlota
         public Partida()
         {
             finalizada = false;
-            numMovimientos = 0;
+            numMovimientos = 1;
             nombrePartida = "Partida" + DateTime.Now.ToString("dd/MM/yyyy HH:mm tt");
         }
 
@@ -82,13 +82,24 @@ namespace HundirFlota
         }
 
         /// <summary>
-        /// Constructor parametrizado de la clase Partida.
+        /// onstructor parametrizado de la clase Partida. Asigna
+        /// los valores de todos los atributos.
         /// </summary>
-        /// <param name="_finalizada"></param>
-        /// <param name="_numMovimientos"></param>
-        /// <param name="_nombrePartida"></param>
-        /// <param name="_nombreGanador"></param>
-        protected Partida(bool _finalizada, int _numMovimientos, string _nombrePartida, string _nombreGanador)
+        /// <param name="_finalizada">
+        /// Booleano que reprsenta el estado de la partida
+        /// (True ≡ Finalizada)
+        /// </param>
+        /// <param name="_numMovimientos">
+        /// Entero que representa el número de movimientos que 
+        /// han sido realizados en la partida.
+        /// </param>
+        /// <param name="_nombrePartida">
+        /// String que representa el nombre de la partida.
+        /// </param>
+        /// <param name="_nombreGanador">
+        /// String que representa el nombre del jugador ganador.
+        /// </param>
+        public Partida(bool _finalizada, int _numMovimientos, string _nombrePartida, string _nombreGanador)
         {
             finalizada = _finalizada;
             numMovimientos = _numMovimientos;
@@ -136,6 +147,14 @@ namespace HundirFlota
             }
 
             return "\n\t * Jugadores: No hay información del estatus.";
+        }
+
+        /// <summary>
+        /// Permite jugar una partida entre dos jugadores.
+        /// </summary>
+        public virtual void Jugar(Pantalla consola)
+        {
+            
         }
 
     }

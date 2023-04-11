@@ -63,10 +63,17 @@ namespace HundirFlota
         }
 
         /// <summary>
-        /// Constructor parametrizado de Juego.
+        /// Constructor parametrizado de la clase Juego. Asigna
+        /// los valores de todos los atributos.
         /// </summary>
-        /// <param name="_listaPartidas"></param>
-        /// <param name="_consola"></param>
+        /// <param name="_listaPartidas">
+        /// Lista de instancias de Partida que almacena todas las
+        /// partidas de un jugador VS otro jugador humano o automático.
+        /// </param>
+        /// <param name="_consola">
+        /// Instancia de la clase Pantalla para controlar la entrada
+        /// y salida de datos del usuario.
+        /// </param>
         public Juego(List<Partida> _listaPartidas, Pantalla _consola)
         {
             consola = _consola;
@@ -110,7 +117,7 @@ namespace HundirFlota
                 switch (accionMenu)
                 {
                     case 1:
-                        ListarPartidas();
+                        ListarPartidas(); // Listar partidas y cargar 1.
                         break;
                     case 2:
                         CrearPartida(2); // Partida Múltiple.
@@ -119,10 +126,10 @@ namespace HundirFlota
                         CrearPartida(1); // Partida Individual.
                         break;
                     case 4:
-                        RankingPartidas();
+                        RankingPartidas(); // Ranking de partidas.
                         break;
                     case 5: // Salir.
-                        GuardarFichero(listaPartidas, Program.ficheroPartidas);
+                        GuardarFichero(listaPartidas, Program.ficheroPartidas); // Guardar listaPartidas.
                         Environment.Exit(0);
                         break;
                     default: // Mensaje error desde PintarMenu en Pantalla.
@@ -155,6 +162,8 @@ namespace HundirFlota
             }
 
             consola.Continuar(1); // Pulsa enter para continuar.
+
+            JugarPartida(listaPartidas[0]);
         }
 
         /// <summary>
@@ -208,8 +217,12 @@ namespace HundirFlota
                     break;
             }
 
+            consola.Continuar(1); // Pulsa enter para continuar.
+
             partidaInsertar.NuevaPartida();
             listaPartidas.Add(partidaInsertar);
+            GuardarFichero(listaPartidas, Program.ficheroPartidas);
+            
         }
 
         /// <summary>
@@ -272,11 +285,11 @@ namespace HundirFlota
         {
             if (mostrarGanador == 1) // Mostrar nombre ganador.
             {
-                return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n\t * Ganador: " + partida.nombreGanador + "\n";
+                return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + (partida.numMovimientos - 1) + "\n\t * Estatus: " + partida.InformacionStatus() + "\n\t * Ganador: " + partida.nombreGanador + "\n";
 
             }
 
-            return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n";
+            return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + (partida.numMovimientos - 1) + "\n\t * Estatus: " + partida.InformacionStatus() + "\n";
         }
 
         /// <summary>
@@ -311,6 +324,7 @@ namespace HundirFlota
             if (!File.Exists(nombreFichero))
             {
                 File.Create(nombreFichero).Close();
+                GuardarFichero(listaPartidas, nombreFichero);
                 return;
             }
 
@@ -321,9 +335,17 @@ namespace HundirFlota
             Archivo.Close();
         }
 
-        public void Jugar()
+        /// <summary>
+        /// Permite jugar una partida concreta.
+        /// </summary>
+        /// <param name="partida">
+        /// Instancia de la clase Partida que representa
+        /// aquella partida que se quiere jugar.
+        /// </param>
+        public void JugarPartida(Partida partida)
         {
-
+            partida.Jugar(consola);
+            Console.ReadKey();
         }
     }
 }
