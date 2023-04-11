@@ -27,14 +27,14 @@ namespace HundirFlota
         /// jugador humano participar en la partida (Jugador 1).
         /// </summary>
         [JsonInclude]
-        public JugadorHumano jugadorHumano1 { get; set; }
+        public Jugador jugadorHumano1 { get; set; }
 
         /// <summary>
         /// Instancia de la clase Jugador que permite a otro 
         /// jugador humano participar en la partida (Jugador 2).
         /// </summary>
         [JsonInclude]
-        public JugadorHumano jugadorHumano2 { get; set; }
+        public Jugador jugadorHumano2 { get; set; }
 
         // Constructores 
 
@@ -44,8 +44,8 @@ namespace HundirFlota
         /// </summary>
         public PartidaMultiple() 
         {
-            jugadorHumano1 = new JugadorHumano();
-            jugadorHumano2 = new JugadorHumano();
+            jugadorHumano1 = new Jugador();
+            jugadorHumano2 = new Jugador();
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace HundirFlota
         /// <param name="_nombrePartida">
         /// String que representa el nombre de la partida.
         /// </param>
-        public PartidaMultiple(JugadorHumano _jugadorHumano1, JugadorHumano _jugadorHumano2, string _nombrePartida) : base(false, 0, _nombrePartida)
+        public PartidaMultiple(Jugador _jugadorHumano1, Jugador _jugadorHumano2, string _nombrePartida) : base(false, 0, _nombrePartida)
         {
             jugadorHumano1 = _jugadorHumano1;
             jugadorHumano2 = _jugadorHumano2;

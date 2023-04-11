@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace HundirFlota
 {
-    internal abstract class Jugador
+    internal class Jugador
     {
         // Atributos
 

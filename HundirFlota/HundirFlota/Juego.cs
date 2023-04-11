@@ -154,8 +154,8 @@ namespace HundirFlota
                                   "\t * Nombre Jugador 2: ",
                                   "\n  Ya existe una partida con ese nombre.\n"};
 
-            JugadorHumano nuevoJugador1; // Instancia jugador1.
-            JugadorHumano nuevoJugador2; // Instancia jugador2.
+            Jugador nuevoJugador1; // Instancia jugador1.
+            Jugador nuevoJugador2; // Instancia jugador2.
 
             consola.ImprimirConsola(opciones[0], 1); // Opciones[0]: -- NUEVA PARTIDA --...
             string nuevoNombrePartida = consola.LeerString(opciones[1]); // Opciones[1]: * Nombre de la Partida.
@@ -170,7 +170,7 @@ namespace HundirFlota
                 return; // Volver al menú.
             }
 
-            nuevoJugador1 = new JugadorHumano(consola.LeerString(opciones[2])); // Opciones[2]: * Nombre Jugador 1.
+            nuevoJugador1 = new Jugador(consola.LeerString(opciones[2])); // Opciones[2]: * Nombre Jugador 1.
 
             switch (numJugadores) // Partida de 1 o 2 jugadores.
             {
@@ -179,12 +179,12 @@ namespace HundirFlota
 
                     consola.ImprimirConsola(opciones[3], 0);
 
-                    nuevoJugador2 = new JugadorHumano("Autómata");
+                    nuevoJugador2 = new Jugador("Autómata");
                     partidaInsertar = new PartidaIndividual(nuevoJugador1, nuevoJugador2, nuevoNombrePartida);
                     break;
                
                 case 2: // Multiple (Humano VS Humano)
-                    nuevoJugador2 = new JugadorHumano(consola.LeerString(opciones[3])); // Opciones[3]: * Nombre Jugador 2.
+                    nuevoJugador2 = new Jugador(consola.LeerString(opciones[3])); // Opciones[3]: * Nombre Jugador 2.
                     partidaInsertar = new PartidaMultiple(nuevoJugador1, nuevoJugador2, nuevoNombrePartida);
                     break;
             }
