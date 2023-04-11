@@ -220,20 +220,20 @@ namespace HundirFlota
         public void PintarTablero(String[,] mapaGeneral )
         {
 
-            Console.WriteLine(String.Concat(Enumerable.Repeat(" ", 30)) + "EJE  X");
+            Console.WriteLine(String.Concat(Enumerable.Repeat(" ", 27)) + "EJE  X");
             for (int i = 0; i < 12; i++)
             {
                 if (i != 0 && i < 9)
                 {
-                    Console.Write("   " + (i + 1));
+                    Console.Write(String.Concat(Enumerable.Repeat(" ", 3)) + (i + 1));
                 }
                 else if (i == 0)
                 {
-                    Console.Write("          " + (i + 1));
+                    Console.Write(String.Concat(Enumerable.Repeat(" ", 9)) + (i + 1));
                 }
                 else
                 {
-                    Console.Write("  " + (i + 1));
+                    Console.Write(String.Concat(Enumerable.Repeat(" ", 2)) + (i + 1));
                 }
                 
             }
