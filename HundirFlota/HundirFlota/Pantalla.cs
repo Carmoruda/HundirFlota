@@ -219,6 +219,8 @@ namespace HundirFlota
         /// </param>
         public void PintarTablero(String[,] mapaGeneral )
         {
+
+            Console.WriteLine(String.Concat(Enumerable.Repeat(" ", 30)) + "EJE  X");
             for (int i = 0; i < 12; i++)
             {
                 if (i != 0 && i < 9)
@@ -227,7 +229,7 @@ namespace HundirFlota
                 }
                 else if (i == 0)
                 {
-                    Console.Write("     " + (i + 1));
+                    Console.Write("          " + (i + 1));
                 }
                 else
                 {
@@ -240,13 +242,40 @@ namespace HundirFlota
 
             for (int i = 0; i < 12; i++)
             {
+                switch(i)
+                {
+                    case 3:
+                        Console.Write(" E  ");
+                        break;
+                    case 4:
+                        Console.Write(" J  ");
+                        break;
+                    case 5:
+                        Console.Write(" E  ");
+                        break;
+                    case 6:
+                        Console.Write("    ");
+                        break;
+                    case 7:
+                        Console.Write(" Y  ");
+                        break;
+                    case 9:
+                    case 10:
+                    case 11:
+                        Console.Write("   ");
+                        break;
+                    default:
+                        Console.Write("    ");
+                        break;
+
+                }
                 if (i < 9)
                 {
                     Console.Write((i + 1) + ". ");
                 }
                 else
                 {
-                    Console.Write((i + 1) + ".");
+                    Console.Write((i + 1) + ". ");
                 }
                 
                 for (int j  = 0; j < 12; j++)
