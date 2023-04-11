@@ -28,7 +28,7 @@ namespace HundirFlota
             //Tablero tablero = new Tablero();
             //tablero.Pintar();
             //Console.ReadKey();
-            miJuego.CargarFichero(ficheroPartidas);
+            //miJuego.CargarFichero(ficheroPartidas);
             miJuego.Menu();
         }
     }

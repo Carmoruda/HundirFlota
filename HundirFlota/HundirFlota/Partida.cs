@@ -22,7 +22,7 @@ namespace HundirFlota
     [JsonDerivedType(typeof(PartidaMultiple), typeDiscriminator: "conHumanos")]
     [JsonDerivedType(typeof(PartidaIndividual), typeDiscriminator: "conAutómata")]
 
-    internal class Partida
+    internal abstract class Partida
     {
         // Atributos
 
