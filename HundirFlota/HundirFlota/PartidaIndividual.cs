@@ -59,7 +59,7 @@ namespace HundirFlota
         /// <param name="_nombrePartida">
         /// String que representa el nombre de la partida.
         /// </param>
-        public PartidaIndividual(Jugador _jugador1, Jugador _jugador2, string _nombrePartida) : base(false, 1, _nombrePartida)
+        public PartidaIndividual(Jugador _jugador1, Jugador _jugador2, string _nombrePartida) : base(false, 0, _nombrePartida)
         {
             jugador1 = _jugador1; // Humano.
             jugador2 = _jugador2; // Automático.
@@ -133,22 +133,29 @@ namespace HundirFlota
         {
             while (true)
             {
-                string texto = "------------------------------ PARTIDA " + nombrePartida.ToUpper() + " ------------------------------\n\n\n\t------------------------------ TURNO DE ";
+                string texto = "------------------------------ PARTIDA " + nombrePartida.ToUpper() + " ------------------------------\n\t--------------------- TURNO DE ";
 
-                if (numMovimientos % 2 != 0) // Turno jugador 1.
+                if (numMovimientos % 2 != 0 || numMovimientos == 0) // Turno jugador 1.
                 {
-                    texto += jugador1.nombre + " ------------------------------\n";
-                    numMovimientos++;
-                    consola.ImprimirConsola(texto, 1);
-                    jugador1.Atacar();
-                    Console.ReadKey();
+                    texto += jugador1.nombre + " ----------------------\n\n";
+                    consola.ImprimirConsola(texto, 1); // texto: -- TURNO DE...
+
+                    jugador1.Atacar(); // Acción de atacar del jugador 1.
+                    consola.Continuar(1); // Pulsa enter para continuar.
+
+
+                    numMovimientos++; // +1 Movimiento.
+
                 }
                 else // Turno jugador 2.
                 {
-                    texto += jugador2.nombre + " ------------------------------\n";
-                    numMovimientos++;
-                    consola.ImprimirConsola(texto, 1);
-                    Console.ReadKey();
+                    texto += jugador2.nombre + " ----------------------\n\n";
+                    consola.ImprimirConsola(texto, 1); // texto: -- TURNO DE...
+
+                    jugador2.Automático(); // Acción de atacar del jugador 2.
+                    consola.Continuar(1); // Pulsa enter para continuar.
+
+                    numMovimientos++; // +1 Movimiento.
                 }
             }
         }

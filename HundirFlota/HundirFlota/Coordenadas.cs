@@ -98,7 +98,14 @@ namespace HundirFlota
             bool coincideConAlgo = true;
             int indice = 0;
 
-            tablero.Pintar(mostrarOponente); // Mostrar el tablero.
+            if (!mostrarOponente)
+            {
+                tablero.PintarPropio(); // Mostrar el tablero.
+            }
+            else
+            {
+                tablero.PintarOponente();
+            }
 
             do
             {
@@ -131,26 +138,12 @@ namespace HundirFlota
                 }
 
                 coincideConAlgo = ComprobarCoordenadasCoincidente(tablero, ref indice);
-                
-                if (objeto == "BARCO" && coincideConAlgo)
+
+                TextoCoincidencia(objeto, coincideConAlgo, indice, opciones, consola);
+
+                if(objeto == "ATACAR")
                 {
-                    consola.ImprimirConsola(opciones[indice], 0);
-                }
-                else if (objeto == "ATACAR" && coincideConAlgo)
-                {
-                    switch(indice)
-                    {
-                        case 3:
-                            consola.ImprimirConsola("Tocado", 0);
-                            break;
-                        case 4:
-                            consola.ImprimirConsola("Tierra", 0);
-                            break;
-                    }
-                }
-                else if (objeto == "ATACAR" && !coincideConAlgo)
-                {
-                    consola.ImprimirConsola("Agua", 0);
+                    return;
                 }
 
 
@@ -252,6 +245,49 @@ namespace HundirFlota
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Permite imprimir el texto que indica con que coinciden las coordenadas introducidas.
+        /// </summary>
+        /// <param name="objeto">
+        /// String que representa la entidad que se quiere introducir.
+        /// </param>
+        /// <param name="coincideConAlgo"></param>
+        /// <param name="indice">
+        /// Entero que representa el indice del elemento del array
+        /// que se desea mostrar por pantalla.
+        /// </param>
+        /// <param name="opciones">
+        /// String array que representa las diferentes opciones del menú.
+        /// </param>
+        /// <param name="consola">
+        /// Instancia de la clase Pantalla para controlar la entrada
+        /// y salida de datos del usuario.
+        /// </param>
+        public void TextoCoincidencia(string objeto, bool coincideConAlgo, int indice, string[] opciones, Pantalla consola)
+        {
+            if (objeto == "BARCO" && coincideConAlgo)
+            {
+                consola.ImprimirConsola(opciones[indice], 0);
+            }
+            else if (objeto == "ATACAR" && coincideConAlgo)
+            {
+                switch (indice)
+                {
+                    case 3:
+                        consola.ImprimirConsola("\t Tocado\n", 0);
+                        return;
+                    case 4:
+                        consola.ImprimirConsola("\t Tierra\n", 0);
+                        return;
+                }
+            }
+            else if (objeto == "ATACAR" && !coincideConAlgo)
+            {
+                consola.ImprimirConsola("\t Agua\n", 0);
+                return;
+            }
         }
 
         /// <summary>

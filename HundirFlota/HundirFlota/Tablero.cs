@@ -206,28 +206,20 @@ namespace HundirFlota
         }
 
         /// <summary>
-        /// Permite pintar el mapa de los jugadores.
+        /// Permite pintar el mapa del jugador.
         /// </summary>
-        /// <param name="oponente">
-        /// Booleano que indica si se desea imprimir el tablero del
-        /// adversario.
-        /// </param>
-        public void Pintar(bool mostrarOponente)
+        public void PintarPropio()
         {
             consola.PintarTablero(mapa);
-
-            if (mostrarOponente)
-            {
-                consola.PintarTablero(mapaOponente);
-            }
-            
-
         }
 
-        /*public void PintarOponente()
+        /// <summary>
+        /// Permite pintar el mapa del oponente.
+        /// </summary>
+        public void PintarOponente()
         {
-            consola.PintarTableroOponente(mapa);
-        }*/
+            consola.PintarTablero(mapaOponente);
+        }
 
     }
 }

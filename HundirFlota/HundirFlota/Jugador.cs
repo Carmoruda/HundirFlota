@@ -146,24 +146,32 @@ namespace HundirFlota
             portaaviones.NuevoBarco(nombre);
         }
 
+        /// <summary>
+        /// Permite controlar las acciones de atacar del jugador
+        /// automático.
+        /// </summary>
+
         public void Automático()
         {
+            Coordenadas coordenada = new Coordenadas();
             bool libre = false;
+            int indice = 0;
+            string[] opciones = { };
             int posX = 0;
             int posY = 0;
+
             do
             {
                 posX = r.Next(1, 12);
                 posY = r.Next(1, 12);
 
-                Coordenadas coordenada = new Coordenadas();
 
                 coordenada.x[0] = coordenada.x[1] = posX;
                 coordenada.y[0] = coordenada.y[1] = posY;
 
-                libre = coordenada.BuscarEntidad(tablero.zonasTierra);
+                libre = coordenada.ComprobarCoordenadasCoincidente(tablero, ref indice);
 
-                for (int i = 0; i< lanzamientoX.Count; i++)
+                for (int i = 0; i < lanzamientoX.Count; i++)
                 {
                     if (posX == lanzamientoX[i] && posY == lanzamientoY[i])
                     {
@@ -175,8 +183,14 @@ namespace HundirFlota
             lanzamientoX.Add(posX);
             lanzamientoY.Add(posY);
 
+            coordenada.TextoCoincidencia("ATACAR", libre, indice, opciones, consola);
+
         }
 
+        /// <summary>
+        /// Permite controlar las acciones de atacar del jugador
+        /// humano.
+        /// </summary>
         public void Atacar()
         {
             string[] opciones = { "\n\t* Coordenada X: ", "\t* Coordenada Y: "};

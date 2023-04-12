@@ -285,11 +285,11 @@ namespace HundirFlota
         {
             if (mostrarGanador == 1) // Mostrar nombre ganador.
             {
-                return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + (partida.numMovimientos - 1) + "\n\t * Estatus: " + partida.InformacionStatus() + "\n\t * Ganador: " + partida.nombreGanador + "\n";
+                return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n\t * Ganador: " + partida.nombreGanador + "\n";
 
             }
 
-            return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + (partida.numMovimientos - 1) + "\n\t * Estatus: " + partida.InformacionStatus() + "\n";
+            return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n";
         }
 
         /// <summary>
