@@ -276,16 +276,16 @@ namespace HundirFlota
                 switch (indice)
                 {
                     case 3:
-                        consola.ImprimirConsola("\t Tocado\n", 0);
+                        consola.ImprimirConsola("\t* Resultado disparo: Barco tocado.\n", 0);
                         return;
                     case 4:
-                        consola.ImprimirConsola("\t Tierra\n", 0);
+                        consola.ImprimirConsola("\t* Resultado disparo: Tierra bombardeada.\n", 0);
                         return;
                 }
             }
             else if (objeto == "ATACAR" && !coincideConAlgo)
             {
-                consola.ImprimirConsola("\t Agua\n", 0);
+                consola.ImprimirConsola("\t* Resultado disparo: Agua.\n", 0);
                 return;
             }
         }

@@ -146,6 +146,8 @@ namespace HundirFlota
         /// </summary>
         public void ListarPartidas()
         {
+            int indice = 1;
+
             consola.ImprimirConsola("------------------------------ LISTADO PARTIDAS ------------------------------\n\n", 1);
 
             if (listaPartidas.Count < 1) // Comprobar que al menos hay 1 partida.
@@ -157,8 +159,9 @@ namespace HundirFlota
 
             foreach (Partida partida in listaPartidas)
             {
-                consola.ImprimirConsola(InformacionPartida(partida, 0), 0);
+                consola.ImprimirConsola(InformacionPartida(indice, partida, 0), 0);
                 consola.ImprimirConsola("\n", 0);
+                indice++;
             }
 
             consola.Continuar(1); // Pulsa enter para continuar.
@@ -232,14 +235,16 @@ namespace HundirFlota
         /// </summary>
         public void RankingPartidas()
         {
+            int indice = 1;
             consola.ImprimirConsola("------------------------------ LISTADO PARTIDAS ------------------------------\n\n", 1);
 
             foreach (Partida partida in listaPartidas)
             {
                 if (partida.finalizada == true)
                 {
-                    consola.ImprimirConsola(InformacionPartida(partida, 1), 0);
+                    consola.ImprimirConsola(InformacionPartida(indice, partida, 1), 0);
                     consola.ImprimirConsola("\n", 0);
+                    indice++;
                 }
             }
 
@@ -271,6 +276,9 @@ namespace HundirFlota
         /// Muestra la información de la cada partida (Nombre, nombre jugadores,
         /// nº movimientos y estatus).
         /// </summary>
+        /// <param name="indice">
+        /// Entero que representa el índice de la partida dentro de la lista.
+        /// </param>
         /// <param name="partida">
         /// Instancia de la clase Partida que representa aquella partida de la que se
         /// quiere saber la información.
@@ -281,15 +289,15 @@ namespace HundirFlota
         /// <returns>
         /// String que contiene toda la información de la partida.
         /// </returns>
-        public string InformacionPartida(Partida partida, int mostrarGanador)
+        public string InformacionPartida(int indice, Partida partida, int mostrarGanador)
         {
             if (mostrarGanador == 1) // Mostrar nombre ganador.
             {
-                return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n\t * Ganador: " + partida.nombreGanador + "\n";
+                return "\n   " + indice + ". Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n\t * Ganador: " + partida.nombreGanador + "\n";
 
             }
 
-            return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n";
+            return "\n   " + indice + ". Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n";
         }
 
         /// <summary>

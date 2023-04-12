@@ -183,6 +183,8 @@ namespace HundirFlota
             lanzamientoX.Add(posX);
             lanzamientoY.Add(posY);
 
+            consola.ImprimirConsola("\t* Lanzamiento del Autómata:\n\t    * Coordenada X: " + posX + "\n\t    * Coordenada Y: " + posY + "\n\n", 0);
+
             coordenada.TextoCoincidencia("ATACAR", libre, indice, opciones, consola);
 
         }
