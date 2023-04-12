@@ -32,6 +32,12 @@ namespace HundirFlota
         public List<Partida> listaPartidas { get; set; }
 
         /// <summary>
+        /// Lista de instancias de Partida que almacena todas las
+        /// partidas finalizadas.
+        /// </summary>
+        public List<Partida> listaRanking { get; set; }
+
+        /// <summary>
         /// Instancia de la clase Pantalla para controlar la entrada
         /// y salida de datos del usuario.
         /// </summary>
@@ -47,6 +53,7 @@ namespace HundirFlota
         {
             consola = new Pantalla();
             listaPartidas = new List<Partida>();
+            listaRanking = new List<Partida>();
         }
 
         /// <summary>
@@ -74,10 +81,15 @@ namespace HundirFlota
         /// Instancia de la clase Pantalla para controlar la entrada
         /// y salida de datos del usuario.
         /// </param>
-        public Juego(List<Partida> _listaPartidas, Pantalla _consola)
+        /// <param name="_listaPartidas">
+        /// Lista de instancias de Partida que almacena todas las
+        /// partidas finalizadas.
+        /// </param>
+        public Juego(List<Partida> _listaPartidas, List<Partida> _listaRanking, Pantalla _consola)
         {
             consola = _consola;
             listaPartidas = _listaPartidas;
+            listaRanking = _listaRanking;
         }
 
         // Métodos
@@ -130,6 +142,7 @@ namespace HundirFlota
                         break;
                     case 5: // Salir.
                         GuardarFichero(listaPartidas, Program.ficheroPartidas); // Guardar listaPartidas.
+                        GuardarFichero(listaRanking, Program.ficheroRanking); // Guardar listaRanking.
                         Environment.Exit(0);
                         break;
                     default: // Mensaje error desde PintarMenu en Pantalla.
@@ -147,6 +160,7 @@ namespace HundirFlota
         public void ListarPartidas()
         {
             int indice = 1;
+            int eleccionPartida = 0;
 
             consola.ImprimirConsola("------------------------------ LISTADO PARTIDAS ------------------------------\n\n", 1);
 
@@ -164,9 +178,10 @@ namespace HundirFlota
                 indice++;
             }
 
+            eleccionPartida = consola.LeerEntero("\n\n  Introduzca el número de la partida que quiera continuar:\n  ===> ", 1, listaPartidas.Count) - 1;
             consola.Continuar(1); // Pulsa enter para continuar.
 
-            JugarPartida(listaPartidas[0]);
+            JugarPartida(listaPartidas[eleccionPartida]); // Jugar partida seleccionada.
         }
 
         /// <summary>
@@ -225,6 +240,8 @@ namespace HundirFlota
             partidaInsertar.NuevaPartida();
             listaPartidas.Add(partidaInsertar);
             GuardarFichero(listaPartidas, Program.ficheroPartidas);
+
+            JugarPartida(partidaInsertar);
             
         }
 
@@ -236,9 +253,17 @@ namespace HundirFlota
         public void RankingPartidas()
         {
             int indice = 1;
-            consola.ImprimirConsola("------------------------------ LISTADO PARTIDAS ------------------------------\n\n", 1);
 
-            foreach (Partida partida in listaPartidas)
+            consola.ImprimirConsola("------------------------------ RANKING PARTIDAS ------------------------------\n\n", 1);
+
+            if (listaRanking.Count < 1) // Comprobar que al menos hay 1 partida.
+            {
+                consola.ImprimirConsola("  No hay partidas finalizanadas guardadas.\n", 0);
+                consola.Continuar(1); // Pulsa enter para continuar.
+                return;
+            }
+
+            foreach (Partida partida in listaRanking)
             {
                 if (partida.finalizada == true)
                 {
@@ -267,11 +292,6 @@ namespace HundirFlota
             return listaPartidas.SingleOrDefault(r => r.nombrePartida == nombre);
         }
 
-        public void CargarPartida(string nombre)
-        {
-
-        }
-
         /// <summary>
         /// Muestra la información de la cada partida (Nombre, nombre jugadores,
         /// nº movimientos y estatus).
@@ -293,11 +313,11 @@ namespace HundirFlota
         {
             if (mostrarGanador == 1) // Mostrar nombre ganador.
             {
-                return "\n   " + indice + ". Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n\t * Ganador: " + partida.nombreGanador + "\n";
+                return "\n   " + indice + ". Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + (partida.numMovimientos - 1)+ "\n\t * Estatus: " + partida.InformacionStatus() + "\n\t * Ganador: " + partida.nombreGanador + "\n";
 
             }
 
-            return "\n   " + indice + ". Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n";
+            return "\n   " + indice + ". Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + (partida.numMovimientos - 1) + "\n\t * Estatus: " + partida.InformacionStatus() + "\n";
         }
 
         /// <summary>
@@ -322,11 +342,15 @@ namespace HundirFlota
         /// <summary>
         /// Carga la lista de partidas de un fichero.
         /// </summary>
+        /// <param name="listadoPartidas">
+        /// Listado de partidas que se quiere guardar
+        /// en el fichero.
+        /// </param>
         /// <param name="nombreFichero">
         /// String que represeta la ruta relativa al fichero del que
         /// se quiere leer la información.
         /// </param>
-        public void CargarFichero(string nombreFichero)
+        public void CargarFichero(string nombreFichero, bool ranking)
         {
             // Si el fichero no existe se crea.
             if (!File.Exists(nombreFichero))
@@ -339,7 +363,17 @@ namespace HundirFlota
             // Cargar a listaPartidas las partidas guardadas en el fichero.
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             FileStream Archivo = File.Open(nombreFichero, FileMode.Open);
-            listaPartidas = (List<Partida>)binaryFormatter.Deserialize(Archivo);
+
+            if (!ranking)
+            {
+                listaPartidas = (List<Partida>)binaryFormatter.Deserialize(Archivo);
+            }
+            else
+            {
+                listaRanking = (List<Partida>)binaryFormatter.Deserialize(Archivo);
+
+            }
+
             Archivo.Close();
         }
 
@@ -352,8 +386,23 @@ namespace HundirFlota
         /// </param>
         public void JugarPartida(Partida partida)
         {
-            partida.Jugar(consola);
-            Console.ReadKey();
+            if (!partida.finalizada)
+            {
+                partida.Jugar(consola);
+                GuardarFichero(listaPartidas, Program.ficheroPartidas);
+
+                if (partida.finalizada)
+                {
+                    listaRanking.Add(partida);
+                    GuardarFichero(listaRanking, Program.ficheroRanking);
+                }
+            }
+            else
+            {
+                consola.ImprimirConsola("\n\n  Sólo se pueden jugar partidas que no hayan finalizado\n\n", 0);
+            }
+
+            consola.Continuar(1); // Pulsa enter para continuar.
         }
     }
 }

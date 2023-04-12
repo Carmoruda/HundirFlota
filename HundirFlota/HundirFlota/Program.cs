@@ -19,7 +19,7 @@ namespace HundirFlota
         /// Constante de tipo string que representa la ruta relativa al 
         /// fichero que almacena la información del ranking.
         /// </summary>
-        public const string ficheroRanking = @"RankingPartidas.bin";
+        public const string ficheroRanking = @"PartidasFinalizadas.bin";
 
         static void Main(string[] args)
         {
@@ -30,7 +30,8 @@ namespace HundirFlota
             //tablero.Pintar(true);
             //Console.ReadKey();
 
-            miJuego.CargarFichero(ficheroPartidas);
+            miJuego.CargarFichero(ficheroPartidas, false);
+            miJuego.CargarFichero(ficheroRanking, true);
             miJuego.Menu();
         }
     }

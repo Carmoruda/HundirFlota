@@ -157,5 +157,28 @@ namespace HundirFlota
             
         }
 
+        public bool SalirPartida(Pantalla consola)
+        {
+            int accionSalir = 0;
+
+            string[] opciones = { "\n  Seleccione una de las siguientes opciones:\n",
+                                  "\t1   Continuar partida.",
+                                  "\t2   Guardar y salir."};
+
+            do
+            {
+                accionSalir = consola.PintarMenu(opciones, 0, 0);
+
+                switch (accionSalir)
+                {
+                    case 1:
+                        return true; // Continuar partida.
+                    case 2:
+                        return false; // Volver al menú
+                }
+            } while (true);
+
+        }
+
     }
 }

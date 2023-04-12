@@ -61,7 +61,7 @@ namespace HundirFlota
         /// <param name="_nombrePartida">
         /// String que representa el nombre de la partida.
         /// </param>
-        public PartidaMultiple(Jugador _jugador1, Jugador _jugador2, string _nombrePartida) : base(false, 0, _nombrePartida)
+        public PartidaMultiple(Jugador _jugador1, Jugador _jugador2, string _nombrePartida) : base(false, 1, _nombrePartida)
         {
             jugador1 = _jugador1;
             jugador2 = _jugador2;
@@ -139,7 +139,7 @@ namespace HundirFlota
             {
                 string texto = "------------------------------ PARTIDA " + nombrePartida.ToUpper() + " ------------------------------\n\t--------------------- TURNO DE ";
 
-                if (numMovimientos % 2 != 0 || numMovimientos == 0) // Turno jugador 1.
+                if (numMovimientos % 2 != 0) // Turno jugador 1.
                 {
                     texto += jugador1.nombre + " ----------------------\n\n";
                     consola.ImprimirConsola(texto, 1); // texto: -- TURNO DE...
