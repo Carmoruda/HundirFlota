@@ -91,6 +91,8 @@ namespace HundirFlota
             int[] coordenadasY   = { 1, 2, 8, 6, 7, 9, 10, 3, 4, 5, 2, 10, 3, 9}; // Cordenadas eje Y.
             int[] longitudTierra = { 1, 2, 3, 1, 1, 1,  1, 1, 2, 3, 3,  4, 2, 2}; // Longitud trozos de tierra.
 
+          
+
             for (int i = 0; i < coordenadasX.Length; i++)
             {
                 Coordenadas nuevasCoordenas = new Coordenadas();
