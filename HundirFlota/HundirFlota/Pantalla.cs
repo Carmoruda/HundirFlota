@@ -84,6 +84,10 @@ namespace HundirFlota
         public void Continuar(int limpiar)
         {
             Console.WriteLine("\n  Pulse Enter para continuar:");
+            
+            
+            
+            
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
             Limpiar(limpiar);
         }

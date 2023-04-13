@@ -119,7 +119,8 @@ namespace HundirFlota
         /// </summary>
         public override void NuevaPartida()
         {
-            jugador1.NuevaPartida();
+            jugador1.NuevaPartida("MANUAL");
+            jugador2.NuevaPartida("AUTOMATICO");
            
         }
 
@@ -143,7 +144,7 @@ namespace HundirFlota
                     texto += jugador1.nombre + " ----------------------\n\n";
                     consola.ImprimirConsola(texto, 1); // texto: -- TURNO DE...
 
-                    jugador1.Atacar(); // Acción de atacar del jugador 1.
+                    jugador1.Atacar("MANUAL"); // Acción de atacar del jugador 1.
 
                     numMovimientos++; // +1 Movimiento.
                     continuar = SalirPartida(consola); // Salir o continuar.
@@ -154,7 +155,9 @@ namespace HundirFlota
                     texto += jugador2.nombre + " ----------------------\n\n";
                     consola.ImprimirConsola(texto, 1); // texto: -- TURNO DE...
 
-                    jugador2.Automático(); // Acción de atacar del jugador 2.
+                    jugador2.Atacar("AUTOMATICO");
+
+                    //jugador2.Automático(); // Acción de atacar del jugador 2.
 
                     numMovimientos++; // +1 Movimiento.
                     continuar = SalirPartida(consola); // Salir o continuar.

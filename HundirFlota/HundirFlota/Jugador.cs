@@ -135,15 +135,15 @@ namespace HundirFlota
         /// de los barcos dentro del tablero, además de 
         /// rellenar el tablero con las casillas iniciales.
         /// </summary>
-        public void NuevaPartida()
+        public void NuevaPartida(string modo)
         {
             tablero.RellenarTableroInicial(tablero.mapa, tablero.mapaOponente);
             tablero.RellenarTierra();
 
-            patrullero.NuevoBarco(nombre);
-            submarino.NuevoBarco(nombre);
-            destructor.NuevoBarco(nombre);
-            portaaviones.NuevoBarco(nombre);
+            patrullero.NuevoBarco(nombre, modo);
+            submarino.NuevoBarco(nombre, modo);
+            destructor.NuevoBarco(nombre, modo);
+            portaaviones.NuevoBarco(nombre, modo);
         }
 
         /// <summary>
@@ -193,11 +193,11 @@ namespace HundirFlota
         /// Permite controlar las acciones de atacar del jugador
         /// humano.
         /// </summary>
-        public void Atacar()
+        public void Atacar(string modo)
         {
             string[] opciones = { "\n\t* Coordenada X: ", "\t* Coordenada Y: "};
             Coordenadas coordenadasAtacar = new Coordenadas();
-            coordenadasAtacar.ControlIntroducirCoordenadas(1, 1, consola, tablero, opciones, "ATACAR", true);
+            coordenadasAtacar.ControlIntroducirCoordenadas(1, 1, consola, tablero, opciones, "ATACAR", true, modo);
         }
     }
 }

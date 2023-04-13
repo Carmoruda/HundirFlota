@@ -66,6 +66,8 @@ namespace HundirFlota
         /// </summary>
         public Coordenadas coordenadas { get; set; }
 
+        public Random r = new Random();
+
         // Constructores
 
         /// <summary>
@@ -148,12 +150,12 @@ namespace HundirFlota
         /// <param name="nombre">
         /// String que representa el nombre del jugador.
         /// </param>
-        public void NuevoBarco(string nombre)
+        public void NuevoBarco(string nombre, string modo)
         {
             nombreJugador = nombre;
 
-            SeleccionarOrientacion();
-            IntroducirCoordenadas();
+            SeleccionarOrientacion(modo);
+            IntroducirCoordenadas(modo);
             ColocarBarco();
         }
 
@@ -162,38 +164,48 @@ namespace HundirFlota
         /// y asigna el valor correspondiente al atributo
         /// horizontal (0 - Vertical, 1 - Horizontal).
         /// </summary>
-        public void SeleccionarOrientacion()
+        public void SeleccionarOrientacion(string modo)
         {
             int accionOrientacion = 0;
 
-            do
+            switch (modo)
             {
-                string texto = "------------------------------ JUGADOR " + nombreJugador.ToUpper() + " ------------------------------\n\n" +
-                           "------------------------------ NUEVO BARCO ------------------------------\n\n\n  Información barco:" +
-                           "\n\n\t * Tipo de barco: " + tipo + "\n\t * Longitud: " + longitud + "\n\t * Letra mapa: "
-                           + tipo.Substring(0, 1).ToUpper() + "\n";
+                case "MANUAL":
+                    do
+                    {
+                        string texto = "------------------------------ JUGADOR " + nombreJugador.ToUpper() + " ------------------------------\n\n" +
+                                   "------------------------------ NUEVO BARCO ------------------------------\n\n\n  Información barco:" +
+                                   "\n\n\t * Tipo de barco: " + tipo + "\n\t * Longitud: " + longitud + "\n\t * Letra mapa: "
+                                   + tipo.Substring(0, 1).ToUpper() + "\n";
 
-                consola.ImprimirConsola(texto, 1); // texto: -- JUGADOR...
+                        consola.ImprimirConsola(texto, 1); // texto: -- JUGADOR...
 
-                string[] opciones = { "\n  Seleccione una de las siguientes opciones:\n",
+                        string[] opciones = { "\n  Seleccione una de las siguientes opciones:\n",
                                       "\t1   Orientación vertical.\n\t2   Orientación horizontal."};
 
-                accionOrientacion = consola.PintarMenu(opciones, 0, 0);
-                
-                consola.Continuar(0); // Pulsar enter para continuar.
-            } while (accionOrientacion < 1 || accionOrientacion > 2);
+                        accionOrientacion = consola.PintarMenu(opciones, 0, 0);
+
+                        consola.Continuar(0); // Pulsar enter para continuar.
+                    } while (accionOrientacion < 1 || accionOrientacion > 2);
+
+
+                    orientacion = accionOrientacion - 1; // Orientación del barco.
+                    consola.ImprimirConsola("\n", 0); // Imprimir salto de línea.
+                    break;
+
+                case "AUTOMATICO":
+                    orientacion = r.Next(0, 1);
+                    break;
+            }
+
             
-
-            orientacion = accionOrientacion - 1; // Orientación del barco.
-            consola.ImprimirConsola("\n", 0); // Imprimir salto de línea.
-
         }
 
         /// <summary>
         /// Permite introducir el valor de las coordenadas 
         /// de los barcos.
         /// </summary>
-        public void IntroducirCoordenadas() 
+        public void IntroducirCoordenadas(String modo) 
         {
             string[] opciones = { "\n\t* Coordenada X: ",
                                   "\t* Coordenada Y: ",
@@ -201,7 +213,7 @@ namespace HundirFlota
                                   "\t  Error! Ya hay otro barco colocado en esa posición.\n",
                                   "\t  Error! Hay una zona de tierra en esa posición.\n"};
 
-            coordenadas.ControlIntroducirCoordenadas(orientacion, longitud, consola, tablero, opciones, "BARCO", false);
+            coordenadas.ControlIntroducirCoordenadas(orientacion, longitud, consola, tablero, opciones, "BARCO", false, modo);
         }
 
         /// <summary>

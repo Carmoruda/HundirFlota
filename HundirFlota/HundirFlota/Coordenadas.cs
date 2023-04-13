@@ -32,6 +32,9 @@ namespace HundirFlota
         /// </summary>
         public int[] y { get; set; }
 
+        public Random r = new Random();
+
+
         // Constructores
 
         /// <summary>
@@ -91,7 +94,7 @@ namespace HundirFlota
         /// <param name="mostrarOponente">
         /// Booleano que indica si se desea pintar el tablero del oponente.
         /// </param>
-        public void ControlIntroducirCoordenadas(int orientacion, int longitud, Pantalla consola, Tablero tablero, string[] opciones, string objeto, bool mostrarOponente)
+        public void ControlIntroducirCoordenadas(int orientacion, int longitud, Pantalla consola, Tablero tablero, string[] opciones, string objeto, bool mostrarOponente, string modo)
         {
             int coordenadaX = 0;
             int coordenadaY = 0;
@@ -109,8 +112,8 @@ namespace HundirFlota
 
             do
             {
-                coordenadaX = IntroducirCoordenadas(orientacion, longitud, consola, opciones, objeto, 0, "x");
-                coordenadaY = IntroducirCoordenadas(orientacion, longitud, consola, opciones, objeto, 1, "y");
+                coordenadaX = IntroducirCoordenadas(orientacion, longitud, consola, opciones, objeto, 0, "x", modo);
+                coordenadaY = IntroducirCoordenadas(orientacion, longitud, consola, opciones, objeto, 1, "y", modo);
 
                 switch (objeto) // Asignación de las coordenadas.
                 {
@@ -186,12 +189,19 @@ namespace HundirFlota
         /// String que representa el eje de la coordenada introducida (X, Y).
         /// </param>
         /// <returns></returns>
-        public int IntroducirCoordenadas (int orientacion, int longitud, Pantalla consola, string[] opciones, string objeto, int indice, string tipo)
+        public int IntroducirCoordenadas (int orientacion, int longitud, Pantalla consola, string[] opciones, string objeto, int indice, string tipo, string modo)
         {
             int coordenada = 0;
             do // Coordenadas eje. 
             {
-                coordenada = consola.LeerEntero(opciones[indice], 1, 12); // Opciones[0]: * Coordenada ...
+                if (modo == "AUTOMATICO")
+                {
+                    coordenada = r.Next(1, 12); // Opciones[0]: * Coordenada ...
+                }
+                else
+                {
+                    coordenada = consola.LeerEntero(opciones[indice], 1, 12); // Opciones[0]: * Coordenada ...
+                }
 
                 switch (objeto.ToUpper()) // ¿Qué se coloca?
                 {

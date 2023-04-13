@@ -122,8 +122,8 @@ namespace HundirFlota
         /// </summary>
         public override void NuevaPartida()
         {
-            jugador1.NuevaPartida();
-            jugador2.NuevaPartida();
+            jugador1.NuevaPartida("MANUAL");
+            jugador2.NuevaPartida("MANUAL");
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace HundirFlota
                     texto += jugador1.nombre + " ----------------------\n\n";
                     consola.ImprimirConsola(texto, 1); // texto: -- TURNO DE...
 
-                    jugador1.Atacar(); // Acción de atacar del jugador 1.
+                    jugador1.Atacar("MANUAL"); // Acción de atacar del jugador 1.
                     consola.Continuar(1); // Pulsa enter para continuar.
 
 
@@ -156,7 +156,7 @@ namespace HundirFlota
                     texto += jugador2.nombre + " ----------------------\n\n";
                     consola.ImprimirConsola(texto, 1); // texto: -- TURNO DE...
 
-                    jugador2.Atacar(); // Acción de atacar del jugador 2.
+                    jugador2.Atacar("MANUAL"); // Acción de atacar del jugador 2.
                     consola.Continuar(1); // Pulsa enter para continuar.
 
                     numMovimientos++; // +1 Movimiento.
