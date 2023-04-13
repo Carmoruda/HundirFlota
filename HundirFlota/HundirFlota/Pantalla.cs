@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace HundirFlota
 {
+    [Serializable]
     internal class Pantalla
     {
         // Atributos
@@ -216,21 +217,23 @@ namespace HundirFlota
         /// <param name="mapaGeneral">
         /// Array bidimensional de strings que representa el mapaGeneral.
         /// </param>
-        public void PintarTablero(String[,] mapaGeneral )
+        public void PintarTablero(String[,] mapaGeneral)
         {
+
+            Console.WriteLine(String.Concat(Enumerable.Repeat(" ", 27)) + "EJE  X");
             for (int i = 0; i < 12; i++)
             {
                 if (i != 0 && i < 9)
                 {
-                    Console.Write("   " + (i + 1));
+                    Console.Write(String.Concat(Enumerable.Repeat(" ", 3)) + (i + 1));
                 }
                 else if (i == 0)
                 {
-                    Console.Write("     " + (i + 1));
+                    Console.Write(String.Concat(Enumerable.Repeat(" ", 9)) + (i + 1));
                 }
                 else
                 {
-                    Console.Write("  " + (i + 1));
+                    Console.Write(String.Concat(Enumerable.Repeat(" ", 2)) + (i + 1));
                 }
                 
             }
@@ -239,13 +242,40 @@ namespace HundirFlota
 
             for (int i = 0; i < 12; i++)
             {
+                switch(i)
+                {
+                    case 3:
+                        Console.Write(" E  ");
+                        break;
+                    case 4:
+                        Console.Write(" J  ");
+                        break;
+                    case 5:
+                        Console.Write(" E  ");
+                        break;
+                    case 6:
+                        Console.Write("    ");
+                        break;
+                    case 7:
+                        Console.Write(" Y  ");
+                        break;
+                    case 9:
+                    case 10:
+                    case 11:
+                        Console.Write("   ");
+                        break;
+                    default:
+                        Console.Write("    ");
+                        break;
+
+                }
                 if (i < 9)
                 {
                     Console.Write((i + 1) + ". ");
                 }
                 else
                 {
-                    Console.Write((i + 1) + ".");
+                    Console.Write((i + 1) + ". ");
                 }
                 
                 for (int j  = 0; j < 12; j++)
@@ -280,6 +310,7 @@ namespace HundirFlota
 
         }
 
+        /*
         /// <summary>
         /// Muestra el tablero del oponente con las tierras,
         /// ocultando los barcos.
@@ -344,6 +375,6 @@ namespace HundirFlota
                 Console.WriteLine();
             }
 
-        }
+        }*/
     }
 }

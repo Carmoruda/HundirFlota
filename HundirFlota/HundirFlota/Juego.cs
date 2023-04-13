@@ -1,4 +1,4 @@
-﻿/// <summary>
+/// <summary>
 /// 
 /// La clase Juego define los atributos y métodos necesarios
 /// para el correcto funcionamiento de la gestión de partidas
@@ -13,12 +13,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 
 namespace HundirFlota
 {
+    [Serializable]
     internal class Juego
     {
 
@@ -29,6 +30,12 @@ namespace HundirFlota
         /// partidas de un jugador VS otro jugador humano o automático.
         /// </summary>
         public List<Partida> listaPartidas { get; set; }
+
+        /// <summary>
+        /// Lista de instancias de Partida que almacena todas las
+        /// partidas finalizadas.
+        /// </summary>
+        public List<Partida> listaRanking { get; set; }
 
         /// <summary>
         /// Instancia de la clase Pantalla para controlar la entrada
@@ -46,6 +53,7 @@ namespace HundirFlota
         {
             consola = new Pantalla();
             listaPartidas = new List<Partida>();
+            listaRanking = new List<Partida>();
         }
 
         /// <summary>
@@ -59,6 +67,29 @@ namespace HundirFlota
         {
             consola = new Pantalla();
             listaPartidas = _listaPartidas;
+        }
+
+        /// <summary>
+        /// Constructor parametrizado de la clase Juego. Asigna
+        /// los valores de todos los atributos.
+        /// </summary>
+        /// <param name="_listaPartidas">
+        /// Lista de instancias de Partida que almacena todas las
+        /// partidas de un jugador VS otro jugador humano o automático.
+        /// </param>
+        /// <param name="_consola">
+        /// Instancia de la clase Pantalla para controlar la entrada
+        /// y salida de datos del usuario.
+        /// </param>
+        /// <param name="_listaPartidas">
+        /// Lista de instancias de Partida que almacena todas las
+        /// partidas finalizadas.
+        /// </param>
+        public Juego(List<Partida> _listaPartidas, List<Partida> _listaRanking, Pantalla _consola)
+        {
+            consola = _consola;
+            listaPartidas = _listaPartidas;
+            listaRanking = _listaRanking;
         }
 
         // Métodos
@@ -98,7 +129,7 @@ namespace HundirFlota
                 switch (accionMenu)
                 {
                     case 1:
-                        ListarPartidas();
+                        ListarPartidas(); // Listar partidas y cargar 1.
                         break;
                     case 2:
                         CrearPartida(2); // Partida Múltiple.
@@ -107,10 +138,11 @@ namespace HundirFlota
                         CrearPartida(1); // Partida Individual.
                         break;
                     case 4:
-                        RankingPartidas();
+                        RankingPartidas(); // Ranking de partidas.
                         break;
                     case 5: // Salir.
-                        GuardarFichero(listaPartidas, Program.ficheroPartidas);
+                        GuardarFichero(listaPartidas, Program.ficheroPartidas); // Guardar listaPartidas.
+                        GuardarFichero(listaRanking, Program.ficheroRanking); // Guardar listaRanking.
                         Environment.Exit(0);
                         break;
                     default: // Mensaje error desde PintarMenu en Pantalla.
@@ -127,15 +159,29 @@ namespace HundirFlota
         /// </summary>
         public void ListarPartidas()
         {
+            int indice = 1;
+            int eleccionPartida = 0;
+
             consola.ImprimirConsola("------------------------------ LISTADO PARTIDAS ------------------------------\n\n", 1);
+
+            if (listaPartidas.Count < 1) // Comprobar que al menos hay 1 partida.
+            {
+                consola.ImprimirConsola("  No hay partidas guardadas.\n", 0);
+                consola.Continuar(1); // Pulsa enter para continuar.
+                return;
+            }
 
             foreach (Partida partida in listaPartidas)
             {
-                consola.ImprimirConsola(InformacionPartida(partida, 0), 0);
+                consola.ImprimirConsola(InformacionPartida(indice, partida, 0), 0);
                 consola.ImprimirConsola("\n", 0);
+                indice++;
             }
 
+            eleccionPartida = consola.LeerEntero("\n\n  Introduzca el número de la partida que quiera continuar:\n  ===> ", 1, listaPartidas.Count) - 1;
             consola.Continuar(1); // Pulsa enter para continuar.
+
+            JugarPartida(listaPartidas[eleccionPartida]); // Jugar partida seleccionada.
         }
 
         /// <summary>
@@ -189,8 +235,14 @@ namespace HundirFlota
                     break;
             }
 
+            consola.Continuar(1); // Pulsa enter para continuar.
+
             partidaInsertar.NuevaPartida();
             listaPartidas.Add(partidaInsertar);
+            GuardarFichero(listaPartidas, Program.ficheroPartidas);
+
+            JugarPartida(partidaInsertar);
+            
         }
 
         /// <summary>
@@ -200,14 +252,24 @@ namespace HundirFlota
         /// </summary>
         public void RankingPartidas()
         {
-            consola.ImprimirConsola("------------------------------ LISTADO PARTIDAS ------------------------------\n\n", 1);
+            int indice = 1;
 
-            foreach (Partida partida in listaPartidas)
+            consola.ImprimirConsola("------------------------------ RANKING PARTIDAS ------------------------------\n\n", 1);
+
+            if (listaRanking.Count < 1) // Comprobar que al menos hay 1 partida.
+            {
+                consola.ImprimirConsola("  No hay partidas finalizanadas guardadas.\n", 0);
+                consola.Continuar(1); // Pulsa enter para continuar.
+                return;
+            }
+
+            foreach (Partida partida in listaRanking)
             {
                 if (partida.finalizada == true)
                 {
-                    consola.ImprimirConsola(InformacionPartida(partida, 1), 0);
+                    consola.ImprimirConsola(InformacionPartida(indice, partida, 1), 0);
                     consola.ImprimirConsola("\n", 0);
+                    indice++;
                 }
             }
 
@@ -230,15 +292,13 @@ namespace HundirFlota
             return listaPartidas.SingleOrDefault(r => r.nombrePartida == nombre);
         }
 
-        public void CargarPartida(string nombre)
-        {
-
-        }
-
         /// <summary>
         /// Muestra la información de la cada partida (Nombre, nombre jugadores,
         /// nº movimientos y estatus).
         /// </summary>
+        /// <param name="indice">
+        /// Entero que representa el índice de la partida dentro de la lista.
+        /// </param>
         /// <param name="partida">
         /// Instancia de la clase Partida que representa aquella partida de la que se
         /// quiere saber la información.
@@ -249,59 +309,100 @@ namespace HundirFlota
         /// <returns>
         /// String que contiene toda la información de la partida.
         /// </returns>
-        public string InformacionPartida(Partida partida, int mostrarGanador)
+        public string InformacionPartida(int indice, Partida partida, int mostrarGanador)
         {
             if (mostrarGanador == 1) // Mostrar nombre ganador.
             {
-                return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n\t * Ganador: " + partida.nombreGanador + "\n";
+                return "\n   " + indice + ". Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + (partida.numMovimientos - 1)+ "\n\t * Estatus: " + partida.InformacionStatus() + "\n\t * Ganador: " + partida.nombreGanador + "\n";
 
             }
 
-            return "\n   * Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + partida.numMovimientos + "\n\t * Estatus: " + partida.InformacionStatus() + "\n";
+            return "\n   " + indice + ". Partida: " + partida.nombrePartida + ": \n" + partida.InformacionJugadores() + "\n\t * Número Movimientos: " + (partida.numMovimientos - 1) + "\n\t * Estatus: " + partida.InformacionStatus() + "\n";
         }
 
         /// <summary>
         /// Guarda un objeto de forma síncrona en su respectivo fichero.
         /// </summary>
-        /// <param name="partida">
-        /// Objeto que representa la partida que se quiere guardar
+        /// <param name="listadoPartidas">
+        /// Listado de partidas que se quiere guardar
         /// en el fichero.
         /// </param>
         /// <param name="nombreFichero">
         /// String que representa la ruta relativa al fichero en el que
         /// se quiere guardar la información.
         /// </param>
-        public void GuardarFichero(List<Partida> partida, string nombreFichero)
+        public void GuardarFichero(List<Partida> listadoPartidas, string nombreFichero)
         {
-            var opciones = new JsonSerializerOptions { WriteIndented = true, IncludeFields = true };
-            var jsonString = JsonSerializer.Serialize(partida, opciones);
-            File.AppendAllText(nombreFichero, jsonString);
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            FileStream Archivo = File.OpenWrite(nombreFichero);
+            binaryFormatter.Serialize(Archivo, listadoPartidas);
+            Archivo.Close();
         }
 
         /// <summary>
         /// Carga la lista de partidas de un fichero.
         /// </summary>
+        /// <param name="listadoPartidas">
+        /// Listado de partidas que se quiere guardar
+        /// en el fichero.
+        /// </param>
         /// <param name="nombreFichero">
         /// String que represeta la ruta relativa al fichero del que
         /// se quiere leer la información.
         /// </param>
-        public void CargarFichero(string nombreFichero)
+        public void CargarFichero(string nombreFichero, bool ranking)
         {
             // Si el fichero no existe se crea.
             if (!File.Exists(nombreFichero))
             {
                 File.Create(nombreFichero).Close();
+                GuardarFichero(listaPartidas, nombreFichero);
+                return;
             }
 
             // Cargar a listaPartidas las partidas guardadas en el fichero.
-            listaPartidas = JsonSerializer.Deserialize<List<Partida>>(File.ReadAllText(nombreFichero));
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            FileStream Archivo = File.Open(nombreFichero, FileMode.Open);
 
+            if (!ranking)
+            {
+                listaPartidas = (List<Partida>)binaryFormatter.Deserialize(Archivo);
+            }
+            else
+            {
+                listaRanking = (List<Partida>)binaryFormatter.Deserialize(Archivo);
 
+            }
+
+            Archivo.Close();
         }
 
-        public void Jugar()
+        /// <summary>
+        /// Permite jugar una partida concreta.
+        /// </summary>
+        /// <param name="partida">
+        /// Instancia de la clase Partida que representa
+        /// aquella partida que se quiere jugar.
+        /// </param>
+        public void JugarPartida(Partida partida)
         {
+            if (!partida.finalizada)
+            {
+                partida.Jugar(consola);
+                GuardarFichero(listaPartidas, Program.ficheroPartidas);
 
+                if (partida.finalizada)
+                {
+                    listaRanking.Add(partida);
+                    GuardarFichero(listaRanking, Program.ficheroRanking);
+                }
+            }
+            else
+            {
+                consola.ImprimirConsola("\n\n  Sólo se pueden jugar partidas que no hayan finalizado\n\n", 0);
+            }
+
+            consola.Continuar(1); // Pulsa enter para continuar.
         }
     }
 }

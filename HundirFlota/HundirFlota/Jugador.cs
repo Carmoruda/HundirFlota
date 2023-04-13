@@ -1,4 +1,4 @@
-﻿/// <summary>
+/// <summary>
 /// 
 /// La clase Jugador define los atributos necesarios
 /// para la identificación de los jugadores y el
@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace HundirFlota
 {
+    [Serializable]
     internal class Jugador
     {
         // Atributos
@@ -55,6 +56,12 @@ namespace HundirFlota
         /// </summary>
         public Barco portaaviones { get; set; }
 
+        /// <summary>
+        /// Instancia de la clase Pantalla para controlar la entrada
+        /// y salida de datos del usuario.
+        /// </summary>
+        public Pantalla consola { get; set; }
+
         public List<int> lanzamientoX = new List<int>();
         public List<int> lanzamientoY = new List<int>();
         public Random r = new Random();
@@ -67,6 +74,7 @@ namespace HundirFlota
         public Jugador() 
         {
             tablero = new Tablero();
+            consola = new Pantalla();
             patrullero = new Barco(2, "Patrullero", tablero);
             submarino = new Barco(3, "Submarino", tablero);
             destructor = new Barco(4, "Destructor", tablero);
@@ -83,6 +91,42 @@ namespace HundirFlota
             nombre = _nombre;
         }
 
+        /// <summary>
+        /// Constructor parametrizado de la clase Jugador. Asigna
+        /// el valor de todos los atributos.
+        /// </summary>
+        /// <param name="_nombre">
+        /// String que representa el nombre del jugador.
+        /// </param>
+        /// <param name="_tablero">
+        /// Instancia de la clase Tablero que permite el control
+        /// del tablero de la partida.
+        /// </param>
+        /// <param name="_patrullero">
+        /// Instancia de la clase Barco que representa
+        /// un navío de tipo patrullero.
+        /// </param>
+        /// <param name="_submarino">
+        /// Instancia de la clase Barco que representa
+        /// un navío de tipo submarino.
+        /// </param>
+        /// <param name="_destructor">
+        /// Instancia de la clase Barco que representa
+        /// un navío de tipo destructor.
+        /// </param>
+        /// <param name="_portaaviones">
+        /// Instancia de la clase Barco que representa
+        /// un navío de tipo portaaviones.
+        /// </param>
+        public Jugador(string _nombre, Tablero _tablero, Barco _patrullero, Barco _submarino, Barco _destructor, Barco _portaaviones)
+        {
+            nombre = _nombre;
+            tablero = _tablero;
+            patrullero = _patrullero;
+            submarino = _submarino;
+            destructor = _destructor;
+            portaaviones = _portaaviones;
+        }
 
         // Métodos
 
@@ -102,24 +146,32 @@ namespace HundirFlota
             portaaviones.NuevoBarco(nombre);
         }
 
+        /// <summary>
+        /// Permite controlar las acciones de atacar del jugador
+        /// automático.
+        /// </summary>
+
         public void Automático()
         {
+            Coordenadas coordenada = new Coordenadas();
             bool libre = false;
+            int indice = 0;
+            string[] opciones = { };
             int posX = 0;
             int posY = 0;
+
             do
             {
                 posX = r.Next(1, 12);
                 posY = r.Next(1, 12);
 
-                Coordenadas coordenada = new Coordenadas();
 
                 coordenada.x[0] = coordenada.x[1] = posX;
                 coordenada.y[0] = coordenada.y[1] = posY;
 
-                libre = tablero.BuscarTierra(coordenada);
+                libre = coordenada.ComprobarCoordenadasCoincidente(tablero, ref indice);
 
-                for (int i = 0; i< lanzamientoX.Count; i++)
+                for (int i = 0; i < lanzamientoX.Count; i++)
                 {
                     if (posX == lanzamientoX[i] && posY == lanzamientoY[i])
                     {
@@ -131,11 +183,21 @@ namespace HundirFlota
             lanzamientoX.Add(posX);
             lanzamientoY.Add(posY);
 
+            consola.ImprimirConsola("\t* Lanzamiento del Autómata:\n\t    * Coordenada X: " + posX + "\n\t    * Coordenada Y: " + posY + "\n\n", 0);
+
+            coordenada.TextoCoincidencia("ATACAR", libre, indice, opciones, consola);
+
         }
 
-        public void Atacar(Coordenadas coordenada)
+        /// <summary>
+        /// Permite controlar las acciones de atacar del jugador
+        /// humano.
+        /// </summary>
+        public void Atacar()
         {
-
+            string[] opciones = { "\n\t* Coordenada X: ", "\t* Coordenada Y: "};
+            Coordenadas coordenadasAtacar = new Coordenadas();
+            coordenadasAtacar.ControlIntroducirCoordenadas(1, 1, consola, tablero, opciones, "ATACAR", true);
         }
     }
 }
