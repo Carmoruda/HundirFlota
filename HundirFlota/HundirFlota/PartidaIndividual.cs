@@ -120,6 +120,7 @@ namespace HundirFlota
         public override void NuevaPartida()
         {
             jugador1.NuevaPartida();
+            jugador1.Atacar(); 
         }
 
         /// <summary>
