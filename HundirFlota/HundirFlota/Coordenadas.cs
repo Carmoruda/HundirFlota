@@ -285,12 +285,12 @@ namespace HundirFlota
                 {
                     case 3:
                         consola.ImprimirConsola("\t* Resultado disparo: Barco tocado.\n", 0);
-                        tablero.mapaOponente[x[0], y[0]] = "| ¬ ";
+                        tablero.mapaOponente[y[0], x[0]] = "| ¬ ";
                         tablero.PintarOponente();
                         return;
                     case 4:
                         consola.ImprimirConsola("\t* Resultado disparo: Tierra bombardeada.\n", 0);
-                        tablero.mapaOponente[x[0], y[0]] = "| # ";
+                        tablero.mapaOponente[y[0], x[0]] = "| # ";
                         tablero.PintarOponente();
                         return;
                 }
@@ -298,7 +298,7 @@ namespace HundirFlota
             else if (objeto == "ATACAR" && !coincideConAlgo)
             {
                 consola.ImprimirConsola("\t* Resultado disparo: Agua.\n", 0);
-                tablero.mapaOponente[x[0], y[0]] = "| ~ ";
+                tablero.mapaOponente[y[0], x[0]] = "| ~ ";
                 tablero.PintarOponente();
                 return;
             }

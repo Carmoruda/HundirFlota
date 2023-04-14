@@ -304,10 +304,13 @@ namespace HundirFlota
                             Console.BackgroundColor = ConsoleColor.DarkGray; // Color PortaAviones.
                             break;
                         case "| # ": 
-                            Console.BackgroundColor = ConsoleColor.DarkGreen; //Color tierra tocada
+                            Console.BackgroundColor = ConsoleColor.DarkGreen; // Color Tierra bombardeada.
                             break;
                         case "| ¬ ": 
-                            Console.BackgroundColor = ConsoleColor.DarkBlue; //Color barco tocado
+                            Console.BackgroundColor = ConsoleColor.DarkBlue; // Color Barco tocado.
+                            break;
+                        case "| ~ ":
+                            Console.BackgroundColor = ConsoleColor.DarkCyan; // Color agua bombardeada.
                             break;
                     }
 
