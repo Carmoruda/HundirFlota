@@ -289,7 +289,7 @@ namespace HundirFlota
                     switch(mapaGeneral[i, j])
                     {
                         case "| X ":
-                            Console.BackgroundColor = ConsoleColor.DarkGreen; // Color Tierra.
+                            Console.BackgroundColor = ConsoleColor.Green; // Color Tierra.
                             break;
                         case "| P ":
                             Console.BackgroundColor = ConsoleColor.DarkRed; // Color Patrullero.
@@ -302,6 +302,12 @@ namespace HundirFlota
                             break;
                         case "| A ":
                             Console.BackgroundColor = ConsoleColor.DarkGray; // Color PortaAviones.
+                            break;
+                        case "| # ": 
+                            Console.BackgroundColor = ConsoleColor.DarkGreen; //Color tierra tocada
+                            break;
+                        case "| ¬ ": 
+                            Console.BackgroundColor = ConsoleColor.DarkBlue; //Color barco tocado
                             break;
                     }
 
