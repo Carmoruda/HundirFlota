@@ -135,6 +135,9 @@ namespace HundirFlota
         /// </param>
         public override void Jugar(Pantalla consola)
         {
+            jugador1.tablero.zonasBarcosOponente = jugador2.tablero.zonasBarcos;
+            jugador2.tablero.zonasBarcosOponente = jugador1.tablero.zonasBarcos;
+
             while (true)
             {
                 string texto = "------------------------------ PARTIDA " + nombrePartida.ToUpper() + " ------------------------------\n\t--------------------- TURNO DE ";

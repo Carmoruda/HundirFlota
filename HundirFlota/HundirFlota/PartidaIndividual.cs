@@ -134,6 +134,9 @@ namespace HundirFlota
         public override void Jugar(Pantalla consola)
         {
             bool continuar = true;
+            jugador1.tablero.zonasBarcosOponente = jugador2.tablero.zonasBarcos;
+            jugador2.tablero.zonasBarcosOponente = jugador1.tablero.zonasBarcos;
+
 
             while (continuar)
             {
