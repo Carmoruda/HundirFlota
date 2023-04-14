@@ -66,7 +66,7 @@ namespace HundirFlota
         /// </summary>
         public Coordenadas coordenadas { get; set; }
 
-        public Random r = new Random();
+
 
         // Constructores
 
@@ -194,7 +194,18 @@ namespace HundirFlota
                     break;
 
                 case "AUTOMATICO":
-                    orientacion = r.Next(0, 1);
+                    int seed = Environment.TickCount;
+                    Random r = new Random(seed);
+                    int numrandom = r.Next(1, 21);
+                    if (numrandom % 2 == 0)
+                    {
+                        orientacion = 0;
+                    }
+                    else
+                    {
+                        orientacion = 1;
+                    }
+                    
                     break;
             }
 

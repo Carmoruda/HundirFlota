@@ -32,9 +32,6 @@ namespace HundirFlota
         /// </summary>
         public int[] y { get; set; }
 
-        public Random r = new Random();
-
-
         // Constructores
 
         /// <summary>
@@ -196,6 +193,8 @@ namespace HundirFlota
             {
                 if (modo == "AUTOMATICO")
                 {
+                    int seed = Environment.TickCount;
+                    Random r = new Random(seed);
                     coordenada = r.Next(1, 12); // Opciones[0]: * Coordenada ...
                 }
                 else
@@ -203,18 +202,17 @@ namespace HundirFlota
                     coordenada = consola.LeerEntero(opciones[indice], 1, 12); // Opciones[0]: * Coordenada ...
                 }
 
-                switch (objeto.ToUpper()) // ¿Qué se coloca?
-                {
-                    case "BARCO":
-                        if (coordenada + longitud - 1 > 12 && tipo.ToUpper() == "X" && orientacion == 1) // Mensaje de error cuando se sale del tablero.
-                        {
-                            consola.ImprimirConsola(opciones[2] + coordenada + " se sale del tablero.\n", 0); // Error, ... se sale del tablero
-                        } else if (coordenada + longitud - 1 > 12 && tipo.ToUpper() == "Y" && orientacion == 0)
-                        {
-                            consola.ImprimirConsola(opciones[2] + coordenada + " se sale del tablero.\n", 0); // Error, ... se sale del tablero
-                        }
-                        break;
-                }
+                if (objeto == "BARCO") {
+                    if (coordenada + longitud - 1 > 12 && tipo.ToUpper() == "X" && orientacion == 1) // Mensaje de error cuando se sale del tablero.
+                    {
+                        consola.ImprimirConsola(opciones[2] + coordenada + " se sale del tablero.\n", 0); // Error, ... se sale del tablero
+                    } else if (coordenada + longitud - 1 > 12 && tipo.ToUpper() == "Y" && orientacion == 0)
+                    {
+                        consola.ImprimirConsola(opciones[2] + coordenada + " se sale del tablero.\n", 0); // Error, ... se sale del tablero
+                    }
+                } 
+                   
+                
 
             } while (coordenada < 1 || coordenada > 12 || (coordenada + longitud - 1 > 12 && orientacion == 0 && tipo.ToUpper() == "Y") 
                     || (coordenada + longitud - 1 > 12 && orientacion == 1 && tipo.ToUpper() == "X"));

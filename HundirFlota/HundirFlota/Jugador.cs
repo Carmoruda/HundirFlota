@@ -64,7 +64,7 @@ namespace HundirFlota
 
         public List<int> lanzamientoX = new List<int>();
         public List<int> lanzamientoY = new List<int>();
-        public Random r = new Random();
+
 
         // Constructores
 
@@ -146,48 +146,7 @@ namespace HundirFlota
             portaaviones.NuevoBarco(nombre, modo);
         }
 
-        /// <summary>
-        /// Permite controlar las acciones de atacar del jugador
-        /// automático.
-        /// </summary>
-
-        public void Automático()
-        {
-            Coordenadas coordenada = new Coordenadas();
-            bool libre = false;
-            int indice = 0;
-            string[] opciones = { };
-            int posX = 0;
-            int posY = 0;
-
-            do
-            {
-                posX = r.Next(1, 12);
-                posY = r.Next(1, 12);
-
-
-                coordenada.x[0] = coordenada.x[1] = posX;
-                coordenada.y[0] = coordenada.y[1] = posY;
-
-                libre = coordenada.ComprobarCoordenadasCoincidente(tablero, ref indice);
-
-                for (int i = 0; i < lanzamientoX.Count; i++)
-                {
-                    if (posX == lanzamientoX[i] && posY == lanzamientoY[i])
-                    {
-                        libre = true;
-                    }
-                }
-            } while (libre);
-
-            lanzamientoX.Add(posX);
-            lanzamientoY.Add(posY);
-
-            consola.ImprimirConsola("\t* Lanzamiento del Autómata:\n\t    * Coordenada X: " + posX + "\n\t    * Coordenada Y: " + posY + "\n\n", 0);
-
-            coordenada.TextoCoincidencia("ATACAR", libre, indice, opciones, consola);
-
-        }
+       
 
         /// <summary>
         /// Permite controlar las acciones de atacar del jugador

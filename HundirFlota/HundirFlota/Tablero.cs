@@ -44,6 +44,7 @@ namespace HundirFlota
         /// barcos en el mapa.
         /// </summary>
         public List<Coordenadas> zonasBarcos = new List<Coordenadas>();
+        public List<Coordenadas> zonasBarcosOponente = new List<Coordenadas>();
 
         /// <summary>
         /// Instancia de la clase Pantalla para controlar la entrada
@@ -166,6 +167,7 @@ namespace HundirFlota
         public void RellenarBarcos(int orientacion, string letraBarco, int longitud, Coordenadas coordenadas)
         {
             zonasBarcos.Add(coordenadas); // Añadir coordenadas a la lista de zonasBarcos.
+            
 
             switch (orientacion)
             {

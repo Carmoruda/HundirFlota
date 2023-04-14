@@ -157,8 +157,6 @@ namespace HundirFlota
 
                     jugador2.Atacar("AUTOMATICO");
 
-                    //jugador2.Automático(); // Acción de atacar del jugador 2.
-
                     numMovimientos++; // +1 Movimiento.
                     continuar = SalirPartida(consola); // Salir o continuar.
 
