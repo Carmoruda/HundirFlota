@@ -142,7 +142,7 @@ namespace HundirFlota
 
                 coincideConAlgo = ComprobarCoordenadasCoincidente(tablero, ref indice);
 
-                TextoCoincidencia(objeto, coincideConAlgo, indice, opciones, consola);
+                TextoCoincidencia(objeto, coincideConAlgo, indice, opciones, consola, tablero);
 
                 if(objeto == "ATACAR")
                 {
@@ -275,7 +275,7 @@ namespace HundirFlota
         /// Instancia de la clase Pantalla para controlar la entrada
         /// y salida de datos del usuario.
         /// </param>
-        public void TextoCoincidencia(string objeto, bool coincideConAlgo, int indice, string[] opciones, Pantalla consola)
+        public void TextoCoincidencia(string objeto, bool coincideConAlgo, int indice, string[] opciones, Pantalla consola, Tablero tablero)
         {
             if (objeto == "BARCO" && coincideConAlgo)
             {
@@ -287,15 +287,21 @@ namespace HundirFlota
                 {
                     case 3:
                         consola.ImprimirConsola("\t* Resultado disparo: Barco tocado.\n", 0);
+                        tablero.mapaOponente[x[0], y[0]] = "| ¬ ";
+                        tablero.PintarOponente();
                         return;
                     case 4:
                         consola.ImprimirConsola("\t* Resultado disparo: Tierra bombardeada.\n", 0);
+                        tablero.mapaOponente[x[0], y[0]] = "| # ";
+                        tablero.PintarOponente();
                         return;
                 }
             }
             else if (objeto == "ATACAR" && !coincideConAlgo)
             {
                 consola.ImprimirConsola("\t* Resultado disparo: Agua.\n", 0);
+                tablero.mapaOponente[x[0], y[0]] = "| ~ ";
+                tablero.PintarOponente();
                 return;
             }
         }
