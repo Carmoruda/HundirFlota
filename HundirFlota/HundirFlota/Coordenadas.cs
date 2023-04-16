@@ -104,6 +104,7 @@ namespace HundirFlota
             }
             else
             {
+                tablero.PintarPropio();
                 tablero.PintarOponente();
             }
 
@@ -241,7 +242,7 @@ namespace HundirFlota
         public bool ComprobarCoordenadasCoincidente(Tablero tablero, ref int indice)
         {
 
-            if (BuscarEntidad(tablero.zonasBarcos)) // Buscar barcos.
+            if (BuscarEntidad(tablero.zonasBarcosOponente)) // Buscar barcos.
             {
                 indice = 3; // Error! Ya hay otro barco...
                 return true;

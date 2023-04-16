@@ -135,10 +135,11 @@ namespace HundirFlota
         /// </param>
         public override void Jugar(Pantalla consola)
         {
+            bool continuar = true;
             jugador1.tablero.zonasBarcosOponente = jugador2.tablero.zonasBarcos;
             jugador2.tablero.zonasBarcosOponente = jugador1.tablero.zonasBarcos;
 
-            while (true)
+            while (continuar)
             {
                 string texto = "------------------------------ PARTIDA " + nombrePartida.ToUpper() + " ------------------------------\n\t--------------------- TURNO DE ";
 
@@ -152,6 +153,7 @@ namespace HundirFlota
 
 
                     numMovimientos++; // +1 Movimiento.
+                    continuar = SalirPartida(consola); // Salir o continuar.
 
                 }
                 else // Turno jugador 2.
@@ -163,6 +165,7 @@ namespace HundirFlota
                     consola.Continuar(1); // Pulsa enter para continuar.
 
                     numMovimientos++; // +1 Movimiento.
+                    continuar = SalirPartida(consola); // Salir o continuar.
                 }
             }
         }
