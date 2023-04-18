@@ -140,7 +140,7 @@ namespace HundirFlota
 
                 coincideConAlgo = ComprobarCoordenadasCoincidente(tablero, ref indice);
 
-                TextoCoincidencia(objeto, coincideConAlgo, indice, opciones, consola, tablero);
+                TextoCoincidencia(objeto, coincideConAlgo, indice, opciones, consola, tablero, modo);
 
                 if(objeto == "ATACAR")
                 {
@@ -203,7 +203,7 @@ namespace HundirFlota
                     coordenada = consola.LeerEntero(opciones[indice], 1, 12); // Opciones[0]: * Coordenada ...
                 }
 
-                if (objeto == "BARCO") {
+                if (objeto == "BARCO" && modo != "AUTOMATICO") {
                     if (coordenada + longitud - 1 > 12 && tipo.ToUpper() == "X" && orientacion == 1) // Mensaje de error cuando se sale del tablero.
                     {
                         consola.ImprimirConsola(opciones[2] + coordenada + " se sale del tablero.\n", 0); // Error, ... se sale del tablero
@@ -274,9 +274,9 @@ namespace HundirFlota
         /// Instancia de la clase Pantalla para controlar la entrada
         /// y salida de datos del usuario.
         /// </param>
-        public void TextoCoincidencia(string objeto, bool coincideConAlgo, int indice, string[] opciones, Pantalla consola, Tablero tablero)
+        public void TextoCoincidencia(string objeto, bool coincideConAlgo, int indice, string[] opciones, Pantalla consola, Tablero tablero, string modo)
         {
-            if (objeto == "BARCO" && coincideConAlgo)
+            if (objeto == "BARCO" && coincideConAlgo && modo != "AUTOMATICO")
             {
                 consola.ImprimirConsola(opciones[indice], 0);
             }
