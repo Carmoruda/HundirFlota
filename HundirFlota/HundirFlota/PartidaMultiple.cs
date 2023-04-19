@@ -143,7 +143,7 @@ namespace HundirFlota
 
                 if (numMovimientos % 2 != 0) // Turno jugador 1.
                 {
-                    texto += jugador1.nombre + " ----------------------\n\n";
+                    texto += jugador1.nombre.ToUpper() + " ----------------------\n\n                                MAPA OPONENTE:\n\n";
                     consola.ImprimirConsola(texto, 1); // texto: -- TURNO DE...
 
                     jugador1.Atacar("MANUAL"); // Acción de atacar del jugador 1.
@@ -157,7 +157,7 @@ namespace HundirFlota
                 }
                 else // Turno jugador 2.
                 {
-                    texto += jugador2.nombre + " ----------------------\n\n";
+                    texto += jugador2.nombre.ToUpper() + " ----------------------\n\n                                MAPA OPONENTE:\n\n";
                     consola.ImprimirConsola(texto, 1); // texto: -- TURNO DE...
 
                     jugador2.Atacar("MANUAL"); // Acción de atacar del jugador 2.

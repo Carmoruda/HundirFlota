@@ -238,15 +238,18 @@ namespace HundirFlota
         /// Permite introducir el valor de las coordenadas 
         /// de los barcos.
         /// </summary>
+        /// <param name="modo">
+        /// String que representa tipo de modo de juego de la partida.
+        /// </param>
         public void IntroducirCoordenadas(String modo) 
         {
             string[] opciones = { "\n\t* Coordenada X: ",
                                   "\t* Coordenada Y: ",
                                   "\t  Error! La longitud de su barco es " + longitud + " y posicionándolo en la casilla ",
-                                  "\t  Error! Ya hay otro barco colocado en esa posición.\n",
-                                  "\t  Error! Hay una zona de tierra en esa posición.\n"};
+                                  "\t  Error! Alguna de las coordendas del barco coincide con otro barco.\n",
+                                  "\t  Error! Alguna de las coordenadas del barco coincide con una tierra.\n"};
 
-            coordenadas.ControlIntroducirCoordenadas(orientacion, longitud, consola, tablero, opciones, "BARCO", false, modo);
+            coordenadas.ControlIntroducirCoordenadas(orientacion, longitud, consola, tablero, opciones, "BARCO", false, modo, nombreJugador);
         }
 
         /// <summary>
@@ -257,7 +260,12 @@ namespace HundirFlota
         {
             string letraBarco = "| " + tipo.Substring(0, 1).ToUpper() + " "; // Letra del barco en el mapa.
             tablero.RellenarBarcos(orientacion, letraBarco, longitud, coordenadas); // Añadir barcos al mapa.
-            tablero.PintarPropio(); // Mostrar el tablero
+            
+            if (nombreJugador != "Autómata") // No mostrar el tablero si el jugador es el automático.
+            {
+                tablero.PintarPropio(); // Mostrar el tablero
+            }
+            
             consola.Continuar(1); // Pulsar enter para continuar.
         }
 

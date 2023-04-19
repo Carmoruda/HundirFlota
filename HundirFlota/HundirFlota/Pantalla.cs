@@ -308,7 +308,7 @@ namespace HundirFlota
                             Console.BackgroundColor = ConsoleColor.DarkBlue; // Color Barco tocado.
                             break;
                         case "| ~ ":
-                            Console.BackgroundColor = ConsoleColor.DarkCyan; // Color Agua bombardeada.
+                            Console.BackgroundColor = ConsoleColor.Cyan; // Color Agua bombardeada.
                             break;
                     }
 

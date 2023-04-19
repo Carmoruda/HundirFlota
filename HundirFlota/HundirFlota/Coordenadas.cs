@@ -94,21 +94,23 @@ namespace HundirFlota
         /// <param name="modo">
         /// String que representa tipo de modo de juego de la partida.
         /// </param>
-        public void ControlIntroducirCoordenadas(int orientacion, int longitud, Pantalla consola, Tablero tablero, string[] opciones, string objeto, bool mostrarOponente, string modo)
+        /// <param name="modo">
+        /// String que representa el nombre del jugador.
+        /// </param>
+        public void ControlIntroducirCoordenadas(int orientacion, int longitud, Pantalla consola, Tablero tablero, string[] opciones, string objeto, bool mostrarOponente, string modo, string nombreJugador)
         {
             int coordenadaX = 0;
             int coordenadaY = 0;
             bool coincideConAlgo = true;
             int indice = 0;
 
-            if (!mostrarOponente)
+            if (!mostrarOponente && nombreJugador != "Autómata")
             {
                 tablero.PintarPropio(); // Mostrar el tablero.
             }
-            else
+            else if (nombreJugador != "Autómata")
             {
-                tablero.PintarPropio();
-                tablero.PintarOponente();
+                tablero.PintarOponente(); // Mostrar el tablero del oponente.
             }
 
             do
@@ -294,12 +296,12 @@ namespace HundirFlota
                 switch (indice)
                 {
                     case 3: // Disparo bombardea barco.
-                        consola.ImprimirConsola("\t* Resultado disparo: Barco tocado.\n", 0);
+                        consola.ImprimirConsola("\t* Resultado disparo: Barco tocado.\n\n", 0);
                         tablero.mapaOponente[y[0], x[0]] = "| ¬ "; // Cambiar caracter tablero.
                         tablero.PintarOponente();
                         return;
                     case 4: // Disparo bombardea tierra.
-                        consola.ImprimirConsola("\t* Resultado disparo: Tierra bombardeada.\n", 0);
+                        consola.ImprimirConsola("\t* Resultado disparo: Tierra bombardeada.\n\n", 0);
                         tablero.mapaOponente[y[0], x[0]] = "| # "; // Cambiar caracter tablero.
                         tablero.PintarOponente();
                         return;
@@ -307,7 +309,7 @@ namespace HundirFlota
             }
             else if (objeto == "ATACAR" && !coincideConAlgo) // Disparo bombardea agua.
             {
-                consola.ImprimirConsola("\t* Resultado disparo: Agua.\n", 0);
+                consola.ImprimirConsola("\t* Resultado disparo: Agua.\n\n", 0);
                 tablero.mapaOponente[y[0], x[0]] = "| ~ "; // Cambiar caracter tablero.
                 tablero.PintarOponente();
                 return;

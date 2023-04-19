@@ -187,7 +187,7 @@ namespace HundirFlota
         {
             string[] opciones = { "\n\t* Coordenada X: ", "\t* Coordenada Y: "};
             Coordenadas coordenadasAtacar = new Coordenadas();
-            coordenadasAtacar.ControlIntroducirCoordenadas(1, 1, consola, tablero, opciones, "ATACAR", true, modo);
+            coordenadasAtacar.ControlIntroducirCoordenadas(1, 1, consola, tablero, opciones, "ATACAR", true, modo, nombre);
         }
     }
 }

@@ -178,8 +178,15 @@ namespace HundirFlota
                 indice++;
             }
 
-            eleccionPartida = consola.LeerEntero("\n\n  Introduzca el número de la partida que quiera continuar:\n  ===> ", 1, listaPartidas.Count) - 1;
+            consola.ImprimirConsola("  Pulse 0 para volver al menú.\n", 0);
+
+            eleccionPartida = consola.LeerEntero("\n\n  Introduzca el número de la partida que quiera continuar:\n  ===> ", 0, listaPartidas.Count) - 1;
             consola.Continuar(1); // Pulsa enter para continuar.
+
+            if (eleccionPartida + 1 == 0)
+            {
+                return;
+            }
 
             JugarPartida(listaPartidas[eleccionPartida]); // Jugar partida seleccionada.
         }
