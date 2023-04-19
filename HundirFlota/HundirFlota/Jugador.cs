@@ -62,8 +62,17 @@ namespace HundirFlota
         /// </summary>
         public Pantalla consola { get; set; }
 
-        public List<int> lanzamientoX = new List<int>();
-        public List<int> lanzamientoY = new List<int>();
+        /// <summary>
+        /// Lista de enteros que representa las coordenadas X
+        /// de los lanzamientos.
+        /// </summary>
+        public List<int> lanzamientoX { get; set; }
+
+        /// <summary>
+        /// Lista de enteros que representa las coordenadas Y
+        /// de los lanzamientos.
+        /// </summary>
+        public List<int> lanzamientoY { get; set; }
 
 
         // Constructores
@@ -79,13 +88,17 @@ namespace HundirFlota
             submarino = new Barco(3, "Submarino", tablero);
             destructor = new Barco(4, "Destructor", tablero);
             portaaviones = new Barco(5, "Aviones", tablero);
+            lanzamientoX = new List<int>();
+            lanzamientoY = new List<int>();
         }
 
         /// <summary>
         /// Constructor parametrizado de la clase Jugador. Asigna
         /// el valor del nombre del jugador.
         /// </summary>
-        /// <param name="_nombre"></param>
+        /// <param name="_nombre">
+        /// String que representa el nombre del jugador.
+        /// </param>
         public Jugador(string _nombre) : this()
         {
             nombre = _nombre;
@@ -118,7 +131,19 @@ namespace HundirFlota
         /// Instancia de la clase Barco que representa
         /// un navío de tipo portaaviones.
         /// </param>
-        public Jugador(string _nombre, Tablero _tablero, Barco _patrullero, Barco _submarino, Barco _destructor, Barco _portaaviones)
+        /// <param name="_consola">
+        /// Instancia de la clase Tablero que permite el control
+        /// del tablero de la partida.
+        /// </param>
+        /// <param name="_lanzamientosX">
+        /// Lista de enteros que representa las coordenadas X
+        /// de los lanzamientos.
+        /// </param>
+        /// <param name="_lanzamientosY">
+        /// Lista de enteros que representa las coordenadas Y
+        /// de los lanzamientos.
+        /// </param>
+        public Jugador(string _nombre, Tablero _tablero, Barco _patrullero, Barco _submarino, Barco _destructor, Barco _portaaviones, Pantalla _consola, List<int> _lanzamientosX, List<int> _lanzamientosY)
         {
             nombre = _nombre;
             tablero = _tablero;
@@ -126,6 +151,9 @@ namespace HundirFlota
             submarino = _submarino;
             destructor = _destructor;
             portaaviones = _portaaviones;
+            consola = _consola;
+            lanzamientoX = _lanzamientosX;
+            lanzamientoY = _lanzamientosY;
         }
 
         // Métodos
@@ -135,6 +163,9 @@ namespace HundirFlota
         /// de los barcos dentro del tablero, además de 
         /// rellenar el tablero con las casillas iniciales.
         /// </summary>
+        /// <param name="modo">
+        /// String que representa tipo de modo de juego de la partida.
+        /// </param>
         public void NuevaPartida(string modo)
         {
             tablero.RellenarTableroInicial(tablero.mapa, tablero.mapaOponente);

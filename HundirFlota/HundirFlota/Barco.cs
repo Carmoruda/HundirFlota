@@ -66,7 +66,17 @@ namespace HundirFlota
         /// </summary>
         public Coordenadas coordenadas { get; set; }
 
+        /// <summary>
+        /// Booleano que representa si el barco se encuentra
+        /// hundido.
+        /// </summary>
+        public bool hundido { get; set; }
 
+        /// <summary>
+        /// Entero que representa el número de disparos que ha recibido
+        /// el barco.
+        /// </summary>
+        public int contadorTocados { get; set; }
 
         // Constructores
 
@@ -77,6 +87,8 @@ namespace HundirFlota
         {
             consola = new Pantalla();
             coordenadas = new Coordenadas();
+            hundido = false;
+            contadorTocados = 0;
         }
 
         /// <summary>
@@ -129,7 +141,14 @@ namespace HundirFlota
         /// Instancia de la clase Coordenadas para controlar
         /// las coordenadas de los barcos.
         /// </param>
-        public Barco(string _tipo, int _longitud, int _orientacion, string _nombreJugador, Pantalla _consola, Tablero _tablero, Coordenadas _coordenadas)
+        /// <param name="_hundido">
+        /// Booleano que representa si el barco se encuentra hundido.
+        /// </param>
+        /// <param name="_contadorTocados">
+        /// Entero que representa el número de disparos que ha recibido
+        /// el barco.
+        /// </param>
+        public Barco(string _tipo, int _longitud, int _orientacion, string _nombreJugador, Pantalla _consola, Tablero _tablero, Coordenadas _coordenadas, bool _hundido, int _contadorTocados)
         {
             tipo = _tipo;
             longitud = _longitud;
@@ -138,6 +157,8 @@ namespace HundirFlota
             consola = _consola;
             tablero = _tablero;
             coordenadas = _coordenadas;
+            hundido = _hundido;
+            contadorTocados = _contadorTocados;
         }
 
         // Métodos
@@ -149,6 +170,9 @@ namespace HundirFlota
         /// </summary>
         /// <param name="nombre">
         /// String que representa el nombre del jugador.
+        /// </param>
+        /// <param name="modo">
+        /// String que representa tipo de modo de juego de la partida.
         /// </param>
         public void NuevoBarco(string nombre, string modo)
         {
@@ -207,9 +231,7 @@ namespace HundirFlota
                     }
                     
                     break;
-            }
-
-            
+            }            
         }
 
         /// <summary>
@@ -237,6 +259,24 @@ namespace HundirFlota
             tablero.RellenarBarcos(orientacion, letraBarco, longitud, coordenadas); // Añadir barcos al mapa.
             tablero.PintarPropio(); // Mostrar el tablero
             consola.Continuar(1); // Pulsar enter para continuar.
+        }
+
+        /// <summary>
+        /// Permite establecer el estado del barco dependiendo de
+        /// si ha sido bombardeado en todas sus coordenadas hundiéndolo.
+        /// </summary>
+        public void EstadoHundido()
+        {
+            string letraBarco = "| " + tipo.Substring(0, 1).ToUpper() + " "; // Letra del barco en el mapa.
+            if (tablero.mapaOponente[coordenadas.x[0], coordenadas.y[0]] == letraBarco)
+            {
+                contadorTocados += 1;
+            }
+
+            if (contadorTocados == longitud)
+            {
+                hundido = true;
+            }
         }
     }
 }

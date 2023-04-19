@@ -150,6 +150,7 @@ namespace HundirFlota
                     jugador1.Atacar("MANUAL"); // Acción de atacar del jugador 1.
 
                     numMovimientos++; // +1 Movimiento.
+                    InformacionStatus(); // Comprobar si la partida ha finalizado.
                     continuar = SalirPartida(consola); // Salir o continuar.
 
                 }
@@ -161,10 +162,35 @@ namespace HundirFlota
                     jugador2.Atacar("AUTOMATICO");
 
                     numMovimientos++; // +1 Movimiento.
+                    InformacionStatus(); // Comprobar si la partida ha finalizado.
                     continuar = SalirPartida(consola); // Salir o continuar.
 
                 }
             }
+        }
+
+        /// <summary>
+        /// Permite comprobar el estado de la partida y cambiarlo
+        /// si ésta a terminado.
+        /// </summary>
+        /// <returns>
+        /// Booleano que representa si la partida ha finalizado.
+        /// </returns>
+        public override bool EstadoPartida()
+        {
+            if (jugador1.portaaviones.hundido && jugador1.patrullero.hundido && jugador1.submarino.hundido && jugador1.destructor.hundido)
+            {
+                nombreGanador = jugador2.nombre; // Victoria del jugador 2.
+                return true; // Partida finalizada.
+
+            }
+            else if (jugador2.portaaviones.hundido && jugador2.patrullero.hundido && jugador2.submarino.hundido && jugador2.destructor.hundido)
+            {
+                nombreGanador = jugador1.nombre; // Victoria del jugador 1.
+                return true; // Partida finalizada.
+            }
+
+            return base.EstadoPartida(); // False.
         }
     }
 

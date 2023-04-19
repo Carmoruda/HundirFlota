@@ -12,7 +12,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace HundirFlota
@@ -26,14 +25,12 @@ namespace HundirFlota
         /// Instancia de la clase Jugador que permite a un
         /// jugador humano participar en la partida (Jugador 1).
         /// </summary>
-        [JsonInclude]
         public Jugador jugador1 { get; set; }
 
         /// <summary>
         /// Instancia de la clase Jugador que permite a otro 
         /// jugador humano participar en la partida (Jugador 2).
         /// </summary>
-        [JsonInclude]
         public Jugador jugador2 { get; set; }
 
         // Constructores 
@@ -126,6 +123,7 @@ namespace HundirFlota
             jugador2.NuevaPartida("MANUAL");
         }
 
+
         /// <summary>
         /// Permite jugar una partida entre dos jugadores.
         /// </summary>
@@ -153,6 +151,7 @@ namespace HundirFlota
 
 
                     numMovimientos++; // +1 Movimiento.
+                    InformacionStatus(); // Comprobar si la partida ha finalizado.
                     continuar = SalirPartida(consola); // Salir o continuar.
 
                 }
@@ -165,9 +164,34 @@ namespace HundirFlota
                     consola.Continuar(1); // Pulsa enter para continuar.
 
                     numMovimientos++; // +1 Movimiento.
+                    InformacionStatus(); // Comprobar si la partida ha finalizado.
                     continuar = SalirPartida(consola); // Salir o continuar.
                 }
             }
+        }
+
+        /// <summary>
+        /// Permite comprobar el estado de la partida y cambiarlo
+        /// si ésta a terminado.
+        /// </summary>
+        /// <returns>
+        /// Booleano que representa si la partida ha finalizado.
+        /// </returns>
+        public override bool EstadoPartida()
+        {
+            if (jugador1.portaaviones.hundido && jugador1.patrullero.hundido && jugador1.submarino.hundido && jugador1.destructor.hundido)
+            {
+                nombreGanador = jugador2.nombre; // Victoria del jugador 2.
+                return true; // Partida finalizada.
+
+            }
+            else if (jugador2.portaaviones.hundido && jugador2.patrullero.hundido && jugador2.submarino.hundido && jugador2.destructor.hundido)
+            {
+                nombreGanador = jugador1.nombre; // Victoria del jugador 1.
+                return true; // Partida finalizada.
+            }
+
+            return base.EstadoPartida(); // False.
         }
     }
 }

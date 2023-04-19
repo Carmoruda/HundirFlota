@@ -91,6 +91,9 @@ namespace HundirFlota
         /// <param name="mostrarOponente">
         /// Booleano que indica si se desea pintar el tablero del oponente.
         /// </param>
+        /// <param name="modo">
+        /// String que representa tipo de modo de juego de la partida.
+        /// </param>
         public void ControlIntroducirCoordenadas(int orientacion, int longitud, Pantalla consola, Tablero tablero, string[] opciones, string objeto, bool mostrarOponente, string modo)
         {
             int coordenadaX = 0;
@@ -186,7 +189,12 @@ namespace HundirFlota
         /// <param name="tipo">
         /// String que representa el eje de la coordenada introducida (X, Y).
         /// </param>
-        /// <returns></returns>
+        /// <param name="modo">
+        /// String que representa tipo de modo de juego de la partida.
+        /// </param>
+        /// <returns>
+        /// Entero que representa la coordenada introducida en su respectivo eje.
+        /// </returns>
         public int IntroducirCoordenadas (int orientacion, int longitud, Pantalla consola, string[] opciones, string objeto, int indice, string tipo, string modo)
         {
             int coordenada = 0;
@@ -203,7 +211,8 @@ namespace HundirFlota
                     coordenada = consola.LeerEntero(opciones[indice], 1, 12); // Opciones[0]: * Coordenada ...
                 }
 
-                if (objeto == "BARCO" && modo != "AUTOMATICO") {
+                if (objeto == "BARCO" && modo != "AUTOMATICO") 
+                {
                     if (coordenada + longitud - 1 > 12 && tipo.ToUpper() == "X" && orientacion == 1) // Mensaje de error cuando se sale del tablero.
                     {
                         consola.ImprimirConsola(opciones[2] + coordenada + " se sale del tablero.\n", 0); // Error, ... se sale del tablero
@@ -212,9 +221,6 @@ namespace HundirFlota
                         consola.ImprimirConsola(opciones[2] + coordenada + " se sale del tablero.\n", 0); // Error, ... se sale del tablero
                     }
                 } 
-                   
-                
-
             } while (coordenada < 1 || coordenada > 12 || (coordenada + longitud - 1 > 12 && orientacion == 0 && tipo.ToUpper() == "Y") 
                     || (coordenada + longitud - 1 > 12 && orientacion == 1 && tipo.ToUpper() == "X"));
 
@@ -274,6 +280,9 @@ namespace HundirFlota
         /// Instancia de la clase Pantalla para controlar la entrada
         /// y salida de datos del usuario.
         /// </param>
+        /// <param name="modo">
+        /// String que representa tipo de modo de juego de la partida.
+        /// </param>
         public void TextoCoincidencia(string objeto, bool coincideConAlgo, int indice, string[] opciones, Pantalla consola, Tablero tablero, string modo)
         {
             if (objeto == "BARCO" && coincideConAlgo && modo != "AUTOMATICO")
@@ -284,22 +293,22 @@ namespace HundirFlota
             {
                 switch (indice)
                 {
-                    case 3:
+                    case 3: // Disparo bombardea barco.
                         consola.ImprimirConsola("\t* Resultado disparo: Barco tocado.\n", 0);
-                        tablero.mapaOponente[y[0], x[0]] = "| ¬ ";
+                        tablero.mapaOponente[y[0], x[0]] = "| ¬ "; // Cambiar caracter tablero.
                         tablero.PintarOponente();
                         return;
-                    case 4:
+                    case 4: // Disparo bombardea tierra.
                         consola.ImprimirConsola("\t* Resultado disparo: Tierra bombardeada.\n", 0);
-                        tablero.mapaOponente[y[0], x[0]] = "| # ";
+                        tablero.mapaOponente[y[0], x[0]] = "| # "; // Cambiar caracter tablero.
                         tablero.PintarOponente();
                         return;
                 }
             }
-            else if (objeto == "ATACAR" && !coincideConAlgo)
+            else if (objeto == "ATACAR" && !coincideConAlgo) // Disparo bombardea agua.
             {
                 consola.ImprimirConsola("\t* Resultado disparo: Agua.\n", 0);
-                tablero.mapaOponente[y[0], x[0]] = "| ~ ";
+                tablero.mapaOponente[y[0], x[0]] = "| ~ "; // Cambiar caracter tablero.
                 tablero.PintarOponente();
                 return;
             }

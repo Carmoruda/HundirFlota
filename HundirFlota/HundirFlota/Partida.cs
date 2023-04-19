@@ -137,7 +137,9 @@ namespace HundirFlota
         /// </returns>
         public string InformacionStatus()
         {
-            switch(finalizada)
+            finalizada = EstadoPartida(); // Comprobar si la partida ha finalizado.
+
+            switch (finalizada)
             {
                 case true:
                     return "Partida finalizada.";
@@ -178,6 +180,18 @@ namespace HundirFlota
                 }
             } while (true);
 
+        }
+
+        /// <summary>
+        /// Permite comprobar el estado de la partida y cambiarlo
+        /// si ésta a terminado.
+        /// </summary>
+        /// <returns>
+        /// Booleano que representa si la partida ha finalizado.
+        /// </returns>
+        public virtual bool EstadoPartida()
+        {
+            return false;
         }
 
     }

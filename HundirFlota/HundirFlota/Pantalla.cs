@@ -86,8 +86,6 @@ namespace HundirFlota
             Console.WriteLine("\n  Pulse Enter para continuar:");
             
             
-            
-            
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
             Limpiar(limpiar);
         }
@@ -120,7 +118,7 @@ namespace HundirFlota
         /// Entero que representa si se desea limpiar (1) la consola
         /// antes de mostrar el texto.
         /// </param>
-        /// <param name="Salir">
+        /// <param name="salir">
         /// Entero que representa si se desea permitir la opción de 
         /// salir en el menú.
         /// </param>
@@ -310,7 +308,7 @@ namespace HundirFlota
                             Console.BackgroundColor = ConsoleColor.DarkBlue; // Color Barco tocado.
                             break;
                         case "| ~ ":
-                            Console.BackgroundColor = ConsoleColor.DarkCyan; // Color agua bombardeada.
+                            Console.BackgroundColor = ConsoleColor.DarkCyan; // Color Agua bombardeada.
                             break;
                     }
 
@@ -322,72 +320,5 @@ namespace HundirFlota
             }
 
         }
-
-        /*
-        /// <summary>
-        /// Muestra el tablero del oponente con las tierras,
-        /// ocultando los barcos.
-        /// </summary>
-        /// <param name="mapa">
-        /// Array bidimensional de strings que representa el mapaGeneral.
-        /// </param>
-        public void PintarTableroOponente(String[,] mapa)
-        {
-            for (int i = 0; i < 12; i++)
-            {
-                if (i != 0 && i < 9)
-                {
-                    Console.Write("   " + (i + 1));
-                }
-                else if (i == 0)
-                {
-                    Console.Write("     " + (i + 1));
-                }
-                else
-                {
-                    Console.Write("  " + (i + 1));
-                }
-
-            }
-            Console.ResetColor();
-            Console.WriteLine();
-
-            for (int i = 0; i < 12; i++)
-            {
-                if (i < 9)
-                {
-                    Console.Write((i + 1) + ". ");
-                }
-                else
-                {
-                    Console.Write((i + 1) + ".");
-                }
-
-                for (int j = 0; j < 12; j++)
-                {
-                    Console.BackgroundColor = ConsoleColor.Blue;
-
-                    switch (mapa[i, j])
-                    {
-                        case "| X ":
-                            Console.BackgroundColor = ConsoleColor.DarkGreen; // Color Tierra.
-                            Console.Write(mapa[i, j]);
-                            break;
-                        case "| P ":                            
-                        case "| S ":
-                        case "| D ":
-                        case "| A ":
-                            Console.Write("| _ "); ; // Ocultar barcos.
-                            break;
-                        default:
-                            Console.Write(mapa[i, j]);
-                            break;
-                    }
-                }
-                Console.ResetColor();
-                Console.WriteLine();
-            }
-
-        }*/
     }
 }

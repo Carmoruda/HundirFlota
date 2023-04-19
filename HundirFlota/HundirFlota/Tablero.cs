@@ -37,14 +37,19 @@ namespace HundirFlota
         /// Lista de la clase Coordenadas que representan las coordenadas de las 
         /// zonas de tierra en el mapa.
         /// </summary>
-        public List<Coordenadas> zonasTierra = new List<Coordenadas>();
+        public List<Coordenadas> zonasTierra { get; set; }
 
         /// <summary>
         /// Lista de la clase Coordenadas que representan las coordenadas de los 
-        /// barcos en el mapa.
+        /// barcos del jugador en el mapa.
         /// </summary>
-        public List<Coordenadas> zonasBarcos = new List<Coordenadas>();
-        public List<Coordenadas> zonasBarcosOponente = new List<Coordenadas>();
+        public List<Coordenadas> zonasBarcos { get; set; }
+
+        /// <summary>
+        /// Lista de la clase Coordenadas que representan las coordenadas de los 
+        /// barcos del jugador oponente en el mapa.
+        /// </summary>
+        public List<Coordenadas> zonasBarcosOponente { get; set; }
 
         /// <summary>
         /// Instancia de la clase Pantalla para controlar la entrada
@@ -60,10 +65,12 @@ namespace HundirFlota
         /// </summary>
         public Tablero()
         {
-            consola = new Pantalla();
-            zonasTierra = new List<Coordenadas>();
             mapa = new string[12, 12];
             mapaOponente = new string[12, 12];
+            zonasBarcos = new List<Coordenadas>();
+            zonasBarcosOponente = new List<Coordenadas>();
+            zonasTierra = new List<Coordenadas>();
+            consola = new Pantalla();
         }
 
         /// <summary>
@@ -92,23 +99,33 @@ namespace HundirFlota
         /// Array bidimesional de string que representa el mapa
         /// del juego.
         /// </param>
+        /// <param name="_mapaOponente">
+        /// Array bidimesional de string que representa el mapa
+        /// del jugador ooponente del juego.
+        /// </param>
         /// <param name="_zonasTierra">
         /// Lista de enteros que representan las coordenadas de las zonas
         /// de tierra en el mapa.
         /// </param>
         /// <param name="_zonasBarcos">
         /// Lista de enteros que representan las coordenadas de las zonas
-        /// de barcos en el mapa.
+        /// de barcos del jugador en el mapa.
+        /// </param>
+        /// <param name="_zonasBarcosOponente">
+        /// Lista de enteros que representan las coordenadas de las zonas
+        /// de barcos del jugador oponente en el mapa.
         /// </param>
         /// <param name="_consola">
         /// Instancia de la clase Pantalla para controlar la entrada
         /// y salida de datos del usuario.
         /// </param>
-        public Tablero(string[,] _mapa, List<Coordenadas> _zonasTierra, List<Coordenadas> _zonasBarcos, Pantalla _consola)
+        public Tablero(string[,] _mapa, string[,] _mapaOponente, List<Coordenadas> _zonasTierra, List<Coordenadas> _zonasBarcos, List<Coordenadas> _zonasBarcosOponente, Pantalla _consola)
         {
             mapa = _mapa;
+            mapaOponente = _mapaOponente;
             zonasTierra = _zonasTierra;
             zonasBarcos = _zonasBarcos;
+            zonasBarcosOponente = _zonasBarcosOponente;
             consola = _consola;
         }
 
