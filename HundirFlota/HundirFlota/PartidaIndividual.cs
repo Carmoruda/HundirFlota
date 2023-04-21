@@ -150,7 +150,7 @@ namespace HundirFlota
 
                     coordenadasAtaque = jugador1.Atacar("MANUAL");
 
-                    jugador2.EstadoBarcos(coordenadasAtaque, jugador1.tablero); // Acción de atacar del jugador 1.
+                    jugador2.EstadoBarcos(jugador1.coordenadasLanzamientos, coordenadasAtaque, jugador1.tablero); // Acción de atacar del jugador 1.
 
                     numMovimientos++; // +1 Movimiento.
                     EstadoPartida(); // Comprobar si la partida ha finalizado.
@@ -164,7 +164,7 @@ namespace HundirFlota
 
                     coordenadasAtaque = jugador2.Atacar("AUTOMATICO");
 
-                    jugador1.EstadoBarcos(coordenadasAtaque, jugador2.tablero);
+                    jugador1.EstadoBarcos(jugador2.coordenadasLanzamientos, coordenadasAtaque, jugador2.tablero); // Acción de atacar del jugador 2.
 
                     numMovimientos++; // +1 Movimiento.
                     EstadoPartida(); // Comprobar si la partida ha finalizado.

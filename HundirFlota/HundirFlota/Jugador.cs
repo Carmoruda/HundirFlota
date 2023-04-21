@@ -191,14 +191,12 @@ namespace HundirFlota
         /// Intancia de la clase Tablero que representa el tablero
         /// de ataque del jugador adversario.
         /// </param>
-        public void EstadoBarcos(Coordenadas coordenadas, Tablero tableroOponente)
+        public void EstadoBarcos(List<Coordenadas> coordenadasLanzamientosOponente, Coordenadas coordenadas, Tablero tableroOponente)
         {
-            patrullero.EstadoHundido(coordenadasLanzamientos, coordenadas, tableroOponente);
-            submarino.EstadoHundido(coordenadasLanzamientos, coordenadas, tableroOponente);
-            destructor.EstadoHundido(coordenadasLanzamientos, coordenadas, tableroOponente);
-            portaaviones.EstadoHundido(coordenadasLanzamientos, coordenadas, tableroOponente);
-
-            coordenadasLanzamientos.Add(coordenadas);
+            patrullero.EstadoHundido(coordenadasLanzamientosOponente, coordenadas, tableroOponente);
+            submarino.EstadoHundido(coordenadasLanzamientosOponente, coordenadas, tableroOponente);
+            destructor.EstadoHundido(coordenadasLanzamientosOponente, coordenadas, tableroOponente);
+            portaaviones.EstadoHundido(coordenadasLanzamientosOponente, coordenadas, tableroOponente);
         }
     }
 }

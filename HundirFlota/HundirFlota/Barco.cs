@@ -285,17 +285,11 @@ namespace HundirFlota
 
             string letraBarco = "| " + tipo.Substring(0, 1).ToUpper() + " "; // Letra del barco en el mapa.
 
-            if (coordenadasLanzamientos.Count == 0 && tableroOponente.mapaOponente[coordenadas.y[0], coordenadas.x[0]] == "| ¬ " && tablero.mapa[coordenadas.y[0], coordenadas.x[0]] == letraBarco)
+            Coordenadas coordenadasBuscar = coordenadasLanzamientos.FirstOrDefault(r => r.x[0] == coordenadas.x[0] && r.y[0] == coordenadas.y[0]); // Buscar si ya se había disparado a esas coordenadas.
+
+            if (coordenadasBuscar == null && tableroOponente.mapaOponente[coordenadas.y[0], coordenadas.x[0]] == "| ¬ " && tablero.mapa[coordenadas.y[0], coordenadas.x[0]] == letraBarco)
             {
                 contadorTocados += 1;
-            }
-
-            foreach (Coordenadas coordenada in coordenadasLanzamientos)
-            {
-                if ((coordenada.x[0] != coordenadas.x[0] || coordenada.y[0] != coordenadas.y[0]) && tableroOponente.mapaOponente[coordenadas.y[0], coordenadas.x[0]] == "| ¬ " && tablero.mapa[coordenadas.y[0], coordenadas.x[0]] == letraBarco)
-                {
-                    contadorTocados += 1;
-                }
             }
 
 
@@ -303,7 +297,7 @@ namespace HundirFlota
             if (contadorTocados == longitud)
             {
                 hundido = true;
-                consola.ImprimirConsola("\n\t  Barco de tipo " + tipo.ToLower() + " hundido!.\n\n", 0);
+                consola.ImprimirConsola("\n\t  Barco de tipo " + tipo.ToLower() + " hundido!\n\n", 0);
             }
         }
     }

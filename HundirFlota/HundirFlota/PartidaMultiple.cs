@@ -139,7 +139,7 @@ namespace HundirFlota
             jugador1.tablero.zonasBarcosOponente = jugador2.tablero.zonasBarcos;
             jugador2.tablero.zonasBarcosOponente = jugador1.tablero.zonasBarcos;
 
-            while (continuar && !finalizada)
+            while (continuar)
             {
                 string texto = "------------------------------ PARTIDA " + nombrePartida.ToUpper() + " ------------------------------\n\t--------------------- TURNO DE ";
 
@@ -150,10 +150,20 @@ namespace HundirFlota
 
                     coordenadasAtaque = jugador1.Atacar("MANUAL");
 
-                    jugador2.EstadoBarcos(coordenadasAtaque, jugador1.tablero); // Acción de atacar del jugador 1.
+                    jugador2.EstadoBarcos(jugador1.coordenadasLanzamientos, coordenadasAtaque, jugador1.tablero); // Acción de atacar del jugador 1.
+
+                    jugador1.coordenadasLanzamientos.Add(coordenadasAtaque);
 
                     numMovimientos++; // +1 Movimiento.
-                    EstadoPartida(); // Comprobar si la partida ha finalizado.
+                    finalizada = EstadoPartida(); // Comprobar si la partida ha finalizado.
+
+                    if (finalizada)
+                    {
+                        consola.ImprimirConsola(InformacionStatus(), 0);
+                        continuar = false;
+                        break;
+                    }
+
                     continuar = SalirPartida(consola); // Salir o continuar.
 
                 }
@@ -164,10 +174,12 @@ namespace HundirFlota
 
                     coordenadasAtaque = jugador2.Atacar("MANUAL");
 
-                    jugador1.EstadoBarcos(coordenadasAtaque, jugador2.tablero);
+                    jugador1.EstadoBarcos(jugador2.coordenadasLanzamientos, coordenadasAtaque, jugador2.tablero); // Acción de atacar del jugador 2.
+
+                    jugador2.coordenadasLanzamientos.Add(coordenadasAtaque);
 
                     numMovimientos++; // +1 Movimiento.
-                    EstadoPartida(); // Comprobar si la partida ha finalizado.
+                    finalizada = EstadoPartida(); // Comprobar si la partida ha finalizado.
                     continuar = SalirPartida(consola); // Salir o continuar.
 
                 }
