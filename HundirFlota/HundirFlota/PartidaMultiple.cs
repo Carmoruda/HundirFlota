@@ -133,11 +133,13 @@ namespace HundirFlota
         /// </param>
         public override void Jugar(Pantalla consola)
         {
+            Coordenadas coordenadasAtaque = new Coordenadas();
+
             bool continuar = true;
             jugador1.tablero.zonasBarcosOponente = jugador2.tablero.zonasBarcos;
             jugador2.tablero.zonasBarcosOponente = jugador1.tablero.zonasBarcos;
 
-            while (continuar)
+            while (continuar && !finalizada)
             {
                 string texto = "------------------------------ PARTIDA " + nombrePartida.ToUpper() + " ------------------------------\n\t--------------------- TURNO DE ";
 
@@ -146,26 +148,28 @@ namespace HundirFlota
                     texto += jugador1.nombre.ToUpper() + " ----------------------\n\n                                MAPA OPONENTE:\n\n";
                     consola.ImprimirConsola(texto, 1); // texto: -- TURNO DE...
 
-                    jugador1.Atacar("MANUAL"); // Acción de atacar del jugador 1.
-                    consola.Continuar(1); // Pulsa enter para continuar.
+                    coordenadasAtaque = jugador1.Atacar("MANUAL");
 
+                    jugador2.EstadoBarcos(coordenadasAtaque, jugador1.tablero); // Acción de atacar del jugador 1.
 
                     numMovimientos++; // +1 Movimiento.
-                    InformacionStatus(); // Comprobar si la partida ha finalizado.
+                    EstadoPartida(); // Comprobar si la partida ha finalizado.
                     continuar = SalirPartida(consola); // Salir o continuar.
 
                 }
                 else // Turno jugador 2.
                 {
-                    texto += jugador2.nombre.ToUpper() + " ----------------------\n\n                                MAPA OPONENTE:\n\n";
+                    texto += jugador2.nombre.ToUpper() + " ----------------------\n\n";
                     consola.ImprimirConsola(texto, 1); // texto: -- TURNO DE...
 
-                    jugador2.Atacar("MANUAL"); // Acción de atacar del jugador 2.
-                    consola.Continuar(1); // Pulsa enter para continuar.
+                    coordenadasAtaque = jugador2.Atacar("MANUAL");
+
+                    jugador1.EstadoBarcos(coordenadasAtaque, jugador2.tablero);
 
                     numMovimientos++; // +1 Movimiento.
-                    InformacionStatus(); // Comprobar si la partida ha finalizado.
+                    EstadoPartida(); // Comprobar si la partida ha finalizado.
                     continuar = SalirPartida(consola); // Salir o continuar.
+
                 }
             }
         }

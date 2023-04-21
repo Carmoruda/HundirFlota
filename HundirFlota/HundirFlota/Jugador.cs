@@ -63,16 +63,10 @@ namespace HundirFlota
         public Pantalla consola { get; set; }
 
         /// <summary>
-        /// Lista de enteros que representa las coordenadas X
-        /// de los lanzamientos.
+        /// Lista de instancias de la clase Coordenadas que representa
+        /// las coordenadas de los lanzamientos.
         /// </summary>
-        public List<int> lanzamientoX { get; set; }
-
-        /// <summary>
-        /// Lista de enteros que representa las coordenadas Y
-        /// de los lanzamientos.
-        /// </summary>
-        public List<int> lanzamientoY { get; set; }
+        public List<Coordenadas> coordenadasLanzamientos { get; set; }
 
 
         // Constructores
@@ -88,8 +82,7 @@ namespace HundirFlota
             submarino = new Barco(3, "Submarino", tablero);
             destructor = new Barco(4, "Destructor", tablero);
             portaaviones = new Barco(5, "Aviones", tablero);
-            lanzamientoX = new List<int>();
-            lanzamientoY = new List<int>();
+            coordenadasLanzamientos = new List<Coordenadas>();
         }
 
         /// <summary>
@@ -135,15 +128,11 @@ namespace HundirFlota
         /// Instancia de la clase Tablero que permite el control
         /// del tablero de la partida.
         /// </param>
-        /// <param name="_lanzamientosX">
-        /// Lista de enteros que representa las coordenadas X
-        /// de los lanzamientos.
+        /// <param name="_coordenadasLanzamientos">
+        /// Lista de instancias de la clase Coordenadas que 
+        /// representa las coordenadas de los lanzamientos.
         /// </param>
-        /// <param name="_lanzamientosY">
-        /// Lista de enteros que representa las coordenadas Y
-        /// de los lanzamientos.
-        /// </param>
-        public Jugador(string _nombre, Tablero _tablero, Barco _patrullero, Barco _submarino, Barco _destructor, Barco _portaaviones, Pantalla _consola, List<int> _lanzamientosX, List<int> _lanzamientosY)
+        public Jugador(string _nombre, Tablero _tablero, Barco _patrullero, Barco _submarino, Barco _destructor, Barco _portaaviones, Pantalla _consola, List<Coordenadas> _coordenadasLanzamientos)
         {
             nombre = _nombre;
             tablero = _tablero;
@@ -152,8 +141,7 @@ namespace HundirFlota
             destructor = _destructor;
             portaaviones = _portaaviones;
             consola = _consola;
-            lanzamientoX = _lanzamientosX;
-            lanzamientoY = _lanzamientosY;
+            coordenadasLanzamientos = _coordenadasLanzamientos;
         }
 
         // Métodos
@@ -205,13 +193,12 @@ namespace HundirFlota
         /// </param>
         public void EstadoBarcos(Coordenadas coordenadas, Tablero tableroOponente)
         {
-            patrullero.EstadoHundido(lanzamientoX, lanzamientoY, coordenadas, tableroOponente);
-            submarino.EstadoHundido(lanzamientoX, lanzamientoY, coordenadas, tableroOponente);
-            destructor.EstadoHundido(lanzamientoX, lanzamientoY, coordenadas, tableroOponente);
-            portaaviones.EstadoHundido(lanzamientoX, lanzamientoY, coordenadas, tableroOponente);
+            patrullero.EstadoHundido(coordenadasLanzamientos, coordenadas, tableroOponente);
+            submarino.EstadoHundido(coordenadasLanzamientos, coordenadas, tableroOponente);
+            destructor.EstadoHundido(coordenadasLanzamientos, coordenadas, tableroOponente);
+            portaaviones.EstadoHundido(coordenadasLanzamientos, coordenadas, tableroOponente);
 
-            lanzamientoX.Add(coordenadas.x[0]); // Añadir a la lista de lanzamientos de ataque las coordenas.
-            lanzamientoY.Add(coordenadas.y[0]); // Añadir a la lista de lanzamientos de ataque las coordenas.
+            coordenadasLanzamientos.Add(coordenadas);
         }
     }
 }
