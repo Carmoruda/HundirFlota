@@ -139,7 +139,7 @@ namespace HundirFlota
             jugador2.tablero.zonasBarcosOponente = jugador1.tablero.zonasBarcos;
 
 
-            while (continuar)
+            while (continuar && !finalizada)
             {
                 string texto = "------------------------------ PARTIDA " + nombrePartida.ToUpper() + " ------------------------------\n\t--------------------- TURNO DE ";
 
@@ -183,15 +183,19 @@ namespace HundirFlota
         /// </returns>
         public override bool EstadoPartida()
         {
+            Pantalla consola = new Pantalla();
+
             if (jugador1.portaaviones.hundido && jugador1.patrullero.hundido && jugador1.submarino.hundido && jugador1.destructor.hundido)
             {
                 nombreGanador = jugador2.nombre; // Victoria del jugador 2.
+                consola.ImprimirConsola("\t\n La partida ha finalizado", 0);
                 return true; // Partida finalizada.
 
             }
             else if (jugador2.portaaviones.hundido && jugador2.patrullero.hundido && jugador2.submarino.hundido && jugador2.destructor.hundido)
             {
-                nombreGanador = jugador1.nombre; // Victoria del jugador 1.
+                nombreGanador = jugador1.nombre; // Victoria del jugador 1
+                consola.ImprimirConsola("\t\n La partida ha finalizado", 0);                             // .
                 return true; // Partida finalizada.
             }
 
