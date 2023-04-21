@@ -133,6 +133,7 @@ namespace HundirFlota
         /// </param>
         public override void Jugar(Pantalla consola)
         {
+            Coordenadas coordenadasAtaque = new Coordenadas();
             bool continuar = true;
             jugador1.tablero.zonasBarcosOponente = jugador2.tablero.zonasBarcos;
             jugador2.tablero.zonasBarcosOponente = jugador1.tablero.zonasBarcos;
@@ -147,7 +148,9 @@ namespace HundirFlota
                     texto += jugador1.nombre.ToUpper() + " ----------------------\n\n                                MAPA OPONENTE:\n\n";
                     consola.ImprimirConsola(texto, 1); // texto: -- TURNO DE...
 
-                    jugador1.Atacar("MANUAL"); // Acción de atacar del jugador 1.
+                    coordenadasAtaque = jugador1.Atacar("MANUAL");
+
+                    jugador2.EstadoBarcos(coordenadasAtaque, jugador1.tablero); // Acción de atacar del jugador 1.
 
                     numMovimientos++; // +1 Movimiento.
                     InformacionStatus(); // Comprobar si la partida ha finalizado.
@@ -159,7 +162,9 @@ namespace HundirFlota
                     texto += jugador2.nombre.ToUpper() + " ----------------------\n\n";
                     consola.ImprimirConsola(texto, 1); // texto: -- TURNO DE...
 
-                    jugador2.Atacar("AUTOMATICO");
+                    coordenadasAtaque = jugador2.Atacar("AUTOMATICO");
+
+                    jugador1.EstadoBarcos(coordenadasAtaque, jugador2.tablero);
 
                     numMovimientos++; // +1 Movimiento.
                     InformacionStatus(); // Comprobar si la partida ha finalizado.

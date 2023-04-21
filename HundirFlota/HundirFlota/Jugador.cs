@@ -183,11 +183,35 @@ namespace HundirFlota
         /// Permite controlar las acciones de atacar del jugador
         /// humano.
         /// </summary>
-        public void Atacar(string modo)
+        public Coordenadas Atacar(string modo)
         {
             string[] opciones = { "\n\t* Coordenada X: ", "\t* Coordenada Y: "};
             Coordenadas coordenadasAtacar = new Coordenadas();
             coordenadasAtacar.ControlIntroducirCoordenadas(1, 1, consola, tablero, opciones, "ATACAR", true, modo, nombre);
+
+            return coordenadasAtacar;
+        }
+
+        /// <summary>
+        /// Permite controlar el estado de los barcos.
+        /// </summary>
+        /// <param name="coordenadas">
+        /// Instancia de la clase coordenadas que representa las 
+        /// coordenadas a las que se ataca.
+        /// </param>
+        /// <param name="tableroOponente">
+        /// Intancia de la clase Tablero que representa el tablero
+        /// de ataque del jugador adversario.
+        /// </param>
+        public void EstadoBarcos(Coordenadas coordenadas, Tablero tableroOponente)
+        {
+            patrullero.EstadoHundido(lanzamientoX, lanzamientoY, coordenadas, tableroOponente);
+            submarino.EstadoHundido(lanzamientoX, lanzamientoY, coordenadas, tableroOponente);
+            destructor.EstadoHundido(lanzamientoX, lanzamientoY, coordenadas, tableroOponente);
+            portaaviones.EstadoHundido(lanzamientoX, lanzamientoY, coordenadas, tableroOponente);
+
+            lanzamientoX.Add(coordenadas.x[0]); // Añadir a la lista de lanzamientos de ataque las coordenas.
+            lanzamientoY.Add(coordenadas.y[0]); // Añadir a la lista de lanzamientos de ataque las coordenas.
         }
     }
 }

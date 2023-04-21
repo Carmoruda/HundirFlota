@@ -153,6 +153,7 @@ namespace HundirFlota
                 }
 
 
+
             } while (coincideConAlgo);
 
             consola.ImprimirConsola("\n", 0); // Imprimir salto de línea.

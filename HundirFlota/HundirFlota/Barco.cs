@@ -260,23 +260,28 @@ namespace HundirFlota
         {
             string letraBarco = "| " + tipo.Substring(0, 1).ToUpper() + " "; // Letra del barco en el mapa.
             tablero.RellenarBarcos(orientacion, letraBarco, longitud, coordenadas); // Añadir barcos al mapa.
-            
+
             if (nombreJugador != "Autómata") // No mostrar el tablero si el jugador es el automático.
             {
                 tablero.PintarPropio(); // Mostrar el tablero
+                consola.Continuar(1); // Pulsar enter para continuar.
             }
             
-            consola.Continuar(1); // Pulsar enter para continuar.
         }
 
         /// <summary>
         /// Permite establecer el estado del barco dependiendo de
         /// si ha sido bombardeado en todas sus coordenadas hundiéndolo.
         /// </summary>
-        public void EstadoHundido()
+        public void EstadoHundido(List<int> lanzamientosX, List<int> lanzamientosY, Coordenadas coordenadas, Tablero tableroOponente)
         {
-            string letraBarco = "| " + tipo.Substring(0, 1).ToUpper() + " "; // Letra del barco en el mapa.
-            if (tablero.mapaOponente[coordenadas.x[0], coordenadas.y[0]] == letraBarco)
+            int indiceCoordenadaLista = lanzamientosX.IndexOf(coordenadas.x[0]); // Indice en la lista de coordenadas de ataques de la coordenada X.
+
+            if (!lanzamientosX.Contains(coordenadas.x[0]) && tableroOponente.mapaOponente[coordenadas.y[0], coordenadas.x[0]] == "| ¬ ")
+            {
+                contadorTocados += 1;
+            }
+            else if (lanzamientosX.Contains(coordenadas.x[0]) && lanzamientosY[0] != coordenadas.y[0] && tableroOponente.mapaOponente[coordenadas.y[0], coordenadas.x[0]] == "| ¬ ")
             {
                 contadorTocados += 1;
             }
