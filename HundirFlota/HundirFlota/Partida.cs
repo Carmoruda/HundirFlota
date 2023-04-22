@@ -154,11 +154,24 @@ namespace HundirFlota
         /// <summary>
         /// Permite jugar una partida entre dos jugadores.
         /// </summary>
+        /// <param name="consola">
+        /// Instancia de la clase Pantalla para controlar la entrada
+        /// y salida de datos del usuario.
+        /// </param>
         public virtual void Jugar(Pantalla consola)
         {
             
         }
 
+        /// <summary>
+        /// Permite continuar una partida o guardar y volver
+        /// al menú principal.
+        /// </summary>
+        /// <param name="consola">
+        /// Instancia de la clase Pantalla para controlar la entrada
+        /// y salida de datos del usuario.
+        /// </param>
+        /// <returns></returns>
         public bool SalirPartida(Pantalla consola)
         {
             int accionSalir = 0;

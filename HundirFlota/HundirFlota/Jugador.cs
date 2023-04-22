@@ -183,6 +183,10 @@ namespace HundirFlota
         /// <summary>
         /// Permite controlar el estado de los barcos.
         /// </summary>
+        /// <param name="coordenadasLanzamientosOponente">
+        /// Lista de instancias de la clase Coordenadas que representa
+        /// las coordenadas de los ataques del oponente.
+        /// </param>
         /// <param name="coordenadas">
         /// Instancia de la clase coordenadas que representa las 
         /// coordenadas a las que se ataca.

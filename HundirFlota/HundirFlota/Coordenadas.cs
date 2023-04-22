@@ -94,7 +94,7 @@ namespace HundirFlota
         /// <param name="modo">
         /// String que representa tipo de modo de juego de la partida.
         /// </param>
-        /// <param name="modo">
+        /// <param name="nombreJugador">
         /// String que representa el nombre del jugador.
         /// </param>
         public void ControlIntroducirCoordenadas(int orientacion, int longitud, Pantalla consola, Tablero tablero, string[] opciones, string objeto, bool mostrarOponente, string modo, string nombreJugador)
@@ -276,7 +276,10 @@ namespace HundirFlota
         /// <param name="objeto">
         /// String que representa la entidad que se quiere introducir.
         /// </param>
-        /// <param name="coincideConAlgo"></param>
+        /// <param name="coincideConAlgo">
+        /// Booleano que representa si las coordenadas introducidas coinciden con algún otro 
+        /// objeto en el Tablero.
+        /// </param>
         /// <param name="indice">
         /// Entero que representa el indice del elemento del array
         /// que se desea mostrar por pantalla.

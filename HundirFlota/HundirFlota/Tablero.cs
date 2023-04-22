@@ -25,13 +25,13 @@ namespace HundirFlota
         /// Array bidimesional de strings que representa el mapa
         /// del jugador.
         /// </summary>
-        public String[,] mapa { get; set; }
+        public string[,] mapa { get; set; }
 
         /// <summary>
         /// Array bidimesional de strings que representa el mapa
         /// del oponente.
         /// </summary>
-        public String[,] mapaOponente { get; set; }
+        public string[,] mapaOponente { get; set; }
 
         /// <summary>
         /// Lista de la clase Coordenadas que representan las coordenadas de las 
@@ -214,7 +214,7 @@ namespace HundirFlota
         /// Array bidimesional de strings que representa el mapa
         /// del oponente.
         /// </param>
-        public void RellenarTableroInicial(String[,] mapa, String[,] mapaOponente)
+        public void RellenarTableroInicial(string[,] mapa, string[,] mapaOponente)
         {
             for (int i = 0; i<12; i++)
             {

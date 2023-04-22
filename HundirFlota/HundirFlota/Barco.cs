@@ -188,6 +188,9 @@ namespace HundirFlota
         /// y asigna el valor correspondiente al atributo
         /// horizontal (0 - Vertical, 1 - Horizontal).
         /// </summary>
+        /// <param name="modo">
+        /// String que representa tipo de modo de juego de la partida.
+        /// </param>
         public void SeleccionarOrientacion(string modo)
         {
             int accionOrientacion = 0;
@@ -241,7 +244,7 @@ namespace HundirFlota
         /// <param name="modo">
         /// String que representa tipo de modo de juego de la partida.
         /// </param>
-        public void IntroducirCoordenadas(String modo) 
+        public void IntroducirCoordenadas(string modo) 
         {
             string[] opciones = { "\n\t* Coordenada X: ",
                                   "\t* Coordenada Y: ",
@@ -273,6 +276,17 @@ namespace HundirFlota
         /// Permite establecer el estado del barco dependiendo de
         /// si ha sido bombardeado en todas sus coordenadas hundiéndolo.
         /// </summary>
+        /// <param name="coordenadasLanzamientos">
+        /// Lista de instancias de la clase Coordenadas que representa las
+        /// coordenadas a las que el jugador a disparado con anterioridad.
+        /// </param>
+        /// <param name="coordenadas">
+        /// Instancia de la clase Coordenadas que representa las coordenadas
+        /// a las que el jugador quiere disparar.
+        /// </param>
+        /// <param name="tableroOponente">
+        /// Instancia de la clase Tablero que representa el tablero del oponente.
+        /// </param>
         public void EstadoHundido(List<Coordenadas> coordenadasLanzamientos, Coordenadas coordenadas, Tablero tableroOponente)
         {
 

@@ -122,8 +122,8 @@ Consite en un conjunto de turnos hasta la derrota de uno de los jugadores o fina
 - Se valorarán los comentarios en el código.
 - Se valorará el código estructuraado y limpio.
 - **Obligatorio**:
-  - [ ] Abstracción.
-  - [ ] Encapsulación.
-  - [ ] Herencia.
-  - [ ] Polimorfismo.
-  - [ ] Uso de buenas prácticas.
+  - [x] Abstracción.
+  - [x] Encapsulación.
+  - [x] Herencia.
+  - [x] Polimorfismo.
+  - [x] Uso de buenas prácticas.
