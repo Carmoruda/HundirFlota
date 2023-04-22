@@ -169,7 +169,7 @@ namespace HundirFlota
                 }
                 else // Turno jugador 2.
                 {
-                    texto += jugador2.nombre.ToUpper() + " ----------------------\n\n";
+                    texto += jugador2.nombre.ToUpper() + " ----------------------\n\n                                MAPA OPONENTE:\n\n";
                     consola.ImprimirConsola(texto, 1); // texto: -- TURNO DE...
 
                     coordenadasAtaque = jugador2.Atacar("MANUAL");

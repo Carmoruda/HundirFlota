@@ -190,6 +190,7 @@ namespace HundirFlota
 
                     continuar = SalirPartida(consola); // Salir o continuar.
 
+
                 }
             }
         }
