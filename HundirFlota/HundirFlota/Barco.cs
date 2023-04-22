@@ -261,13 +261,11 @@ namespace HundirFlota
             string letraBarco = "| " + tipo.Substring(0, 1).ToUpper() + " "; // Letra del barco en el mapa.
             tablero.RellenarBarcos(orientacion, letraBarco, longitud, coordenadas); // Añadir barcos al mapa.
 
-            /*if (nombreJugador != "Autómata") // No mostrar el tablero si el jugador es el automático.
+            if (nombreJugador != "Autómata") // No mostrar el tablero si el jugador es el automático.
             {
                 tablero.PintarPropio(); // Mostrar el tablero
                 consola.Continuar(1); // Pulsar enter para continuar.
-            }*/
-            tablero.PintarPropio(); // Mostrar el tablero
-            consola.Continuar(1); // Pulsar enter para continuar.
+            }
 
         }
 
@@ -291,8 +289,6 @@ namespace HundirFlota
             {
                 contadorTocados += 1;
             }
-
-
 
             if (contadorTocados == longitud)
             {

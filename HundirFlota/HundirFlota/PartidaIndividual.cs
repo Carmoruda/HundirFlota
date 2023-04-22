@@ -26,13 +26,13 @@ namespace HundirFlota
         /// Instancia de la clase Jugador que permite
         /// a un jugador humano participar en la partida.
         /// </summary>
-        public Jugador jugador1 { get; set; }
+        public Jugador jugadorHumano { get; set; }
 
         /// <summary>
         /// Instancia de la clase Jugador que permite
         /// a un jugador automático participar en la partida.
         /// </summary>
-        public Jugador jugador2 { get; set; }
+        public Jugador jugadorAutomatico { get; set; }
 
         //Constructores
 
@@ -42,37 +42,37 @@ namespace HundirFlota
         /// </summary>
         public PartidaIndividual()
         {
-            jugador1 = new Jugador();
-            jugador2 = new Jugador();
+            jugadorHumano = new Jugador();
+            jugadorAutomatico = new Jugador();
         }
 
         /// <summary>
         /// Constructor parametrizado de la clase PartidaIndividual.
         /// Inicializa las instancias de la clase Jugador.
         /// </summary>
-        /// <param name="_jugador1">
+        /// <param name="_jugadorHumano">
         /// Instancia de Jugador que representa al jugador humano.
         /// </param>
-        /// <param name="_jugador2">
+        /// <param name="_jugadorAutomatico">
         /// Instancia de Jugador que representa al jugador automático
         /// </param>
         /// <param name="_nombrePartida">
         /// String que representa el nombre de la partida.
         /// </param>
-        public PartidaIndividual(Jugador _jugador1, Jugador _jugador2, string _nombrePartida) : base(false, 1, _nombrePartida)
+        public PartidaIndividual(Jugador _jugadorHumano, Jugador _jugadorAutomatico, string _nombrePartida) : base(false, 1, _nombrePartida)
         {
-            jugador1 = _jugador1; // Humano.
-            jugador2 = _jugador2; // Automático.
+            jugadorHumano = _jugadorHumano; // Humano.
+            jugadorAutomatico = _jugadorAutomatico; // Automático.
         }
 
         /// <summary>
         /// Constructor parametrizado de la clase PartidaIndividual.
         /// Asigna los valores de todos los atributos.
         /// </summary>
-        /// <param name="_jugador1">
+        /// <param name="_jugadorHumano">
         /// Instancia de Jugador que representa al jugador humano.
         /// </param>
-        /// <param name="_jugador2">
+        /// <param name="_jugadorAutomatico">
         /// Instancia de Jugador que repsenta al jugador automático
         /// </param>
         /// <param name="_finalizada">
@@ -89,10 +89,10 @@ namespace HundirFlota
         /// <param name="_nombreGanador">
         /// String que representa el nombre del ganador.
         /// </param>
-        public PartidaIndividual(Jugador _jugador1, Jugador _jugador2, bool _finalizada, int _numMovimientos, string _nombrePartida, string _nombreGanador)
+        public PartidaIndividual(Jugador _jugadorHumano, Jugador _jugadorAutomatico, bool _finalizada, int _numMovimientos, string _nombrePartida, string _nombreGanador)
         {
-            jugador1 = _jugador1; // Humano.
-            jugador2 = _jugador2; // Automático
+            jugadorHumano = _jugadorHumano; // Humano.
+            jugadorAutomatico = _jugadorAutomatico; // Automático
             finalizada = _finalizada;
             numMovimientos = _numMovimientos;
             nombrePartida = _nombrePartida;
@@ -110,7 +110,7 @@ namespace HundirFlota
         /// </returns>
         public override string InformacionJugadores()
         {
-            return "\n\t * Jugador 1: " + jugador1.nombre + "\n\t * Jugador 2: " + jugador2.nombre;
+            return "\n\t * Jugador 1: " + jugadorHumano.nombre + "\n\t * Jugador 2: " + jugadorAutomatico.nombre;
         }
 
         /// <summary>
@@ -119,8 +119,8 @@ namespace HundirFlota
         /// </summary>
         public override void NuevaPartida()
         {
-            jugador1.NuevaPartida("MANUAL");
-            jugador2.NuevaPartida("AUTOMATICO");
+            jugadorHumano.NuevaPartida("MANUAL");
+            jugadorAutomatico.NuevaPartida("AUTOMATICO");
            
         }
 
@@ -135,39 +135,59 @@ namespace HundirFlota
         {
             Coordenadas coordenadasAtaque = new Coordenadas();
             bool continuar = true;
-            jugador1.tablero.zonasBarcosOponente = jugador2.tablero.zonasBarcos;
-            jugador2.tablero.zonasBarcosOponente = jugador1.tablero.zonasBarcos;
+            jugadorHumano.tablero.zonasBarcosOponente = jugadorAutomatico.tablero.zonasBarcos;
+            jugadorAutomatico.tablero.zonasBarcosOponente = jugadorHumano.tablero.zonasBarcos;
 
 
-            while (continuar && !finalizada)
+            while (continuar)
             {
                 string texto = "------------------------------ PARTIDA " + nombrePartida.ToUpper() + " ------------------------------\n\t--------------------- TURNO DE ";
 
                 if (numMovimientos % 2 != 0) // Turno jugador 1.
                 {
-                    texto += jugador1.nombre.ToUpper() + " ----------------------\n\n                                MAPA OPONENTE:\n\n";
+                    texto += jugadorHumano.nombre.ToUpper() + " ----------------------\n\n                                MAPA OPONENTE:\n\n";
                     consola.ImprimirConsola(texto, 1); // texto: -- TURNO DE...
 
-                    coordenadasAtaque = jugador1.Atacar("MANUAL");
+                    coordenadasAtaque = jugadorHumano.Atacar("MANUAL");
 
-                    jugador2.EstadoBarcos(jugador1.coordenadasLanzamientos, coordenadasAtaque, jugador1.tablero); // Acción de atacar del jugador 1.
+                    jugadorAutomatico.EstadoBarcos(jugadorHumano.coordenadasLanzamientos, coordenadasAtaque, jugadorHumano.tablero); // Acción de atacar del jugador 1.
+
+                    jugadorHumano.coordenadasLanzamientos.Add(coordenadasAtaque);
 
                     numMovimientos++; // +1 Movimiento.
-                    EstadoPartida(); // Comprobar si la partida ha finalizado.
+                    finalizada = EstadoPartida(); // Comprobar si la partida ha finalizado.
+
+                    if (finalizada)
+                    {
+                        consola.ImprimirConsola(InformacionStatus(), 0);
+                        continuar = false;
+                        break;
+                    }
+
                     continuar = SalirPartida(consola); // Salir o continuar.
 
                 }
                 else // Turno jugador 2.
                 {
-                    texto += jugador2.nombre.ToUpper() + " ----------------------\n\n";
+                    texto += jugadorAutomatico.nombre.ToUpper() + " ----------------------\n\n";
                     consola.ImprimirConsola(texto, 1); // texto: -- TURNO DE...
 
-                    coordenadasAtaque = jugador2.Atacar("AUTOMATICO");
+                    coordenadasAtaque = jugadorAutomatico.Atacar("AUTOMATICO");
 
-                    jugador1.EstadoBarcos(jugador2.coordenadasLanzamientos, coordenadasAtaque, jugador2.tablero); // Acción de atacar del jugador 2.
+                    jugadorHumano.EstadoBarcos(jugadorAutomatico.coordenadasLanzamientos, coordenadasAtaque, jugadorAutomatico.tablero); // Acción de atacar del jugador 2.
+
+                    jugadorAutomatico.coordenadasLanzamientos.Add(coordenadasAtaque);
 
                     numMovimientos++; // +1 Movimiento.
-                    EstadoPartida(); // Comprobar si la partida ha finalizado.
+                    finalizada = EstadoPartida(); // Comprobar si la partida ha finalizado.
+
+                    if (finalizada)
+                    {
+                        consola.ImprimirConsola(InformacionStatus(), 0);
+                        continuar = false;
+                        break;
+                    }
+
                     continuar = SalirPartida(consola); // Salir o continuar.
 
                 }
@@ -185,17 +205,15 @@ namespace HundirFlota
         {
             Pantalla consola = new Pantalla();
 
-            if (jugador1.portaaviones.hundido && jugador1.patrullero.hundido && jugador1.submarino.hundido && jugador1.destructor.hundido)
+            if (jugadorHumano.portaaviones.hundido && jugadorHumano.patrullero.hundido && jugadorHumano.submarino.hundido && jugadorHumano.destructor.hundido)
             {
-                nombreGanador = jugador2.nombre; // Victoria del jugador 2.
-                consola.ImprimirConsola("\t\n La partida ha finalizado", 0);
+                nombreGanador = jugadorAutomatico.nombre; // Victoria del jugador 2.
                 return true; // Partida finalizada.
 
             }
-            else if (jugador2.portaaviones.hundido && jugador2.patrullero.hundido && jugador2.submarino.hundido && jugador2.destructor.hundido)
+            else if (jugadorAutomatico.portaaviones.hundido && jugadorAutomatico.patrullero.hundido && jugadorAutomatico.submarino.hundido && jugadorAutomatico.destructor.hundido)
             {
-                nombreGanador = jugador1.nombre; // Victoria del jugador 1
-                consola.ImprimirConsola("\t\n La partida ha finalizado", 0);
+                nombreGanador = jugadorHumano.nombre; // Victoria del jugador 1
                 return true; // Partida finalizada.
             }
 

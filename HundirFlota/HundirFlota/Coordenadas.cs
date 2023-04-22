@@ -143,7 +143,7 @@ namespace HundirFlota
                         break;
                 }
 
-                coincideConAlgo = ComprobarCoordenadasCoincidente(tablero, ref indice);
+                coincideConAlgo = ComprobarCoordenadasCoincidente(tablero, ref indice, objeto);
 
                 TextoCoincidencia(objeto, coincideConAlgo, indice, opciones, consola, tablero, modo);
 
@@ -248,10 +248,10 @@ namespace HundirFlota
         /// Booleano que representa si en las coordenadas introducidas
         /// existe al menos 1 entidad (true - coincide, false - no coincide).
         /// </returns>
-        public bool ComprobarCoordenadasCoincidente(Tablero tablero, ref int indice)
+        public bool ComprobarCoordenadasCoincidente(Tablero tablero, ref int indice, string modo)
         {
 
-            if (BuscarEntidad(tablero.zonasBarcosOponente)) // Buscar barcos.
+            if (modo == "BARCO" && BuscarEntidad(tablero.zonasBarcos)) // Buscar barcos.
             {
                 indice = 3; // Error! Ya hay otro barco...
                 return true;
@@ -259,6 +259,11 @@ namespace HundirFlota
             else if (BuscarEntidad(tablero.zonasTierra)) // Buscar tierra.
             {
                 indice = 4; // Error! Hay una zona de...
+                return true;
+            }
+            else if (modo == "ATACAR" && BuscarEntidad(tablero.zonasBarcosOponente))
+            {
+                indice = 3;
                 return true;
             }
 

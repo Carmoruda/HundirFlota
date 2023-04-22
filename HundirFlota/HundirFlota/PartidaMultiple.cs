@@ -180,6 +180,14 @@ namespace HundirFlota
 
                     numMovimientos++; // +1 Movimiento.
                     finalizada = EstadoPartida(); // Comprobar si la partida ha finalizado.
+
+                    if (finalizada)
+                    {
+                        consola.ImprimirConsola(InformacionStatus(), 0);
+                        continuar = false;
+                        break;
+                    }
+
                     continuar = SalirPartida(consola); // Salir o continuar.
 
                 }
