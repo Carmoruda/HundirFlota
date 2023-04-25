@@ -104,14 +104,14 @@ Consite en un conjunto de turnos hasta la derrota de uno de los jugadores o fina
 
 ## Memoria
 
-- [ ] Portada.
-- [ ] Índice de cotenidos.
-- [ ] Introducción (descripción resumida del trabajo realizado y nombre miembros).
+- [x] Portada.
+- [x] Índice de cotenidos.
+- [x] Introducción (descripción resumida del trabajo realizado y nombre miembros).
 - [ ] Descripción trabajo:
-  - [ ] Descripción clases y decisiones de diseño.
-  - [ ] Incluir un diagrama de clases (incluye todas las clases y las relaciones existentes).
-- [ ] Problemas encontrados (describir problemas encontrados a lo largo de la práctica).
-- [ ] Conclusiones (Indicando la valoración del trabajo realizado).
+  - [x] Descripción clases y decisiones de diseño.
+  - [x] Incluir un diagrama de clases (incluye todas las clases y las relaciones existentes).
+- [x] Problemas encontrados (describir problemas encontrados a lo largo de la práctica).
+- [x] Conclusiones (Indicando la valoración del trabajo realizado).
 
 ## Normas entrega
 
